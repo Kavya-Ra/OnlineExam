@@ -1,0 +1,223 @@
+﻿@model OnlineExam.ViewModel.DtpAccountViewModel
+@using OnlineExam.Authentication
+
+@{
+    ViewBag.Title = "QaAs Account";
+}
+
+<section class="pt-5 bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <span class="surtitle">DTP account</span>
+                        <h1 class="h2 mb-0">Account Details</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="slice slice-sm bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="mb-5">
+
+                            @if (ViewBag.StatusMessage != null)
+                            {
+                                <div class="alert alert-outline-success" role="alert">
+                                    <strong>@ViewBag.StatusMessage</strong>
+                                </div>
+                            }
+
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <div class="alert alert-outline-danger" role="alert">
+                                    <strong>@ViewBag.ErrorMessage</strong>
+                                </div>
+                            }
+
+                            <div>
+                                <h5 class="mb-3">Create User Account</h5>
+                                <form id="UserAccount" method="post">
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.Id)
+                                    @Html.HiddenFor(model => model.DtpRegId)
+
+                                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                    {
+                                        var identity = ((CustomPrincipal)HttpContext.Current.User);
+                                        <input type="hidden" id="CuserId" name="CuserId" value="@identity.UserId" />
+                                    }
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">First name</label>
+                                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter your first name" } })
+                                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "error" })
+                                                <label id="Name-error" class="error" for="FirstName" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Last name</label>
+                                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Also your last name" } })
+                                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "error" })
+                                                <label id="LastName-error" class="error" for="LastName" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Mobile Number</label>
+                                                @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control", @placeholder = "000 000 0000", @maxlength = "14" } })
+                                                @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "error" })
+                                                <label id="Mobile-error" class="error" for="Mobile" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">WhatsApp Number</label>
+                                                @Html.EditorFor(model => model.WhatsApp, new { htmlAttributes = new { @class = "form-control", @placeholder = "000 000 0000", @maxlength = "14" } })
+                                                @Html.ValidationMessageFor(model => model.WhatsApp, "", new { @class = "error" })
+                                                <label id="WhatsApp-error" class="error" for="WhatsApp" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Email</label>
+                                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Email" } })
+                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "error" })
+                                                <label id="Email-error" class="error" for="Email" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Rgistration Id</label>
+                                                <input class="form-control" value="@Model.DtpRegId" disabled />
+                                                @Html.ValidationMessageFor(model => model.DtpRegId, "", new { @class = "error" })
+                                                <label id="DtpRegId-error" class="error" for="DtpRegId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Location</label>
+                                                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Location" } })
+                                                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "error" })
+                                                <label id="Password-Location" class="error" for="Location" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Place</label>
+                                                @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Place" } })
+                                                @Html.ValidationMessageFor(model => model.Place, "", new { @class = "error" })
+                                                <label id="Place-error" class="error" for="Place" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 text-right">
+                                        <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        $('#UserAccount').validate({
+            rules: {
+                FirstName: {
+                    required: true
+                },
+                LastName: {
+                    required: true
+                },
+                Email: {
+                    required: true,
+                    email: true
+                },
+                Mobile: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 14
+                },
+                WhatsApp: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 14
+                },
+                DtpRegId: {
+                    required: true
+                },
+                Location: {
+                    required: true
+                },
+                Place: {
+                    required: true,
+                    minlength: 6
+                }
+            },
+            messages: {
+                FirstName: {
+                    required: 'Please enter First Name'
+                },
+                LastName: {
+                    required: 'Please enter Last Name'
+                },
+                Email: {
+                    required: 'Please enter valid Email'
+                },
+                Mobile: {
+                    required: 'Please enter valid Mobile Number'
+                },
+                WhatsApp: {
+                    required: 'Please enter valid WhatsApp Number'
+                },
+                DtpRegId: {
+                    required: 'Please enter Registration Id'
+                },
+                Location: {
+                    required: 'Please enter Location'
+                },
+                Place: {
+                    required: 'Please enter Place'
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+
+                var data = element.id;
+                $("#" + data).addClass("is-invalid");
+                $("." + data).css({ 'border-color': '#f25767' });
+                $(".error" + data + "-error").show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                var data = element.id;
+                $("#" + data).removeClass("is-invalid");
+                $("." + data).css({ 'border-color': '' });
+                $("." + data + "-error").hide();
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    </script>
+}

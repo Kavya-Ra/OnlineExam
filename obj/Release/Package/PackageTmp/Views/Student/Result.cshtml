@@ -1,0 +1,129 @@
+﻿@model OnlineExam.ViewModel.ExamResultViewModel
+@{
+    ViewBag.Title = "Result";
+}
+
+
+<link rel="stylesheet" href="~/Theme/exam/css/exam.css" />
+
+<section class="slice py-5 bg-section-secondary">
+    <div class="container">
+
+        <div class="row exam-part-3">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body py-3">
+                        <div class="card-body py-3">
+                            <div class="d-flex align-items-center result_card">
+                                <div class="result-div">
+                                    <span class="avatar bg-dark text-white avatar-lg mb-3 twltr"></span>
+                                    <span class="h6 res_name"></span>
+                                </div>
+                                <div class="ml-auto">
+                                    <h6 class="text-primary mb-0">Exam Name : <span class="text-sm text-muted">@Model.ExDetails.Name</span></h6>
+                                    <h6 class="text-primary mb-0">Subject Name : <span class="text-sm text-muted">@Model.ExDetails.SubjectName</span></h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="card-header py-4">
+                                <div class="h3 text-center mb-0">Exam Result</div>
+                            </div>
+
+                            <div class="py-3 table-responsive">
+                                <table class="table table-bordered" id="tbl">
+                                    <tbody>
+                                        <tr>
+                                            <td>Total Question</td>
+                                            <th id="lblRTotalQuestion">@Model.AttendDetails.TQ</th>
+                                            <td>Total Attempted</td>
+                                            <th id="lblRTotalAttempted">@Model.AttendDetails.TA</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Correct Answers</td>
+                                            <th id="lblRTotalCorrect">@Model.AttendDetails.CA</th>
+                                            <td>Incorrect Answers</td>
+                                            <th id="lblRTotalWrong">@Model.AttendDetails.IA</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Score</td>
+                                            <td id="lblRScore">@Model.AttendDetails.ES</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <link rel="stylesheet" type="text/css" href="~/Theme/assets/libs/datatable/css/tables/datatable/datatables.min.css">
+
+
+                            <div class="py-3 table-responsive">
+                                <table id="theadres" class="table table-bordered dataTable no-footer" role="grid" aria-describedby="theadres_info">
+                                    <thead>
+                                        <tr role="row">
+                                        <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" aria-label="Question No.: activate to sort column ascending" style="width: 0px;">Question No.</th>
+                                        <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" aria-label="selected Option: activate to sort column ascending" style="width: 0px;">selected Option</th>
+                                        <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 0px;">Status</th>
+                                        <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" aria-label="Correct Option: activate to sort column ascending" style="width: 0px;">Correct Option</th></tr>
+                                    </thead>
+                                    <tbody id="tbodyResult">
+
+                                        @foreach (var item in Model.ExResult)
+                                        {
+                                            int selAns = item.SelectedAnswer;
+                                            int cotAns = item.CorrectAnswer;
+                                            <tr>
+                                                <td>Question @item.QsNo</td>
+                                                <td>@selAns</td>
+                                                <td>
+                                                    @if (selAns == cotAns)
+                                                    {
+                                                        <span>Correct</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span> Wrong</span>
+                                                    }
+                                                </td>
+                                                <td>@cotAns</td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="p-3">
+                                <a href="~/Student/Results" class="btn btn-sm btn-secondary hover-translate-y-n3 hover-shadow-lg mb-3" id="btnExamComplete">Back Result</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+@section Scripts {
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var fullName = $('#userFullName').val();
+            var twoltr = $('#twoLetter').val();
+            $('#studentName').text(fullName);
+            $('#studentName2').text(fullName);
+            $('.res_name').text(fullName);
+            $('.twltr').text(twoltr);
+
+            $('#theadres').dataTable();
+        });
+    </script>
+}

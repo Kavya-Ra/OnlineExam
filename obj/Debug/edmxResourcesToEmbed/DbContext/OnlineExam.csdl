@@ -1,0 +1,1353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Exam_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AttendExam">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExamId" Type="Int32" Nullable="false" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <Property Name="IsAttented" Type="Int32" Nullable="false" />
+    <Property Name="OptMark" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IsDeletedEr" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDateAe" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TQ" Type="Int32" Nullable="false" />
+    <Property Name="TA" Type="Int32" Nullable="false" />
+    <Property Name="CA" Type="Int32" Nullable="false" />
+    <Property Name="IA" Type="Int32" Nullable="false" />
+    <Property Name="ES" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Chapter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="DeletedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SubId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK_Chapter_ChapterSujectid" FromRole="Chapter" ToRole="Subject" />
+  </EntityType>
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Courses" Relationship="Self.FK_Courses_Class" FromRole="Class" ToRole="Courses" />
+  </EntityType>
+  <EntityType Name="Cours">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="DeletedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ClassId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Class" Relationship="Self.FK_Courses_Class" FromRole="Courses" ToRole="Class" />
+  </EntityType>
+  <EntityType Name="DataEntry_QuestionBank">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Questions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Option1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Option2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Option3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Option4" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CorrectAns" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Mark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PrevQnYear" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SubjectId" Type="Int32" Nullable="false" />
+    <Property Name="ChapterId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="DeletedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PgmId" Type="Int32" Nullable="false" />
+    <Property Name="CourseId" Type="Int32" Nullable="false" />
+    <Property Name="ClassId" Type="Int32" Nullable="false" />
+    <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="DataEntry_Registration">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DtpRegId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Mobile" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="WhatsApp" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Place" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="DeletedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ExGroupId" Type="Int32" Nullable="false" />
+    <Property Name="PgmId" Type="Int32" Nullable="false" />
+    <Property Name="ClassId" Type="Int32" Nullable="false" />
+    <Property Name="CourseId" Type="Int32" Nullable="false" />
+    <Property Name="SubjectId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsActive" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="DeletedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ExamTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TotalMark" Type="Int32" Nullable="false" />
+    <Property Name="QsAsFrom" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Exam_QnTable" Relationship="Self.FK_Exam_QnTable_Exam" FromRole="Exam" ToRole="Exam_QnTable" />
+  </EntityType>
+  <EntityType Name="Exam_QnTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExamId" Type="Int32" Nullable="false" />
+    <Property Name="QnId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsDataEntryQn" Type="Int32" />
+    <NavigationProperty Name="Exam" Relationship="Self.FK_Exam_QnTable_Exam" FromRole="Exam_QnTable" ToRole="Exam" />
+  </EntityType>
+  <EntityType Name="ExamResult">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExamId" Type="Int32" Nullable="false" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <Property Name="QuestionId" Type="Int32" Nullable="false" />
+    <Property Name="SelectedAnswer" Type="Int32" Nullable="false" />
+    <Property Name="CorrectAnswer" Type="Int32" Nullable="false" />
+    <Property Name="NotVisited" Type="Int32" Nullable="false" />
+    <Property Name="MarkForReview" Type="Int32" Nullable="false" />
+    <Property Name="AnsMarkForReview" Type="Int32" Nullable="false" />
+    <Property Name="QsNo" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PgmId" Type="Int32" Nullable="false" />
+    <Property Name="CourseId" Type="Int32" Nullable="false" />
+    <Property Name="SubPgmId" Type="Int32" Nullable="false" />
+    <Property Name="SubjectId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DeletedBy" Type="Int32" Nullable="false" />
+    <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="ClassId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Group1" Relationship="Self.FK_Group_Group" FromRole="Group" ToRole="Group1" />
+    <NavigationProperty Name="Group2" Relationship="Self.FK_Group_Group" FromRole="Group1" ToRole="Group" />
+  </EntityType>
+  <EntityType Name="Group_StudentTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupId" Type="Int32" Nullable="false" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Group_Teacher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TeacherId" Type="Int32" Nullable="false" />
+    <Property Name="GroupId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Programme">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="SubPrograms" Relationship="Self.FK__SubProgra__PgmId__114A936A" FromRole="Programmes" ToRole="SubPrograms" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="Self.UserRoles" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Student_AcademicPerformance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RegId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Class" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PassYear" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SchoolAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="RegNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Board" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="PhyMark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ChemMark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BiologyMark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MathsMark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PercOfMark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="IsRegistered" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student_HomeCountryDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RegId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AddressHome1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="AddressHome2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="AreaHome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PincodeHome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="QuickHomeContact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LocationHome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="StateHome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmaiIdHome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="QuickHomeWhatsapp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DistrictHome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student_Parent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RegId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FrName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="FrOcc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FrMobNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FrMailid" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="FrDistrict" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FrSign" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FrState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FrWhatsapp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MrName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="MrOcc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MrMobNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MrMailid" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="MrDistrict" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MrSign" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="MrState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MrWhatsapp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student_PreviousEntrance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RegId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PrevEntranceExamName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="RollNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AttemptedYear" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Rank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NoOfAttempts" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="IsRegistered" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student_Registration">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RegId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ExamAttendingYear" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PreferredDay" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ApplnDate" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AcademicYear" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="AdmissionTestDate" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PreferredTime" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="WhatsappNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DOB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Religion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Caste" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Community" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="BloodGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Nationalty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PresentAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Area" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Location" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="District" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Pincode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="QuickContNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="QuickWhatsApp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PgmId" Type="Int32" Nullable="false" />
+    <Property Name="ClassId" Type="Int32" Nullable="false" />
+    <Property Name="CourseId" Type="Int32" Nullable="false" />
+    <Property Name="SubPgmId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="IsVisited" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="DeletedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Chapters" Relationship="Self.FK_Chapter_ChapterSujectid" FromRole="Subject" ToRole="Chapter" />
+  </EntityType>
+  <EntityType Name="SubProgram">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+    <Property Name="PgmId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Programme" Relationship="Self.FK__SubProgra__PgmId__114A936A" FromRole="SubPrograms" ToRole="Programmes" />
+  </EntityType>
+  <EntityType Name="Teachers_QuestionBank">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Questions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Option1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Option2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Option3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Option4" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CorrectAns" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Mark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PrevQnYear" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SubjectId" Type="Int32" Nullable="false" />
+    <Property Name="ChapterId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="DeletedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PgmId" Type="Int32" Nullable="false" />
+    <Property Name="CourseId" Type="Int32" Nullable="false" />
+    <Property Name="ClassId" Type="Int32" Nullable="false" />
+    <Property Name="TeacherId" Type="Int32" Nullable="false" />
+    <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Teachers_Registration">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TeachRegId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="WhatsApp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PrimarySubject" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SecondarySubject" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsActive" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="StudentGrade" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Weekdays" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Weekends" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Time" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="DeletedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="DeletedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UniqueID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ActivationCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EmailVerify" Type="Int32" Nullable="false" />
+    <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Roles" Relationship="Self.UserRoles" FromRole="Users" ToRole="Roles" />
+  </EntityType>
+  <Association Name="FK_Chapter_ChapterSujectid">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Chapter" Type="Self.Chapter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Chapter">
+        <PropertyRef Name="SubId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Courses_Class">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Courses">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Exam_QnTable_Exam">
+    <End Role="Exam" Type="Self.Exam" Multiplicity="1" />
+    <End Role="Exam_QnTable" Type="Self.Exam_QnTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exam">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Exam_QnTable">
+        <PropertyRef Name="ExamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Group_Group">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="Group1" Type="Self.Group" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Group1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SubProgra__PgmId__114A936A">
+    <End Role="Programmes" Type="Self.Programme" Multiplicity="1" />
+    <End Role="SubPrograms" Type="Self.SubProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Programmes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SubPrograms">
+        <PropertyRef Name="PgmId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserRoles">
+    <End Role="Roles" Type="Self.Role" Multiplicity="*" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="Exam_DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AttendExams" EntityType="Self.AttendExam" />
+    <EntitySet Name="Chapters" EntityType="Self.Chapter" />
+    <EntitySet Name="Classes" EntityType="Self.Class" />
+    <EntitySet Name="Courses" EntityType="Self.Cours" />
+    <EntitySet Name="DataEntry_QuestionBank" EntityType="Self.DataEntry_QuestionBank" />
+    <EntitySet Name="DataEntry_Registration" EntityType="Self.DataEntry_Registration" />
+    <EntitySet Name="Exams" EntityType="Self.Exam" />
+    <EntitySet Name="Exam_QnTable" EntityType="Self.Exam_QnTable" />
+    <EntitySet Name="ExamResults" EntityType="Self.ExamResult" />
+    <EntitySet Name="Groups" EntityType="Self.Group" />
+    <EntitySet Name="Group_StudentTable" EntityType="Self.Group_StudentTable" />
+    <EntitySet Name="Group_Teacher" EntityType="Self.Group_Teacher" />
+    <EntitySet Name="Programmes" EntityType="Self.Programme" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Student_AcademicPerformance" EntityType="Self.Student_AcademicPerformance" />
+    <EntitySet Name="Student_HomeCountryDetails" EntityType="Self.Student_HomeCountryDetails" />
+    <EntitySet Name="Student_Parent" EntityType="Self.Student_Parent" />
+    <EntitySet Name="Student_PreviousEntrance" EntityType="Self.Student_PreviousEntrance" />
+    <EntitySet Name="Student_Registration" EntityType="Self.Student_Registration" />
+    <EntitySet Name="Subjects" EntityType="Self.Subject" />
+    <EntitySet Name="SubPrograms" EntityType="Self.SubProgram" />
+    <EntitySet Name="Teachers_QuestionBank" EntityType="Self.Teachers_QuestionBank" />
+    <EntitySet Name="Teachers_Registration" EntityType="Self.Teachers_Registration" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Chapter_ChapterSujectid" Association="Self.FK_Chapter_ChapterSujectid">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="Chapter" EntitySet="Chapters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Courses_Class" Association="Self.FK_Courses_Class">
+      <End Role="Class" EntitySet="Classes" />
+      <End Role="Courses" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Exam_QnTable_Exam" Association="Self.FK_Exam_QnTable_Exam">
+      <End Role="Exam" EntitySet="Exams" />
+      <End Role="Exam_QnTable" EntitySet="Exam_QnTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Group_Group" Association="Self.FK_Group_Group">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="Group1" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SubProgra__PgmId__114A936A" Association="Self.FK__SubProgra__PgmId__114A936A">
+      <End Role="Programmes" EntitySet="Programmes" />
+      <End Role="SubPrograms" EntitySet="SubPrograms" />
+    </AssociationSet>
+    <AssociationSet Name="UserRoles" Association="Self.UserRoles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <FunctionImport Name="AllStudentRegistrationDetails" ReturnType="Collection(Exam_DBModel.AllStudentRegistrationDetails_Result)" />
+    <FunctionImport Name="GetAllAttentedExamByStudentId" ReturnType="Collection(Exam_DBModel.GetAllAttentedExamByStudentId_Result)">
+      <Parameter Name="StudentId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllDtpQusAns" ReturnType="Collection(Exam_DBModel.GetAllDtpQusAns_Result)" />
+    <FunctionImport Name="GetAllDtpQusAnsByUserId" ReturnType="Collection(Exam_DBModel.GetAllDtpQusAnsByUserId_Result)">
+      <Parameter Name="Userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllExam" ReturnType="Collection(Exam_DBModel.GetAllExam_Result)" />
+    <FunctionImport Name="GetAllExamById" ReturnType="Collection(Exam_DBModel.GetAllExamById_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllExamByTeacherId" ReturnType="Collection(Exam_DBModel.GetAllExamByTeacherId_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllGroupLisByUserId" ReturnType="Collection(Exam_DBModel.GetAllGroupLisByUserId_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllGroupList" ReturnType="Collection(Exam_DBModel.GetAllGroupList_Result)" />
+    <FunctionImport Name="GetAllQusByExamId" ReturnType="Collection(Exam_DBModel.GetAllQusByExamId_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="From" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllQusForEdit" ReturnType="Collection(Exam_DBModel.GetAllQusForEdit_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="From" Mode="In" Type="Int32" />
+      <Parameter Name="CourseId" Mode="In" Type="Int32" />
+      <Parameter Name="PgId" Mode="In" Type="Int32" />
+      <Parameter Name="SubId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllStudentRegistrationByRegId" ReturnType="Collection(Exam_DBModel.GetAllStudentRegistrationByRegId_Result)">
+      <Parameter Name="RegId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllTeacherQusAns" ReturnType="Collection(Exam_DBModel.GetAllTeacherQusAns_Result)" />
+    <FunctionImport Name="GetAllTeacherQusAnsByUserId" ReturnType="Collection(Exam_DBModel.GetAllTeacherQusAnsByUserId_Result)">
+      <Parameter Name="Userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetCourseDetailsByUserId" ReturnType="Collection(Exam_DBModel.GetCourseDetailsByUserId_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="From" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetExamByDate" ReturnType="Collection(Exam_DBModel.GetExamByDate_Result)">
+      <Parameter Name="Date" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetExamByTeacherId" ReturnType="Collection(Exam_DBModel.GetExamByTeacherId_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="Date" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetExamByUserId" ReturnType="Collection(Exam_DBModel.GetExamByUserId_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="Date" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetExamReultByQus" ReturnType="Collection(Exam_DBModel.GetExamReultByQus_Result)">
+      <Parameter Name="ExamId" Mode="In" Type="Int32" />
+      <Parameter Name="StudentId" Mode="In" Type="Int32" />
+      <Parameter Name="From" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetGroupUserByTeacherId" ReturnType="Collection(Exam_DBModel.GetGroupUserByTeacherId_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetStudentGroupbyGroupId" ReturnType="Collection(Exam_DBModel.GetStudentGroupbyGroupId_Result)">
+      <Parameter Name="Groupid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetTeacherGroupbyGroupId" ReturnType="Collection(Exam_DBModel.GetTeacherGroupbyGroupId_Result)">
+      <Parameter Name="Groupid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Student_AcademicPerformancebyRegid" ReturnType="Collection(Exam_DBModel.Student_AcademicPerformancebyRegid_Result)">
+      <Parameter Name="RegId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Student_PreviousEntrancebyRegid" ReturnType="Collection(Exam_DBModel.Student_PreviousEntrancebyRegid_Result)">
+      <Parameter Name="RegId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="StudentAllDetailsByRegId" ReturnType="Collection(Exam_DBModel.StudentAllDetailsByRegId_Result)" />
+  </EntityContainer>
+  <ComplexType Name="AllStudentRegistrationDetails_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="RegId" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ExamAttendingYear" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PreferredDay" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ApplnDate" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="AcademicYear" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="AdmissionTestDate" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="PreferredTime" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="WhatsappNo" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="DOB" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Religion" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Caste" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Community" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="BloodGroup" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Nationalty" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PresentAddress" Nullable="true" />
+    <Property Type="String" Name="Area" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Location" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="District" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Pincode" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="QuickContNo" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Photo" Nullable="true" />
+    <Property Type="String" Name="QuickWhatsApp" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="SubPgmId" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="IsVisited" Nullable="false" />
+    <Property Type="String" Name="SpName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubpName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CorseName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetAllAttentedExamByStudentId_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="Int32" Name="ExGroupId" Nullable="false" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+    <Property Type="String" Name="ExamTime" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="TotalMark" Nullable="false" />
+    <Property Type="Int32" Name="QsAsFrom" Nullable="false" />
+    <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetAllDtpQusAns_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Questions" Nullable="true" />
+    <Property Type="String" Name="Option1" Nullable="false" />
+    <Property Type="String" Name="Option2" Nullable="false" />
+    <Property Type="String" Name="Option3" Nullable="false" />
+    <Property Type="String" Name="Option4" Nullable="false" />
+    <Property Type="String" Name="CorrectAns" Nullable="false" />
+    <Property Type="String" Name="Mark" Nullable="false" />
+    <Property Type="String" Name="PrevQnYear" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="ChapterId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="Int32" Name="IsActive" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="String" Name="Photo" Nullable="true" />
+    <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ChapterName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetAllDtpQusAnsByUserId_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Questions" Nullable="true" />
+    <Property Type="String" Name="Option1" Nullable="false" />
+    <Property Type="String" Name="Option2" Nullable="false" />
+    <Property Type="String" Name="Option3" Nullable="false" />
+    <Property Type="String" Name="Option4" Nullable="false" />
+    <Property Type="String" Name="CorrectAns" Nullable="false" />
+    <Property Type="String" Name="Mark" Nullable="false" />
+    <Property Type="String" Name="PrevQnYear" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="ChapterId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="Int32" Name="IsActive" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="String" Name="Photo" Nullable="true" />
+    <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ChapterName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetAllExam_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="Int32" Name="ExGroupId" Nullable="false" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+    <Property Type="String" Name="ExamTime" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="TotalMark" Nullable="false" />
+    <Property Type="Int32" Name="QsAsFrom" Nullable="false" />
+    <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetAllExamById_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="Int32" Name="ExGroupId" Nullable="false" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+    <Property Type="String" Name="ExamTime" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="TotalMark" Nullable="false" />
+    <Property Type="Int32" Name="QsAsFrom" Nullable="false" />
+    <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetAllExamByTeacherId_Result">
+    <Property Type="Int32" Name="gsId" Nullable="false" />
+    <Property Type="Int32" Name="gId" Nullable="false" />
+    <Property Type="String" Name="GroupName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="Int32" Name="ExGroupId" Nullable="false" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+    <Property Type="String" Name="ExamTime" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="TotalMark" Nullable="false" />
+    <Property Type="Int32" Name="QsAsFrom" Nullable="false" />
+    <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetAllGroupLisByUserId_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="GroupName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="SubPgmId" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubpName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetAllGroupList_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="GroupName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="SubPgmId" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubpName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetAllQusByExamId_Result">
+    <Property Type="Int32" Name="ExamId" Nullable="false" />
+    <Property Type="String" Name="QnId" Nullable="false" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Questions" Nullable="true" />
+    <Property Type="String" Name="Option1" Nullable="false" />
+    <Property Type="String" Name="Option2" Nullable="false" />
+    <Property Type="String" Name="Option3" Nullable="false" />
+    <Property Type="String" Name="Option4" Nullable="false" />
+    <Property Type="String" Name="CorrectAns" Nullable="false" />
+    <Property Type="String" Name="Mark" Nullable="false" />
+    <Property Type="String" Name="Photo" Nullable="true" />
+    <Property Type="String" Name="PrevQnYear" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="ChapterId" Nullable="false" />
+    <Property Type="Int32" Name="IsDataEntryQn" Nullable="true" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetAllQusForEdit_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Questions" Nullable="true" />
+    <Property Type="String" Name="Option1" Nullable="false" />
+    <Property Type="String" Name="Option2" Nullable="false" />
+    <Property Type="String" Name="Option3" Nullable="false" />
+    <Property Type="String" Name="Option4" Nullable="false" />
+    <Property Type="String" Name="CorrectAns" Nullable="false" />
+    <Property Type="String" Name="Mark" Nullable="false" />
+    <Property Type="String" Name="PrevQnYear" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="ChapterId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="Int32" Name="IsActive" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="String" Name="Photo" Nullable="true" />
+    <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ChapterName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetAllStudentRegistrationByRegId_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="RegId" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ExamAttendingYear" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PreferredDay" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ApplnDate" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="AcademicYear" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="AdmissionTestDate" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="PreferredTime" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="WhatsappNo" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="DOB" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Religion" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Caste" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Community" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="BloodGroup" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Nationalty" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PresentAddress" Nullable="true" />
+    <Property Type="String" Name="Area" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Location" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="District" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Pincode" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="QuickContNo" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Photo" Nullable="true" />
+    <Property Type="String" Name="QuickWhatsApp" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="SubPgmId" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="IsVisited" Nullable="false" />
+    <Property Type="Int32" Name="Pid" Nullable="false" />
+    <Property Type="String" Name="PRegId" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="PCreatedDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="PIsDeleted" Nullable="false" />
+    <Property Type="String" Name="FrName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="FrOcc" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="FrMobNo" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="FrMailid" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="FrDistrict" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FrSign" Nullable="true" />
+    <Property Type="String" Name="FrState" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FrWhatsapp" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MrName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="MrOcc" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="MrMobNo" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="MrMailid" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="MrDistrict" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MrSign" Nullable="true" />
+    <Property Type="String" Name="MrState" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MrWhatsapp" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="AddressHome1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="AddressHome2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="AreaHome" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="EmaiIdHome" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="HCreatedDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="Hid" Nullable="false" />
+    <Property Type="Int32" Name="HIsDeleted" Nullable="false" />
+    <Property Type="String" Name="DistrictHome" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LocationHome" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="PincodeHome" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="QuickHomeContact" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="QuickHomeWhatsapp" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="StateHome" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="HregId" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SpName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubpName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CorseName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetAllTeacherQusAns_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Questions" Nullable="true" />
+    <Property Type="String" Name="Option1" Nullable="false" />
+    <Property Type="String" Name="Option2" Nullable="false" />
+    <Property Type="String" Name="Option3" Nullable="false" />
+    <Property Type="String" Name="Option4" Nullable="false" />
+    <Property Type="String" Name="CorrectAns" Nullable="false" />
+    <Property Type="String" Name="Mark" Nullable="false" />
+    <Property Type="String" Name="PrevQnYear" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="ChapterId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="Int32" Name="IsActive" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="Int32" Name="TeacherId" Nullable="false" />
+    <Property Type="String" Name="Photo" Nullable="true" />
+    <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ChapterName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetAllTeacherQusAnsByUserId_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Questions" Nullable="true" />
+    <Property Type="String" Name="Option1" Nullable="false" />
+    <Property Type="String" Name="Option2" Nullable="false" />
+    <Property Type="String" Name="Option3" Nullable="false" />
+    <Property Type="String" Name="Option4" Nullable="false" />
+    <Property Type="String" Name="CorrectAns" Nullable="false" />
+    <Property Type="String" Name="Mark" Nullable="false" />
+    <Property Type="String" Name="PrevQnYear" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="ChapterId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="Int32" Name="IsActive" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="Int32" Name="TeacherId" Nullable="false" />
+    <Property Type="String" Name="Photo" Nullable="true" />
+    <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ChapterName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetCourseDetailsByUserId_Result">
+    <Property Type="Int32" Name="GroupId" Nullable="false" />
+    <Property Type="Int32" Name="userId" Nullable="false" />
+    <Property Type="Int32" Name="GSID" Nullable="false" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="GroupName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="SubPgmId" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetExamByDate_Result">
+    <Property Type="Int32" Name="gsId" Nullable="false" />
+    <Property Type="Int32" Name="gId" Nullable="false" />
+    <Property Type="String" Name="GroupName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="Int32" Name="ExGroupId" Nullable="false" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+    <Property Type="String" Name="ExamTime" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="TotalMark" Nullable="false" />
+    <Property Type="Int32" Name="QsAsFrom" Nullable="false" />
+    <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetExamByTeacherId_Result">
+    <Property Type="Int32" Name="gsId" Nullable="false" />
+    <Property Type="Int32" Name="gId" Nullable="false" />
+    <Property Type="String" Name="GroupName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="Int32" Name="ExGroupId" Nullable="false" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+    <Property Type="String" Name="ExamTime" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="TotalMark" Nullable="false" />
+    <Property Type="Int32" Name="QsAsFrom" Nullable="false" />
+    <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetExamByUserId_Result">
+    <Property Type="Int32" Name="gsId" Nullable="false" />
+    <Property Type="Int32" Name="gId" Nullable="false" />
+    <Property Type="String" Name="GroupName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="Int32" Name="ExGroupId" Nullable="false" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+    <Property Type="String" Name="ExamTime" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="TotalMark" Nullable="false" />
+    <Property Type="Int32" Name="QsAsFrom" Nullable="false" />
+    <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetExamReultByQus_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Questions" Nullable="true" />
+    <Property Type="String" Name="Option1" Nullable="false" />
+    <Property Type="String" Name="Option2" Nullable="false" />
+    <Property Type="String" Name="Option3" Nullable="false" />
+    <Property Type="String" Name="Option4" Nullable="false" />
+    <Property Type="String" Name="CorrectAns" Nullable="false" />
+    <Property Type="String" Name="Mark" Nullable="false" />
+    <Property Type="String" Name="PrevQnYear" Nullable="false" />
+    <Property Type="Int32" Name="SubjectId" Nullable="false" />
+    <Property Type="Int32" Name="ChapterId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="Int32" Name="IsActive" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="String" Name="Photo" Nullable="true" />
+    <Property Type="Int32" Name="ExReId" Nullable="false" />
+    <Property Type="Int32" Name="StudentId" Nullable="false" />
+    <Property Type="Int32" Name="QuestionId" Nullable="false" />
+    <Property Type="Int32" Name="SelectedAnswer" Nullable="false" />
+    <Property Type="Int32" Name="CorrectAnswer" Nullable="false" />
+    <Property Type="Int32" Name="NotVisited" Nullable="false" />
+    <Property Type="Int32" Name="AnsMarkForReview" Nullable="false" />
+    <Property Type="Int32" Name="QsNo" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetGroupUserByTeacherId_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+    <Property Type="Int32" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="DeletedDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="UniqueID" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="MobileNo" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ActivationCode" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="EmailVerify" Nullable="false" />
+    <Property Type="String" Name="Picture" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetStudentGroupbyGroupId_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="GroupId" Nullable="false" />
+    <Property Type="Int32" Name="StudentId" Nullable="false" />
+    <Property Type="String" Name="Firstname" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="GetTeacherGroupbyGroupId_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="TeacherId" Nullable="false" />
+    <Property Type="Int32" Name="GroupId" Nullable="false" />
+    <Property Type="String" Name="Firstname" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="Student_AcademicPerformancebyRegid_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="RegId" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Class" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PassYear" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SchoolAddress" Nullable="true" />
+    <Property Type="String" Name="RegNo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Board" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="PhyMark" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ChemMark" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="BiologyMark" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MathsMark" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PercOfMark" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="IsRegistered" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Student_PreviousEntrancebyRegid_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="RegId" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="PrevEntranceExamName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="RollNo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="AttemptedYear" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Mark" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Rank" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="NoOfAttempts" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="IsRegistered" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="StudentAllDetailsByRegId_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="RegId" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ExamAttendingYear" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PreferredDay" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ApplnDate" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="AcademicYear" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="AdmissionTestDate" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="PreferredTime" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="WhatsappNo" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="DOB" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Religion" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Caste" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Community" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="BloodGroup" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Nationalty" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PresentAddress" Nullable="true" />
+    <Property Type="String" Name="Area" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Location" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="District" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Pincode" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="QuickContNo" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Photo" Nullable="true" />
+    <Property Type="String" Name="QuickWhatsApp" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="PgmId" Nullable="false" />
+    <Property Type="Int32" Name="ClassId" Nullable="false" />
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="Int32" Name="SubPgmId" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+    <Property Type="Int32" Name="IsVisited" Nullable="false" />
+    <Property Type="Int32" Name="Pid" Nullable="false" />
+    <Property Type="String" Name="PRegId" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="PCreatedDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="PIsDeleted" Nullable="false" />
+    <Property Type="String" Name="FrName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="FrOcc" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="FrMobNo" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="FrMailid" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="FrDistrict" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FrSign" Nullable="true" />
+    <Property Type="String" Name="FrState" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FrWhatsapp" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MrName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="MrOcc" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="MrMobNo" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="MrMailid" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="MrDistrict" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MrSign" Nullable="true" />
+    <Property Type="String" Name="MrState" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MrWhatsapp" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="AddressHome1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="AddressHome2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="AreaHome" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="EmaiIdHome" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="HCreatedDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="Hid" Nullable="false" />
+    <Property Type="Int32" Name="HIsDeleted" Nullable="false" />
+    <Property Type="String" Name="DistrictHome" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LocationHome" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="PincodeHome" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="QuickHomeContact" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="QuickHomeWhatsapp" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="StateHome" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="HregId" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SpName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SubpName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CorseName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+</Schema>

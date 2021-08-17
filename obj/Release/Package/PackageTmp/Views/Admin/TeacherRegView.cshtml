@@ -1,0 +1,104 @@
+﻿@model OnlineExam.DbContext.Teachers_Registration
+
+@{
+    ViewBag.Title = "Teacher Application";
+}
+
+
+
+
+<section class="pt-5 bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <span class="surtitle">Admin account</span>
+                        <h1 class="h3 mb-0">Teacher Application</h1>
+                    </div>
+                </div>
+
+                <div class="row align-items-center mt-4" id="printableArea">
+                    <div class="card card-body p-md-5">
+                        <div class="row align-items-center mb-5">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                @*<img src="../../assets/img/brand/dark.png" alt="" height="30">*@
+                            </div>
+                            <div class="col-sm-6 text-sm-right">
+                                <h6 class="d-inline-block m-0 d-print-none">Registration ID</h6>
+                                <span class="badge badge-pill badge-success ml-3">@Model.TeachRegId</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <h5>General Information</h5>
+                                <dl class="row mt-4 align-items-center">
+                                    <dt class="col-sm-5 h6 text-sm">Full Name</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.FirstName @Model.MiddleName @Model.LastName</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Address</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.Address</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Location</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.Location</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Street</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.Street</dd>
+                                    <dt class="col-sm-5 h6 text-sm">District</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.District</dd>
+                                    <dt class="col-sm-5 h6 text-sm">State</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.State</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Country</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.Country</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Whatsapp Number</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.WhatsApp</dd>
+                                </dl>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <h5>Teaching information</h5>
+                                <dl class="row mt-4 align-items-center">
+                                    <dt class="col-sm-5 h6 text-sm">Primary Subject</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.PrimarySubject</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Secondary Subject</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.SecondarySubject</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Student Grades</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.StudentGrade</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Weekdays</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.Weekdays Hours</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Weekends</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.Weekends Hours</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Available Timings</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.Time</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Post Office</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.PO</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Email</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.Email</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4 justify-content-center text-center print_btns">
+                    <div class="col-lg-7 col-md-9 mb-5">
+                        <button type="button" class="btn btn-sm btn-primary" onclick="printDiv('printableArea')">Print Application</button>
+                        <a href="TeacherRegistrations" class="btn btn-sm btn-secondary text-dark font-weight-bold">Back To List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts {
+    <script>
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+}

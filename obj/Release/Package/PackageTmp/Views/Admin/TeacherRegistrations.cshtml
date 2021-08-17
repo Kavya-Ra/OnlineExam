@@ -1,0 +1,170 @@
+﻿@model IEnumerable<OnlineExam.DbContext.Teachers_Registration>
+
+@{
+    ViewBag.Title = "TeacherRegistrations";
+}
+
+<section class="pt-5 bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <span class="surtitle">Admin account</span>
+                        <h1 class="h3 mb-0">Registration Management</h1>
+                    </div>
+                </div>
+                <div class="row align-items-center mt-4">
+                    <div class="col">
+                        <ul class="nav nav-tabs overflow-x">
+                            <li class="nav-item">
+                                <a href="~/Admin/StudentRegistrations" class="nav-link ">Student</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/TeacherRegistrations" class="nav-link active">Teacher</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="slice slice-sm bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="mb-5">
+                            @if (ViewBag.StatusMessage != null)
+                            {
+                                <div class="alert alert-outline-success" role="alert">
+                                    <strong>@ViewBag.StatusMessage</strong>
+                                </div>
+                            }
+
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <div class="alert alert-outline-danger" role="alert">
+                                    <strong>@ViewBag.ErrorMessage</strong>
+                                </div>
+                            }
+                            <div class="colum-hed align-items-center mb-4 ">
+                                <div class="col">
+                                    <div class="d-flex">
+                                        <div class="pr-3">
+                                            <span class="h5 mb-0">
+                                                <i data-feather="users"></i>
+                                            </span>
+                                        </div>
+                                        <div class="">
+                                            <h3 class="h5 mb-0">Teachers Registrations </h3>
+                                            <p class="text-muted mb-0">Manage all Teachers Registrations.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-auto">
+                                    <div class="dropdown">
+                                        @*<div class="form-group">
+                                                <div class="input-group input-group-merge rounded-pill input-group-sm">
+                                                    <input type="text" class="form-control form-control-prepend" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" id="tbSearch">
+                                                    <div class="input-group-prepend ">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <i data-feather="search"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                    </div>
+                                </div>
+                            </div>
+
+                            <link rel="stylesheet" type="text/css" href="~/Theme/assets/libs/datatable/css/tables/datatable/datatables.min.css">
+
+                            <div class="table-responsive">
+                                <table class="table table-striped" style="width:100%" id="TeacherReg">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" data-orderable="false"></th>
+                                            <th scope="col" class="text-left">Name</th>
+                                            <th scope="col" class="text-left">Primary</th>
+                                            <th scope="col" class="text-left">Secondary</th>
+                                            <th scope="col" class="text-left">Reg.Id</th>
+                                            <th scope="col" class="text-left">Whatsapp</th>
+                                            <th scope="col" class="text-right">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbAccounts">
+
+                                        @foreach (var item in Model)
+                                        {
+                                            var fullName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
+                                            <tr>
+                                                <th>
+                                                    <div class="media">
+                                                        <div class="icon bg-gradient-info text-white rounded-circle icon-sm icon-shape hover-rotate-360">
+                                                            <i data-feather="user"></i>
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th scope="row">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <a href="#" class="name h6 mb-0 text-sm">@fullName</a>
+                                                            <small class="d-block font-weight-bold">@item.Email</small>
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <td>@item.PrimarySubject</td>
+                                                <td>@item.SecondarySubject</td>
+                                                <td>@item.TeachRegId</td>
+                                                <td>@item.WhatsApp</td>
+                                                <td class="text-right">
+                                                    <div class="actions ml-3">
+                                                        <a href="TeacherRegView?regId=@item.TeachRegId" class="action-item mr-2" data-toggle="tooltip" title="" data-original-title="Quick view">
+                                                            <i data-feather="external-link"></i>
+                                                        </a>
+                                                        <a href="javascript:void(0)" class="action-item text-danger mr-2" data-toggle="tooltip" title="" data-original-title="Move to trash" onclick="userdelete('@item.Id', '@fullName');">
+                                                            <i data-feather="trash-2" class="text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/vfs_fonts.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.buttons.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/buttons.bootstrap.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#TeacherReg').DataTable({
+                "bLengthChange": false,
+                "bFilter": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+        });
+    </script>
+}

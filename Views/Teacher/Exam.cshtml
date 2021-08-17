@@ -1,0 +1,955 @@
+﻿@model OnlineExam.ViewModel.ExamCreateViewModel
+@using OnlineExam.Authentication
+
+@{
+    ViewBag.Title = "Exam";
+}
+
+
+<section class="pt-5 bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <span class="surtitle">Teacher account</span>
+                        <h1 class="h3 mb-0">Exam Management</h1>
+                    </div>
+                </div>
+                <div class="row align-items-center mt-4">
+                    <div class="col">
+                        <ul class="nav nav-tabs overflow-x">
+                            <li class="nav-item">
+                                <a href="~/Teacher/Exams" class="nav-link">Exam List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Teacher/Exam" class="nav-link active">Create Exam</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="slice slice-sm bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="mb-5">
+                            @if (ViewBag.StatusMessage != null)
+                            {
+                                <div class="alert alert-outline-success" role="alert">
+                                    <strong>@ViewBag.StatusMessage</strong>
+                                </div>
+                            }
+
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <div class="alert alert-outline-danger" role="alert">
+                                    <strong>@ViewBag.ErrorMessage</strong>
+                                </div>
+                            }
+                            <div>
+                                <h5 class="mb-3">Create Exam</h5>
+                                <form id="CreateExam" method="post" enctype="multipart/form-data">
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.Id)
+
+                                    @Html.HiddenFor(model => model.QsAsFrom)
+                                    @Html.ValidationMessageFor(model => model.QsAsFrom, "", new { @class = "error" })
+                                    <label id="QsAsFrom-error" class="error" for="QsAsFrom" style="display:none;"></label><br />
+
+                                    @Html.HiddenFor(model => model.QnIds)
+                                    @Html.ValidationMessageFor(model => model.QnIds, "", new { @class = "error" })
+                                    <label id="QnIds-error" class="error" for="QnIds" style="display:none;"></label><br />
+
+                                    @Html.HiddenFor(model => model.IsDataEntryQn)
+                                    @Html.ValidationMessageFor(model => model.IsDataEntryQn, "", new { @class = "error" })
+                                    <label id="IsDataEntryQn-error" class="error" for="IsDataEntryQn" style="display:none;"></label>
+
+                                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                    {
+                                        var identity = ((CustomPrincipal)HttpContext.Current.User);
+                                        <input type="hidden" id="CuserId" name="CuserId" value="@identity.UserId" />
+                                    }
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Exam Name</label>
+                                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Exam Name" } })
+                                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "error" })
+                                                <label id="Name-error" class="error" for="Name" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Class</label>
+                                                @Html.DropDownList("ClassId", null, "Select Class", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.ClassId, "", new { @class = "error" })
+                                                <label id="ClassId-error" class="error" for="ClassId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Subject</label>
+                                                @Html.DropDownList("SubjectId", null, "Select Subject", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.SubjectId, "", new { @class = "error" })
+                                                <label id="SubjectId-error" class="error" for="SubjectId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Programme</label>
+                                                @Html.DropDownList("PgmId", null, "Select Programme", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.PgmId, "", new { @class = "error" })
+                                                <label id="PgmId-error" class="error" for="PgmId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Course</label>
+                                                @Html.DropDownList("CourseId", null, "Select Course", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "error" })
+                                                <label id="CourseId-error" class="error" for="CourseId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Group</label>
+                                                @Html.DropDownList("ExGroupId", null, "Select Group", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.ExGroupId, "", new { @class = "error" })
+                                                <label id="ExGroupId-error" class="error" for="ExGroupId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-control-label">From Date</label>
+                                                @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Select From Date", @autocomplete = "off" } })
+                                                @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "error" })
+                                                <label id="FromDate-error" class="error" for="FromDate" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-control-label">To Date</label>
+                                                @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Select To Date", @autocomplete = "off" } })
+                                                @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "error" })
+                                                <label id="ToDate-error" class="error" for="ToDate" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Exam Time</label>
+                                                @Html.EditorFor(model => model.ExamTime, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Exam Time" } })
+                                                @Html.ValidationMessageFor(model => model.ExamTime, "", new { @class = "error" })
+                                                <label id="ExamTime-error" class="error" for="ExamTime" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Total Mark</label>
+                                                @Html.EditorFor(model => model.TotalMark, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Total Mark" } })
+                                                @Html.ValidationMessageFor(model => model.TotalMark, "", new { @class = "error" })
+                                                <label id="TotalMark-error" class="error" for="TotalMark" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center my-4 selectQus">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Questions</label>
+                                                <div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                                                        <label class="custom-control-label" for="customRadioInline1">Select From Question Bank</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                                                        <label class="custom-control-label" for="customRadioInline2">Select Manually</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <link rel="stylesheet" type="text/css" href="~/Theme/assets/libs/datatable/css/tables/datatable/datatables.min.css">
+
+
+                                    <div class="row align-items-center" style="display:none;" id="qsasArea">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="mt-3 text-center">
+                                                    <h6 class="h4 mb-1">Questions</h6>
+                                                    <span class="text-muted mb-0">Questions from Question Bank</span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="py-3 table-responsive">
+                                                        <table id="fromDtpQsBank" class="table table-bordered dataTable no-footer" role="grid" aria-describedby="theadres_info">
+                                                            <thead>
+                                                                <tr role="row">
+                                                                    <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="width: 0px;"></th>
+                                                                    <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="max-width: 500px;">Questions</th>
+                                                                    <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="width: 0px;">Ans</th>
+                                                                    <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="width: 0px;">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="fromDtpQsBank_body">
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="text-right">
+                                                        <button type="button" class="btn btn-outline-warning btn-sm btn-icon" id="Confirm">
+                                                            <span class="btn-inner--text">Confirm</span>
+                                                            <span class="btn-inner--icon">
+                                                                <i data-feather="check"></i>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center" style="display:none;" id="selectedArea">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="mt-3 text-center">
+                                                    <h6 class="h4 mb-1">Selected Questions</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="py-3 table-responsive">
+                                                        <table id="selectedqns" class="table table-bordered dataTable no-footer" role="grid" aria-describedby="theadres_info">
+                                                            <thead>
+                                                                <tr role="row">
+                                                                    <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="width: 0px;"></th>
+                                                                    <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="max-width: 500px;">Questions</th>
+                                                                    <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="width: 0px;">Ans</th>
+                                                                    <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="width: 0px;">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="fromDtpQsBank_body">
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="text-right">
+                                                        <button type="button" class="btn btn-outline-success btn-sm btn-icon" id="selectEdit">
+                                                            <span class="btn-inner--text">Edit Selected QsAs</span>
+                                                            <span class="btn-inner--icon">
+                                                                <i data-feather="edit"></i>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @if (Model != null)
+                                    {
+                                        <div class="row align-items-center" style="display:none;" id="editQsasArea">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="mt-3 text-center">
+                                                        <h6 class="h4 mb-1">Questions</h6>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="py-3 table-responsive">
+                                                            <table id="editFromDtpQsBank" class="table table-bordered dataTable no-footer" role="grid" aria-describedby="theadres_info">
+                                                                <thead>
+                                                                    <tr role="row">
+                                                                        <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="width: 0px;"></th>
+                                                                        <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="max-width: 500px;">Questions</th>
+                                                                        <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="width: 0px;">Ans</th>
+                                                                        <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="width: 0px;">Action</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="editFromDtpQsBank_body"></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <div class="text-right">
+                                                            <button type="button" class="btn btn-outline-success btn-sm btn-icon" id="AddMoreQsAs">
+                                                                <span class="btn-inner--text">Add More QsAs</span>
+                                                                <span class="btn-inner--icon">
+                                                                    <i data-feather="plus"></i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                    <div class="mt-3 text-right">
+                                        <a href="/Teacher/Exams" class="btn btn-sm btn-secondary">Cancel</a>
+                                        <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade docs-example-modal-lg" id="viewQsas" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h6" id="myLargeModalLabel">View Question</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="gifLoader text-center">
+                    <img alt="Image" src="~/Theme/assets/img/gif/Book.gif" class="avatar  avatar-lg mb-3"><br />
+                    <p class="d-inline-block text-sm text-muted mb-3 text-underline--dashed">Please wait until content is fully loaded</p>
+                </div>
+                <div class="dataShow">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script src="~/Theme/assets/libs/feather-icons/dist/feather.min.js"></script>
+
+    <script src="~/Theme/assets/jquery-ui.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/vfs_fonts.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.buttons.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/buttons.bootstrap.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+
+
+    <script>
+        jQuery(document).ready(function () {
+
+            $("#ClassId").change(function () {
+                var id = $(this).find(":selected").val()
+                var selectid = { "id": id }
+
+                $.ajax({
+                    url: "../Teacher/GetCourseWiseClass",
+                    data: JSON.stringify(selectid),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $("#CourseId").empty();
+                        $("#CourseId").append('<option value="">Select Course</option>');
+
+                        $.each(data, function (i) {
+                            var optionhtml = '<option value="' +
+                                data[i].Value + '">' + data[i].Text + '</option>';
+                            $("#CourseId").append(optionhtml);
+                        });
+                    }
+                });
+
+            });
+
+            $("#SubjectId").change(function () {
+                var id = $(this).find(":selected").val()
+                var selectid = { "id": id }
+
+                $.ajax({
+                    url: "../Teacher/GetGroup",
+                    data: JSON.stringify(selectid),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $("#ExGroupId").empty();
+                        $("#ExGroupId").append('<option value="">Select Group</option>');
+
+                        $.each(data, function (i) {
+                            var optionhtml = '<option value="' +
+                                data[i].Value + '">' + data[i].Text + '</option>';
+                            $("#ExGroupId").append(optionhtml);
+                        });
+                    }
+                });
+
+            });
+
+            $('#FromDate').focus(function () {
+                this.type = 'date';
+            });
+
+            $('#ToDate').focus(function () {
+                this.type = 'date';
+            });
+
+
+
+            $("#customRadioInline1").change(function () {
+                var pgmId = $("#PgmId").find(":selected").val();
+                var CourseId = $("#CourseId").find(":selected").val();
+                var subjectId = $("#SubjectId").find(":selected").val()
+                if (pgmId != '' && CourseId != '' && subjectId != '') {
+                    GetQsAsBank();
+                    $('#IsDataEntryQn').val(1);
+                    $('#QsAsFrom').val(1);
+                }
+                else {
+                    Swal.fire(
+                        'Please Select ?',
+                        'Programme, Course and Subject',
+                        'question'
+                    )
+                }
+            });
+
+            $("#customRadioInline2").change(function () {
+                var pgmId = $("#PgmId").find(":selected").val();
+                var CourseId = $("#CourseId").find(":selected").val();
+                var subjectId = $("#SubjectId").find(":selected").val()
+                if (pgmId != '' && CourseId != '' && subjectId != '') {
+                    GetManual();
+                    $('#IsDataEntryQn').val(0);
+                    $('#QsAsFrom').val(0);
+                }
+                else {
+                    Swal.fire(
+                        'Please Select ?',
+                        'Programme, Course and Subject',
+                        'question'
+                    )
+                }
+            });
+
+        });
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            var id = $('#Id').val();
+
+            if (id != '') {
+                GetEditQsAs();
+
+                $('.selectQus').hide();
+            }
+        });
+
+        function GetEditQsAs() {
+
+            var i = 1;
+            dataTable3 = $("#editFromDtpQsBank").DataTable({
+                "bDestroy": true,
+                "ordering": false,
+                "ajax": {
+                    "url": "../../api/Exam/QsAs/" + $('#Id').val() + '/' + $('#QsAsFrom').val(),
+                    "type": "GET",
+                    "datatype": "json",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<input type='hidden' id='qsasId' name='qsasId' value='" + full.Id + "' />" + i++;
+                        }
+                    },
+                    {
+                        "render": function (data, type, full, meta) {
+                            if (full.Photo != null) {
+                                return "<img style='max-width:700px;' src= " + full.Photo + " />";
+                            } else {
+
+                                var word = full.Questions;     
+                                return word.slice(0, 100);
+                            }
+                        }
+                    },
+                    { "data": "Mark" },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return `<div class="row text-center">
+                                                   <a href="javascript:void(0)" class="action-item mr-2" data-toggle="modal" data-target=".docs-example-modal-lg" onclick="ViewQsAs('${full.Id}')">
+                                                       <i class="fa fa-eye fa-1x text-success"></i>
+                                                   </a>
+                                                   <a href="javascript:void(0)" class="action-item mr-2" onclick="DeleteQsAsEditList('${full.Id}');">
+                                                      <i class="fa fa-trash text-danger"></i>
+                                                   </a>
+                                               </div>`;
+                        }
+                    }
+                ],
+                "language": {
+                    "emptyTable": "no data found"
+                }
+            });
+
+
+            $('#editQsasArea').show();
+
+        }
+    </script>
+
+    <script>
+        function GetQsAsBank() {
+
+            var i = 1;
+            dataTable1 = $("#fromDtpQsBank").DataTable({
+                "bDestroy": true,
+                "ordering": false,
+                "ajax": {
+                    "url": "../api/Exam/GetQsAsBank",
+                    "type": "POST",
+                    "data": {
+                        "pgmId": $("#PgmId").find(":selected").val(),
+                        "CourseId": $("#CourseId").find(":selected").val(),
+                        "subjectId": $("#SubjectId").find(":selected").val()
+                    },
+                    "dataType": 'json',
+                    "Content-Type": 'application/json',
+                    "dataSrc": ""
+                },
+                "columns": [
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<input type='hidden' id='qsasId' name='qsasId' value='" + full.Id + "' />" + i++;
+                        }
+                    },
+                    {
+                        "render": function (data, type, full, meta) {
+                            if (full.Photo != null) {
+                                return "<img style='max-width:700px;' src= " + full.Photo + " />";
+                            } else {
+                                var word = full.Questions;
+                                return word.slice(0, 100);
+                            }
+                        }
+                    },
+                    { "data": "Mark" },
+                    {
+                        "data": "Id",
+                        "render": function (data) {
+                            return `
+                                                                <div class="row text-center">
+                                                                     <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
+                                                                        <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
+                                                                    </div>
+                                                                    <a href="javascript:void(0)" class="action-item mr-2" data-toggle="modal" data-target=".docs-example-modal-lg" onclick="ViewQsAs('${data}')">
+                                                                        <i class="fa fa-eye fa-1x text-success"></i>
+                                                                    </a>
+                                                                </div>`;
+                        }
+                    }
+                ],
+                "language": {
+                    "emptyTable": "no data found"
+                }
+            });
+
+
+            $('#qsasArea').show();
+
+        }
+    </script>
+
+
+    <script>
+        function GetManual() {
+
+            var i = 1;
+            dataTable2 = $("#fromDtpQsBank").DataTable({
+                "bDestroy": true,
+                "ordering": false,
+                "ajax": {
+                    "url": "../api/Exam/GetQsAsManual",
+                    "type": "POST",
+                    "data": {
+                        "CreatedBy": $("#CuserId").val(),
+                        "pgmId": $("#PgmId").find(":selected").val(),
+                        "CourseId": $("#CourseId").find(":selected").val(),
+                        "subjectId": $("#SubjectId").find(":selected").val()
+                    },
+                    "datatype": "json",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<input type='hidden' id='qsasId' name='qsasId' value='" + full.Id + "' />" + i++;
+                        }
+                    },
+                    {
+                        "render": function (data, type, full, meta) {
+                            if (full.Photo != null) {
+                                return "<img style='max-width:700px;' src= " + full.Photo + " />";
+                            } else {
+                                var word = full.Questions;
+                                return word.slice(0, 100);
+                            }
+                        }
+                    },
+                    { "data": "Mark" },
+                    {
+                        "data": "Id",
+                        "render": function (data) {
+                            return `
+                                                                <div class="row text-center">
+                                                                     <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
+                                                                        <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
+                                                                    </div>
+                                                                    <a href="javascript:void(0)" class="action-item mr-2" onclick="ViewQsAs('${data}')">
+                                                                        <i class="fa fa-eye fa-1x text-success"></i>
+                                                                    </a>
+                                                                </div>`;
+                        }
+                    }
+                ],
+                "language": {
+                    "emptyTable": "no data found"
+                }
+            });
+
+
+            $('#qsasArea').show();
+
+        }
+    </script>
+
+
+    <script>
+        $("#Confirm").on("click", function () {
+
+
+            var qnidtextbox = '';
+            $('#selectedqns tbody').empty();
+
+            var qns = new Array();
+            $("#fromDtpQsBank_body tr").each(function () {
+
+                var row = $(this).has("input[type=checkbox]:checked");
+                var qn = {};
+                qn.Slno = row.find("TD").eq(0).html();
+                qn.Questions = row.find("TD").eq(1).html();
+                qn.Mark = row.find("TD").eq(2).html();
+                qn.QnId = row.find('TD input[type="hidden"]').eq(0).val();
+
+                qns.push(qn);
+
+                var table = $("#selectedqns");
+                if (row.length != 0) {
+                    table.append("<tr><td>" + qn.Slno + "</td><td>" + qn.Questions + "</td><td>" + qn.Mark + "</td><td><a href='javascript:void(0)' class='action-item mr-2' onclick='ViewQsAs(" + qn.QnId + ")'><i class='fa fa-eye fa-1x text-danger'></i></a></td></tr>");
+                    $('#QnIds').val(qnidtextbox + qn.QnId + '|');
+                    qnidtextbox = $('#QnIds').val();
+                }
+                
+            });
+
+            var qnIds = $('#QnIds').val();
+
+            if (qnIds != "") {
+
+                $('#selectedArea').show();
+                $('#qsasArea').hide();
+
+                $('#selectedqns').DataTable();
+            }
+            else {
+                Swal.fire(
+                    'Questions Select ?',
+                    'Please select Questions from the list.',
+                    'question'
+                )
+            }
+
+        });
+
+        $("#selectEdit").on("click", function () {
+            $('#selectedArea').hide();
+            $('#qsasArea').show();
+        });
+    </script>
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#CreateExam').validate({
+                rules: {
+                    QnIds: {
+                        required: true
+                    },
+                    Name: {
+                        required: true
+                    },
+                    ClassId: {
+                        required: true,
+                        digits: true
+                    },
+                    SubjectId: {
+                        required: true,
+                        digits: true
+                    },
+                    PgmId: {
+                        required: true,
+                        digits: true
+                    },
+                    CourseId: {
+                        required: true,
+                        digits: true
+                    },
+                    ExGroupId: {
+                        required: true,
+                        digits: true
+                    },
+                    FromDate: {
+                        required: true
+                    },
+                    ToDate: {
+                        required: true
+                    },
+                    ExamTime: {
+                        required: true,
+                        digits: true
+                    },
+                    TotalMark: {
+                        required: true,
+                        digits: true
+                    }
+                },
+                messages: {
+                    QnIds: {
+                        required: 'Please Select Questions'
+                    },
+                    Name: {
+                        required: 'Please enter Exam Name'
+                    },
+                    ClassId: {
+                        required: 'Please Select Class'
+                    },
+                    CourseId: {
+                        required: 'Please Select Course'
+                    },
+                    SubjectId: {
+                        required: 'Please Select Subject'
+                    },
+                    ExGroupId: {
+                        required: 'Please Select Group'
+                    },
+                    PgmId: {
+                        required: 'Please Select Programme'
+                    },
+                    FromDate: {
+                        required: 'Select From Date'
+                    },
+                    ToDate: {
+                        required: 'Select To Date'
+                    },
+                    ExamTime: {
+                        required: 'Enter Exam Time'
+                    },
+                    TotalMark: {
+                        required: 'Enter Total Mark'
+                    }
+                },
+                highlight: function (element, errorClass, validClass) {
+
+                    var data = element.id;
+                    $("#" + data).addClass("is-invalid");
+                    $("." + data).css({ 'border-color': '#f25767' });
+                    $(".error" + data + "-error").show();
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    var data = element.id;
+                    $("#" + data).removeClass("is-invalid");
+                    $("." + data).css({ 'border-color': '' });
+                    $("." + data + "-error").hide();
+                },
+                submitHandler: function (form) {
+
+                    var id = $('#Id').val();
+                    var isDataen = $('#IsDataEntryQn').val();
+                    var qsId = $('#QnIds').val();
+
+                    if (id != "") {
+                        form.submit();
+                    }
+                    else if (qsId == "" || isDataen == "") {
+
+                        Swal.fire(
+                            'Questions ?',
+                            'Please Select From Question Bank or Manually',
+                            'question'
+                        )
+                    }
+                    else {
+                        form.submit();
+                    }
+
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function DeleteQsAsEditList(id) {
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value == true) {
+
+                    $.ajax({
+                        type: "Delete",
+                        url: '../../api/Exam/DeleteExamQsAs/' + id + '/' + $('#Id').val(),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function () {
+
+                            Swal.fire(
+                                'Deleted!',
+                                'Your QsAs has been deleted.',
+                                'success'
+                            )
+
+                            dataTable3.ajax.reload();
+                        },
+                        error: function () {
+                            alert("Error while deleting data");
+                        }
+                    });
+                }
+            })
+        }
+    </script>
+
+    <script>
+        function ViewQsAs(id) {
+
+
+           @* $.ajax({
+                type: "GET",
+                url: '../api/Exam/ViewQsAs/' + id,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+
+
+                },
+                error: function () {
+                    alert("Error while getting data");
+                }
+            });*@
+        }
+    </script>
+
+    <script>
+        $("#AddMoreQsAs").on("click", function () {
+
+            var qsasFrom = $('#QsAsFrom').val();
+            if (qsasFrom != '') {
+                GetEditExamQsas();
+            }
+        });
+    </script>
+
+    <script>
+        function GetEditExamQsas() {
+
+            var i = 1;
+            dataTable2 = $("#fromDtpQsBank").DataTable({
+                "bDestroy": true,
+                "ordering": false,
+                "ajax": {
+                    "url": "../../api/Exam/GetExamEditQsAs",
+                    "type": "POST",
+                    "data": {
+                        "CreatedBy": $("#CuserId").val(),
+                        "Id": $("#Id").val(),
+                        "pgmId": $("#PgmId").find(":selected").val(),
+                        "CourseId": $("#CourseId").find(":selected").val(),
+                        "subjectId": $("#SubjectId").find(":selected").val(),
+                        "QsAsFrom": $('#QsAsFrom').val()
+                    },
+                    "datatype": "json",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<input type='hidden' id='qsasId' name='qsasId' value='" + full.Id + "' />" + i++;
+                        }
+                    },
+                    {
+                        "render": function (data, type, full, meta) {
+                            if (full.Photo != null) {
+                                return "<img style='max-width:700px;' src= " + full.Photo + " />";
+                            } else {
+                                return full.Questions;
+                            }
+                        }
+                    },
+                    { "data": "Mark" },
+                    {
+                        "data": "Id",
+                        "render": function (data) {
+                            return `
+                                    <div class="row text-center">
+                                       <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
+                                          <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
+                                      </div>
+                                      <a href="javascript:void(0)" class="action-item mr-2" onclick="ViewQsAs('${data}')">
+                                          <i class="fa fa-eye fa-1x text-success"></i>
+                                      </a>
+                                   </div>`;
+                        }
+                    }
+                ],
+                "language": {
+                    "emptyTable": "no data found"
+                }
+            });
+
+            $('#qsasArea').show();
+            $('#editQsasArea').hide();     
+        }
+    </script>
+}

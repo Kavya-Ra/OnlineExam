@@ -1,0 +1,1140 @@
+﻿@model OnlineExam.ViewModel.ExamViewModel
+
+@{
+    ViewBag.Title = "Exam";
+}
+
+<link rel="stylesheet" href="~/Theme/exam/css/exam.css" />
+
+
+
+<section class="slice py-5 bg-section-secondary">
+    <div class="container">
+        <div class="row exam-part">
+            <div class="col-lg-8">
+                <div class="row flex-lg-column">
+                    <div class="col-md-8 col-lg flex-lg-fill">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="h6" id="studentName"></span>
+                                    </div>
+                                    <div class="text-right mobile-exam-details-1">
+                                        <span class="h6 font-weight-light text-muted">Remaining Time</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body py-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="avatar bg-dark text-white avatar-lg mr-3 twltr"></span>
+                                    </div>
+                                    <div class="pl-3 mobile-exam-details-1">
+                                        <h6 class="text-primary mb-0">Exam Name : <span class="text-sm text-muted">@Model.GetExam.Name</span></h6>
+                                        <h6 class="text-primary mb-0">Subject Name : <span class="text-sm text-muted">@Model.GetExam.SubjectName</span></h6>
+                                    </div>
+                                    <div class="ml-auto text-right">
+                                        <span class="h6 font-weight-light text-muted mobile-exam-details-2">Remaining Time<br /></span>
+                                        <span class="badge badge-danger badge-pill">
+                                            <i data-feather="clock"></i> <span class="timer-title time-started">00:00:00</span>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="py-3 mobile-exam-details-2">
+                                    <h6 class="text-primary mb-0">Exam Name : <span class="text-sm text-muted">@Model.GetExam.Name</span></h6>
+                                    <h6 class="text-primary mb-0">Subject Name : <span class="text-sm text-muted">@Model.GetExam.SubjectName</span></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-lg flex-md-fill">
+                        <div class="card mb-lg-0">
+                            <div class="card-body py-3">
+                                <div class="table-responsive">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-body mb0">
+                                                            @{
+                                                                int countNum = 01;
+
+                                                                int exTime = Convert.ToInt16(Model.GetExam.ExamTime) * 60;
+                                                            }
+
+                                                            <input type="hidden" id="hdfTestDuration" value="@exTime" />
+
+                                                            @foreach (var item in Model.GetAllQus)
+                                                            {
+
+                                                                var optName = "";
+                                                                var optId = "";
+                                                                var qsasId = "";
+                                                                int count = countNum++;
+                                                                if (count < 10)
+                                                                {
+                                                                    var num = count.ToString().PadLeft(2, '0');
+
+                                                                    qsasId = "page" + num;
+                                                                    optName = "radiospage" + num;
+                                                                    optId = "rOption" + num + "_1";
+                                                                }
+                                                                else
+                                                                {
+
+                                                                    qsasId = "page" + count;
+                                                                    optName = "radiospage" + count;
+                                                                    optId = "rOption" + count + "_1";
+                                                                }
+
+                                                                if (count == 01)
+                                                                {
+                                                                    if (item.Photo != null)
+                                                                    {
+                                                                        <div style="display: block;" class="tab-content div-question mb0" id="@qsasId">
+                                                                            <input type="hidden" class="hdfQuestionID">
+                                                                            <input type="hidden" class="hdfPaperSetID">
+                                                                            <input type="hidden" value="@item.CorrectAns" class="hdfCurrectAns">
+                                                                            <input type="hidden" value="@item.Mark" class="hdfCorrectAnsMarks">
+                                                                            <input type="hidden" value="0" class="hdfInCorrectAnsMarks">
+                                                                            <div class="question-height">
+                                                                                <h4 class="question-title"> Question @count: <img src="~/Theme/exam/QuizIcons/down.png" class="btndown pull-right"> </h4>
+
+                                                                                <img alt="Question" src="@item.Photo" data-questionno="1" class="img-responsive MQ"> <br>
+                                                                                <table class="table table-borderless mb0">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td> <input type="radio" value="1" name="@optName" id="@optId"> 1 ) </td>
+                                                                                            <td> <input type="radio" value="2" name="@optName" id="@optId"> 2 ) </td>
+                                                                                            <td> <input type="radio" value="3" name="@optName" id="@optId"> 3 ) </td>
+                                                                                            <td> <input type="radio" value="4" name="@optName" id="@optId"> 4 ) </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                                <h4 class="question-footer"> <img src="~/Theme/exam/QuizIcons/up.png" class="btnup pull-right"> </h4>
+                                                                            </div>
+                                                                        </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <div style="display: block;" class="tab-content div-question mb0" id="@qsasId">
+                                                                            <input type="hidden" class="hdfQuestionID">
+                                                                            <input type="hidden" class="hdfPaperSetID">
+                                                                            <input type="hidden" value="@item.CorrectAns" class="hdfCurrectAns">
+                                                                            <input type="hidden" value="@item.Mark" class="hdfCorrectAnsMarks">
+                                                                            <input type="hidden" value="0" class="hdfInCorrectAnsMarks">
+                                                                            <div class="question-height">
+                                                                                <h4 class="question-title"> Question @count: <img src="~/Theme/exam/QuizIcons/down.png" class="btndown pull-right"> </h4>
+
+                                                                                <p class="h6 lh-180 mb-3">@item.Questions</p>
+                                                                                <table class="table table-borderless mb0">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td> <input type="radio" value="1" name="@optName" id="@optId"> 1 ) @item.Option1</td>
+                                                                                            <td> <input type="radio" value="2" name="@optName" id="@optId"> 2 ) @item.Option2</td>
+                                                                                            <td> <input type="radio" value="3" name="@optName" id="@optId"> 3 ) @item.Option3</td>
+                                                                                            <td> <input type="radio" value="4" name="@optName" id="@optId"> 4 ) @item.Option4</td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                                <h4 class="question-footer"> <img src="~/Theme/exam/QuizIcons/up.png" class="btnup pull-right"> </h4>
+                                                                            </div>
+                                                                        </div>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    if (item.Photo != null)
+                                                                    {
+                                                                        <div style="display: none;" class="tab-content div-question mb0" id="@qsasId">
+                                                                            <input type="hidden" class="hdfQuestionID">
+                                                                            <input type="hidden" class="hdfPaperSetID">
+                                                                            <input type="hidden" value="@item.CorrectAns" class="hdfCurrectAns">
+                                                                            <input type="hidden" value="@item.Mark" class="hdfCorrectAnsMarks">
+                                                                            <input type="hidden" value="0" class="hdfInCorrectAnsMarks">
+                                                                            <div class="question-height">
+                                                                                <h4 class="question-title"> Question @count: <img src="~/Theme/exam/QuizIcons/down.png" class="btndown pull-right"> </h4>
+
+                                                                                <img alt="Question" src="@item.Photo" data-questionno="1" class="img-responsive MQ"> <br>
+                                                                                <table class="table table-borderless mb0">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td> <input type="radio" value="1" name="@optName" id="@optId"> 1 ) </td>
+                                                                                            <td> <input type="radio" value="2" name="@optName" id="@optId"> 2 ) </td>
+                                                                                            <td> <input type="radio" value="3" name="@optName" id="@optId"> 3 ) </td>
+                                                                                            <td> <input type="radio" value="4" name="@optName" id="@optId"> 4 ) </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                                <h4 class="question-footer"> <img src="~/Theme/exam/QuizIcons/up.png" class="btnup pull-right"> </h4>
+                                                                            </div>
+                                                                        </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <div style="display: none;" class="tab-content div-question mb0" id="@qsasId">
+                                                                            <input type="hidden" class="hdfQuestionID">
+                                                                            <input type="hidden" class="hdfPaperSetID">
+                                                                            <input type="hidden" value="@item.CorrectAns" class="hdfCurrectAns">
+                                                                            <input type="hidden" value="@item.Mark" class="hdfCorrectAnsMarks">
+                                                                            <input type="hidden" value="0" class="hdfInCorrectAnsMarks">
+                                                                            <div class="question-height">
+                                                                                <h4 class="question-title"> Question @count: <img src="~/Theme/exam/QuizIcons/down.png" class="btndown pull-right"> </h4>
+
+                                                                                <p class="h6 lh-180 mb-3">@item.Questions</p>
+                                                                                <table class="table table-borderless mb0">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td> <input type="radio" value="1" name="@optName" id="@optId"> 1 ) </td>
+                                                                                            <td> <input type="radio" value="2" name="@optName" id="@optId"> 2 ) </td>
+                                                                                            <td> <input type="radio" value="3" name="@optName" id="@optId"> 3 ) </td>
+                                                                                            <td> <input type="radio" value="4" name="@optName" id="@optId"> 4 ) </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                                <h4 class="question-footer"> <img src="~/Theme/exam/QuizIcons/up.png" class="btnup pull-right"> </h4>
+                                                                            </div>
+                                                                        </div>
+                                                                    }
+                                                                }
+
+                                                            }
+
+
+
+                                                            <div class="qsas-btns">
+                                                                <button class="mb5 full-width btn btn-success btn-save-answer">Save &amp; Next</button>
+                                                                <button class="mb5 full-width btn btn-light btn-reset-answer">Clear</button>
+                                                                <button class="mb5 full-width btn btn-warning btn-save-mark-answer">Save &amp; Mark For Review</button>
+                                                                <button class="mb5 full-width btn btn-primary btn-mark-answer">Mark For Review &amp; Next</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel-footer">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <button class="btn btn-success btn-submit-all-answers pull-right">Submit</button>&nbsp;&nbsp;
+                                                                    <button href="javascript:void(0);" class="btn btn-secondary pull-left" id="btnPrevQue" disabled="disabled"> &lt;&lt; Back </button>&nbsp;&nbsp;
+                                                                    <button href="javascript:void(0);" class="btn btn-secondary pull-left" id="btnNextQue">Next &gt;&gt;</button>&nbsp;&nbsp;
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card card-fluid">
+                    <div class="card-body">
+
+                        <div class="row align-items-center mb-3 shadow-none">
+                            <div class="col-auto">
+                                <a class="test-ques-stats que-not-attempted lblNotVisited"></a>
+                            </div>
+                            <div class="col pl-0">
+                                <span class="d-block h6 text-sm mb-0">Not Visited</span>
+                            </div>
+
+                            <div class="col-auto">
+                                <a class="test-ques-stats que-not-answered lblNotAttempted"></a>
+                            </div>
+                            <div class="col pl-0">
+                                <span class="d-block h6 text-sm mb-0">Not Answered</span>
+                            </div>
+                        </div>
+
+                        <hr class="my-3" />
+
+                        <div class="row align-items-center mb-3 shadow-none">
+                            <div class="col-auto">
+                                <a class="test-ques-stats que-save lblTotalSaved"></a>
+                            </div>
+                            <div class="col pl-0">
+                                <span class="d-block h6 text-sm mb-0">Answered</span>
+                            </div>
+
+                            <div class="col-auto">
+                                <a class="test-ques-stats que-mark lblTotalMarkForReview">0</a>
+                            </div>
+                            <div class="col pl-0">
+                                <span class="d-block h6 text-sm mb-0">Marked for Review</span>
+                            </div>
+                        </div>
+
+                        <hr class="my-3" />
+
+                        <div class="row align-items-center mb-3 shadow-none">
+                            <div class="col-auto">
+                                <a class="test-ques-stats que-save-mark lblTotalSaveMarkForReview">0</a>
+                            </div>
+                            <div class="col pl-0">
+                                <span class="d-block h6 text-sm mb-0">Answered &amp; Marked for Review</span>
+                                <p class="mb-0 text-xs">(will be considered for evaluation)</p>
+                            </div>
+                        </div>
+
+                        <hr class="my-3" />
+
+                        <div class="panel-body " style="height: 415px; overflow-y: auto;">
+                            <ul class="pagination test-questions">
+
+                                @{
+                                    int countNum2 = 01;
+                                }
+
+                                @foreach (var item in Model.GetAllQus)
+                                {
+                                    int count2 = countNum2++;
+                                    var qsasId2 = "";
+                                    var num = "";
+
+                                    if (count2 < 10)
+                                    {
+                                        num = count2.ToString().PadLeft(2, '0');
+
+                                        qsasId2 = "page" + num;
+                                    }
+                                    else
+                                    {
+                                        num = count2.ToString();
+                                        qsasId2 = "page" + count2;
+                                    }
+
+                                    if (count2 == 01)
+                                    {
+                                        <li class="active" data-seq="1"><a class="test-ques que-not-answered" href="javascript:void(0);" data-href="@qsasId2">@num</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="" data-seq="1"><a class="test-ques que-not-attempted" href="javascript:void(0);" data-href="@qsasId2">@num</a></li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row exam-part-2" style="display:none;">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="h6" id="studentName2"></span>
+                            </div>
+                            <div class="text-right mobile-exam-details-1">
+                                <span class="h6 font-weight-light text-muted">Remaining Time</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body py-3">
+                        <div class="d-flex align-items-center">
+                            <div class="">
+                                <span class="avatar bg-dark text-white avatar-lg mr-3 twltr"></span>
+                            </div>
+                            <div class="pl-3 mobile-exam-details-1">
+                                <h6 class="text-primary mb-0">Exam Name : <span class="text-sm text-muted">@Model.GetExam.Name</span></h6>
+                                <h6 class="text-primary mb-0">Subject Name : <span class="text-sm text-muted">@Model.GetExam.SubjectName</span></h6>
+                            </div>
+                            <div class="ml-auto text-right">
+                                <span class="h6 font-weight-light text-muted mobile-exam-details-2">Remaining Time<br /></span>
+                                <span class="badge badge-danger badge-pill">
+                                    <i data-feather="clock"></i> <span class="timer-title time-started">00:00:00</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="py-3 mobile-exam-details-2">
+                            <h6 class="text-primary mb-0">Exam Name : <span class="text-sm text-muted">@Model.GetExam.Name</span></h6>
+                            <h6 class="text-primary mb-0">Subject Name : <span class="text-sm text-muted">@Model.GetExam.SubjectName</span></h6>
+                        </div>
+
+                        <hr class="my-3" />
+                        <div class="text-center">
+                            <div class="card-header py-4">
+                                <div class="h3 text-center mb-0">Exam Summary</div>
+                            </div>
+
+                            <div class="py-3 table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No of Questions</th>
+                                            <th scope="col">Answered</th>
+                                            <th scope="col">Not Answered</th>
+                                            <th scope="col">Marked for Review</th>
+                                            <th scope="col">Answered & Marked for Review <br>(will be considered for evaluation)</th>
+                                            <th scope="col">Not Visited</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="lblTotalQuestion"></td>
+                                            <td class="lblTotalSaved"></td>
+                                            <td class="lblNotAttempted"></td>
+                                            <td class="lblTotalMarkForReview"></td>
+                                            <td class="lblTotalSaveMarkForReview"></td>
+                                            <td class="lblNotVisited"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="">
+                                <span class="h6 text-muted">
+                                    Are you sure you want to submit for final marking?<br />
+                                    No changes will be allowed after submission.
+                                </span>
+                            </div>
+
+                            <div class="p-3">
+                                <a href="javascript:void(0);" class="btn btn-sm btn-success hover-translate-y-n3 hover-shadow-lg mb-3" id="btnYesSubmitConfirm">YES</a>
+                                <a href="javascript:void(0);" class="btn btn-sm btn-danger hover-translate-y-n3 hover-shadow-lg mb-3" id="btnNoSubmitConfirm">No</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row exam-part-3" style="display:none;">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body py-3">
+                        <div class="card-body py-3">
+                            <div class="d-flex align-items-center result_card">
+                                <div class="result-div">
+                                    <span class="avatar bg-dark text-white avatar-lg mb-3 twltr"></span>
+                                    <span class="h6 res_name"></span>
+                                </div>
+                                <div class="ml-auto">
+                                    <h6 class="text-primary mb-0">Exam Name : <span class="text-sm text-muted">@Model.GetExam.Name</span></h6>
+                                    <h6 class="text-primary mb-0">Subject Name : <span class="text-sm text-muted">@Model.GetExam.SubjectName</span></h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="card-header py-4">
+                                <div class="h3 text-center mb-0">Exam Result</div>
+                            </div>
+
+                            <div class="py-3 table-responsive">
+                                <table class="table table-bordered" id="tbl">
+                                    <tbody>
+                                        <tr>
+                                            <td>Total Question</td>
+                                            <th id="lblRTotalQuestion">0</th>
+                                            <td>Total Attempted</td>
+                                            <th id="lblRTotalAttempted">0</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Correct Answers</td>
+                                            <th id="lblRTotalCorrect">0</th>
+                                            <td>Incorrect Answers</td>
+                                            <th id="lblRTotalWrong">0</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Score</td>
+                                            <td id="lblRScore">0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <link rel="stylesheet" type="text/css" href="~/Theme/assets/libs/datatable/css/tables/datatable/datatables.min.css">
+
+
+                            <div class="py-3 table-responsive">
+                                <table id="theadres" class="table table-bordered dataTable no-footer" role="grid" aria-describedby="theadres_info">
+                                    <thead>
+                                        <tr role="row"><th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" aria-label="Question No.: activate to sort column ascending" style="width: 0px;">Question No.</th><th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" aria-label="selected Option: activate to sort column ascending" style="width: 0px;">selected Option</th><th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 0px;">Status</th><th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" aria-label="Correct Option: activate to sort column ascending" style="width: 0px;">Correct Option</th></tr>
+                                    </thead>
+                                    <tbody id="tbodyResult">
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            @* <div class="">
+                                    <span class="h6 text-muted">
+                                        Are you sure you want to submit for final marking?<br />
+                                        No changes will be allowed after submission.
+                                    </span>
+                                </div>*@
+
+                            <div class="p-3">
+                                <a href="~/Student/Results" class="btn btn-sm btn-success hover-translate-y-n3 hover-shadow-lg mb-3" id="btnExamComplete">Ok</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 exam-thankyou" style="display: none;">
+            <div class="card">
+                <div class="card-body p-md-5">
+                    <div class="text-center">
+                        <a href="#" class="badge badge-soft-success badge-pill regul">Exam Submitted</a>
+                        <a href="#" class="badge badge-soft-danger badge-pill time" style="display:none;">Exam Time Out</a>
+                        <h1 class="h2 lh-150 mt-3 mb-0">Thank you, Submitted Successfully.</h1>
+                    </div>
+                    <div class="row align-items-center mt-5 pt-5 delimiter-top">
+                        <div class="col mb-3 mb-lg-0">
+                            <div class="media align-items-center">
+                                <div>
+                                    <span class="avatar bg-dark text-white avatar-lg mr-3 twltr"></span>
+                                </div>
+                                <div class="media-body">
+                                    <span class="d-block h6 mb-0 res_name">John Sullivan</span>
+                                    <span class="text-sm text-muted">@Model.GetExam.Name</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <ul class="list-inline mb-0">
+                                <li class="list-inline-item pr-4">
+                                    <a href="#" class="text-muted">
+                                        Total Question : <span class="tq"></span>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item pr-4">
+                                    <a href="#" class="text-muted">
+                                        Attempted Question : <span class="aq"></span>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#" class="text-muted">
+                                        Not Visited Question : <span class="nvq"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a class="btn btn-secondary btn-lg" id="btnViewResult">View Result</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+<table id="tblexamresult" style="display:none;">
+    <tbody>
+        @{int i = 1; }
+
+
+        @foreach (var item in Model.GetAllQus)
+        {
+
+
+            int c = i++;
+            var count = "";
+
+            if (c < 10)
+            {
+                var num = c.ToString().PadLeft(2, '0');
+
+                count = "page" + num;
+            }
+            else
+            {
+
+                count = "page" + c;
+            }
+
+            var id = "qsasId" + count;
+            var id1 = "curAnsId" + count;
+            var id2 = "selAnsId" + count;
+            var id3 = "notVisId" + count;
+            var id4 = "markRevId" + count;
+            var id5 = "ansMarkrevId" + count;
+            var id6 = "studentId" + count;
+            var id7 = "ExamId" + count;
+
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.CorrectAns</td>
+                <td id="@id2">0</td>
+                <td id="@id3">0</td>
+                <td id="@id4">0</td>
+                <td id="@id5">0</td>
+                <td>@Model.StudentId</td>
+                <td>@item.ExamId</td>
+                <td>@c</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table id="tblexamresult2" style="display:none;">
+    <tbody>
+        <tr>
+            <td id="rTotalQuestion">0</td>
+            <td id="rTotalAttempted">0</td>
+            <td id="rCorrectAnswers">0</td>
+            <td id="rIncorrectAnswers">0</td>
+            <td id="rScore">0</td>
+            <td>@Model.GetExam.Id</td>
+            <td>@Model.StudentId</td>
+        </tr>
+    </tbody>
+</table>
+
+
+@section Scripts {
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var fullName = $('#userFullName').val();
+            var twoltr = $('#twoLetter').val();
+            $('#studentName').text(fullName);
+            $('#studentName2').text(fullName);
+            $('.res_name').text(fullName);
+            $('.twltr').text(twoltr);
+        });
+
+
+        @*setTimeout(function () {
+            location.reload();
+        }, 60000)*@
+    </script>
+
+    <script>
+        var myInterval, AttemptedAns = [], TotalTime = 0;
+        function NextQuestion(e) {
+            var t = $(".test-questions").find("li.active");
+            if (CheckNextPrevButtons(),
+                t.is(":last-child"))
+                return !1;
+            $(".test-questions").find("li").removeClass("active"),
+                t.next().addClass("active"),
+                OpenCurrentQue(t.next().find("a")),
+                e && (t.find("a").addClass("que-not-answered"),
+                    t.find("a").removeClass("que-not-attempted"));
+            var a = t.attr("data-seq");
+            $(".nav-tab-sections").find("li").removeClass("active"),
+                $(".nav-tab-sections").find("li[data-id=" + a + "]").addClass("active"),
+                CheckQueAttemptStatus()
+        }
+        function PrevQuestion(e) {
+            var t = $(".test-questions").find("li.active");
+            if (CheckNextPrevButtons(),
+                t.is(":first-child"))
+                return !1;
+            $(".test-questions").find("li").removeClass("active"),
+                t.prev().addClass("active"),
+                OpenCurrentQue(t.prev().find("a"));
+            var a = t.attr("data-seq");
+            $(".nav-tab-sections").find("li").removeClass("active"),
+                $(".nav-tab-sections").find("li[data-id=" + a + "]").addClass("active"),
+                CheckQueAttemptStatus()
+        }
+        function CheckNextPrevButtons() {
+            var e = $(".test-questions").find("li.active");
+            $("#btnPrevQue").removeAttr("disabled"),
+                $("#btnNextQue").removeAttr("disabled"),
+                e.is(":first-child") ? $("#btnPrevQue").attr("disabled", "disabled") : e.is(":last-child") && $("#btnNextQue").attr("disabled", "disabled")
+        }
+        function pad(e, t) {
+            for (var a = e + ""; a.length < t;)
+                a = "0" + a;
+            return a
+        }
+        function OpenCurrentQue(e) {
+            $(".tab-content").hide(),
+                $("#lblQueNumber").text(e.text()),
+                $("#" + e.attr("data-href")).show();
+            var t = e.parent().attr("data-seq");
+            $(".nav-tab-sections").find("li").removeClass("active"),
+                $(".nav-tab-sections").find("li[data-id=" + t + "]").addClass("active"),
+                CheckQueAttemptStatus()
+        }
+        function CoundownTimer(e) {
+            var t = 60 * e;
+            myInterval = setInterval((function () {
+                myTimeSpan = 1e3 * t,
+                    $(".timer-title").text(GetTime(myTimeSpan)),
+                    t < 600 ? ($(".timer-title").addClass("time-ending"),
+                        $(".timer-title").removeClass("time-started")) : ($(".timer-title").addClass("time-started"),
+                            $(".timer-title").removeClass("time-ending")),
+                    t > 0 ? t -= 1 : CleartTimer()
+            }
+            ), 1e3)
+        }
+        function CleartTimer() {
+            clearInterval(myInterval),
+                $("title").text("Time Out"),
+                $("#btnYesSubmitConfirm").trigger("click"),
+            $('.regul').hide(),
+            $('.time').show()
+        }
+        function GetTime(e) {
+            parseInt(e % 1e3 / 100);
+            var t = parseInt(e / 1e3 % 60)
+                , a = parseInt(e / 6e4 % 60)
+                , n = parseInt(e / 36e5 % 24);
+            return (n = n < 10 ? "0" + n : n) + ":" + (a = a < 10 ? "0" + a : a) + ":" + (t < 10 ? "0" + t : t)
+        }
+        function pretty_time_string(e) {
+            return (e < 10 ? "0" : "") + e
+        }
+        function CheckQueExists(e) {
+            $.each(AttemptedAns, (function (t, a) {
+                void 0 !== a && a[1] == e && AttemptedAns.splice(t, 1)
+            }
+            ))
+        }
+        function CheckQueAttemptStatus() {
+            var e = 0
+                , t = 0
+                , a = 0
+                , n = 0
+                , s = 0
+                , i = 0;
+            $(".test-questions").find("li").each((function () {
+                var r = $(this);
+                e += 1,
+                    r.children().hasClass("que-save") ? a += 1 : r.children().hasClass("que-save-mark") ? n += 1 : r.children().hasClass("que-mark") ? s += 1 : r.children().hasClass("que-not-answered") ? t += 1 : i += 1
+            }
+            )),
+                $(".lblTotalQuestion").text(e),
+                $(".tq").text(e),
+                $(".lblNotAttempted").text(t),
+                $(".aq").text(a),
+                $(".lblTotalSaved").text(a),
+                $(".lblTotalSaveMarkForReview").text(n),
+                $(".lblTotalMarkForReview").text(s),
+                $(".lblNotVisited").text(i),
+                $(".nvq").text(i)
+        }
+        function CheckResult() {
+            var n = 0;
+            $("#tbodyResult").html();
+            var score = 0
+                , TotalQuestion = 0
+                , TotalAttempted = 0
+                , TotalCorrect = 0
+                , TotalWrong = 0;
+            $(".test-questions").find("li").each((function () {
+                var r = $(this)
+                    , a = r.find("a").attr("data-href")
+                    , currectAns = $("#" + a).find(".hdfCurrectAns").val()
+                    , currectQue = $("#" + a).find(".question-title").text()
+                    , CorrectAnsMarks = $("#" + a).find(".hdfCorrectAnsMarks").val()
+                    , InCorrectAnsMarks = $("#" + a).find(".hdfInCorrectAnsMarks").val();
+                TotalQuestion += 1;
+                var tr = $("<tr></tr>");
+                tr.append("<td>" + currectQue + "</td>");
+                var ansStatus = "Wrong"
+                    , selectedAns = "";
+                (r.children().hasClass("que-save") || r.children().hasClass("que-save-mark")) && ($("#" + a).find("input[name='radios" + a + "']").each((function () {
+                    var e = $(this);
+                    e.is(":checked") && (selectedAns = e.val(),
+                        e.val() == currectAns && (ansStatus = "Correct"))
+                }
+                )),
+                    "Correct" == ansStatus ? (score += parseInt(CorrectAnsMarks),
+                        TotalCorrect += 1) : (score += parseInt(InCorrectAnsMarks),
+                            TotalWrong += 1),
+                    TotalAttempted += 1),
+                    r.children().hasClass("que-save") || r.children().hasClass("que-save-mark") ? tr.append("<td>" + selectedAns + "</td>") : tr.append("<td>---</td>"),
+                    r.children().hasClass("que-save") || r.children().hasClass("que-save-mark") ? "Correct" == ansStatus ? tr.append('<td><span class="label label-success">' + ansStatus + "</span></td>") : tr.append('<td><span class="label label-danger">' + ansStatus + "</span></td>") : tr.append("<td>N/A</td>"),
+                    tr.append("<td>" + currectAns + "</td>"),
+                    $("#tbodyResult").append(tr)
+            }
+            )),
+                $("#lblRTotalQuestion").text(TotalQuestion),
+                $("#lblRTotalAttempted").text(TotalAttempted),
+                $("#lblRTotalCorrect").text(TotalCorrect),
+                $("#lblRTotalWrong").text(TotalWrong),
+                $("#lblRScore").text(score),
+
+                $("#rTotalQuestion").text(TotalQuestion),
+                $("#rTotalAttempted").text(TotalAttempted),
+                $("#rCorrectAnswers").text(TotalCorrect),
+                $("#rIncorrectAnswers").text(TotalWrong),
+                $("#rScore").text(score),
+
+                $("#theadres").DataTable({
+                    paging: !0,
+                    sorting: !1
+                })
+        }
+        $(document).ready((function () {
+
+            "14" == $("#ExamID").val() && $("#drplanguage").append($("<option></option>").text("Gujarati").val("gujarati")),
+                $("#page01").show(),
+                $(".exam-paper").show(),
+                CoundownTimer(parseInt($("#hdfTestDuration").val())),
+                CheckNextPrevButtons(),
+                CheckQueAttemptStatus(),
+                $("#drpQuestionsGroup").on("change", (function () {
+                    $(".test-questions").find("li:nth-child(" + $(this).val() + ")").find("a").trigger("click")
+                }
+                )),
+                $("#btnPrevQue").click((function () {
+                    PrevQuestion(!0)
+                }
+                )),
+                $("#btnNextQue").click((function () {
+                    NextQuestion(!0)
+                }
+                )),
+
+                $(".test-ques").click((function () {
+                    var e = $(".test-questions").find("li.active").find("a");
+                    $(".test-questions").find("li").removeClass("active"),
+                        $(this).parent().addClass("active"),
+                        $(this).hasClass("que-save") || $(this).hasClass("que-save-mark") || $(this).hasClass("que-mark") || ($(this).addClass("que-not-answered"),
+                            $(this).removeClass("que-not-attempted")),
+                        e.hasClass("que-save") || e.hasClass("que-save-mark") || e.hasClass("que-mark") || (e.addClass("que-not-answered"),
+                            e.removeClass("que-not-attempted")),
+                        OpenCurrentQue($(this))
+                }
+                )),
+
+                $(".btn-save-answer").click((function (e) {
+                    e.preventDefault();
+                    var t = $(".test-questions").find("li.active")
+                        , a = t.find("a").attr("data-href")
+                        , n = ($("#" + a).find(".hdfQuestionID").val(),
+                            $("#" + a).find(".hdfPaperSetID").val(),
+                            $("#" + a).find(".hdfCurrectAns").val(),
+                            !1);
+                    if ($("input[name='radios" + a + "']").each((function () {
+                        $(this).is(":checked") && (n = !0)
+                    }
+                    )),
+                        0 == n)
+                        return alert("Please choose an option"),
+                            !1;
+                    $("input[name='radios" + a + "']:checked").val(),
+                        t.find("a").removeClass("que-save-mark"),
+                        t.find("a").removeClass("que-mark"),
+                        t.find("a").addClass("que-save"),
+                        t.find("a").removeClass("que-not-answered"),
+                        t.find("a").removeClass("que-not-attempted"),
+                        NextQuestion(!1),
+                        CheckQueAttemptStatus(),
+                        SetValueSelect(a)
+                }
+                )),
+
+                $(".btn-save-mark-answer").click((function (e) {
+                    e.preventDefault();
+                    var t = $(".test-questions").find("li.active")
+                        , a = t.find("a").attr("data-href")
+                        , n = ($("#" + a).find(".hdfQuestionID").val(),
+                            $("#" + a).find(".hdfPaperSetID").val(),
+                            $("#" + a).find(".hdfCurrectAns").val(),
+                            $("#" + a).find(".hdfCurrectAns").val(),
+                            !1);
+                    if ($("input[name='radios" + a + "']").each((function () {
+                        $(this).is(":checked") && (n = !0)
+                    }
+                    )),
+                        0 == n)
+                        return alert("Please choose an option"),
+                            !1;
+                    $("input[name='radios" + a + "']:checked").val(),
+                        t.find("a").removeClass("que-save"),
+                        t.find("a").removeClass("que-mark"),
+                        t.find("a").addClass("que-save-mark"),
+                        t.find("a").removeClass("que-not-answered"),
+                        t.find("a").removeClass("que-not-attempted"),
+                        NextQuestion(!1),
+                        CheckQueAttemptStatus(),
+                        AnsweredMarkedforReview(a)
+                }
+                )),
+
+                $(".btn-mark-answer").click((function (e) {
+                    e.preventDefault();
+                    var t = $(".test-questions").find("li.active")
+                        , a = t.find("a").attr("data-href");
+                    $("#" + a).find(".hdfQuestionID").val(),
+                        $("#" + a).find(".hdfPaperSetID").val(),
+                        $("#" + a).find(".hdfCurrectAns").val(),
+                        $("#" + a).find(".hdfCurrectAns").val(),
+                        t.find("a").removeClass("que-save-mark"),
+                        t.find("a").removeClass("que-save"),
+                        t.find("a").addClass("que-mark"),
+                        t.find("a").removeClass("que-not-answered"),
+                        t.find("a").removeClass("que-not-attempted"),
+                        NextQuestion(!1),
+                        CheckQueAttemptStatus(),
+                        MarkedforReview(a)
+                }
+                )),
+
+                $(".btn-reset-answer").click((function (e) {
+                    e.preventDefault();
+                    var t = $(".test-questions").find("li.active")
+                        , a = t.find("a").attr("data-href");
+                    $("#" + a).attr("data-queid"),
+                        t.find("a").removeClass("saved-que"),
+                        $("input[name='radios" + a + "']:checked").each((function () {
+                            $(this).prop("checked", !1).change()
+                        }
+                        )),
+                        $("input[name='chk" + a + "']").each((function () {
+                            $(this).prop("checked", !1).change()
+                        }
+                        )),
+                        $("input[type=checkbox]").prop("checked", !1).change(),
+                        $("input[type=text]").val(""),
+                        a = t.find("a").attr("data-href"),
+                        $("#" + a).find(".hdfQuestionID").val(),
+                        $("#" + a).find(".hdfPaperSetID").val(),
+                        $("#" + a).find(".hdfCurrectAns").val(),
+                        $("#" + a).find(".hdfCurrectAns").val(),
+                        t.find("a").removeClass("que-save-mark"),
+                        t.find("a").removeClass("que-mark"),
+                        t.find("a").removeClass("que-save"),
+                        t.find("a").removeClass("que-not-attempted"),
+                        t.find("a").addClass("que-not-answered"),
+                        CheckQueAttemptStatus()
+                }
+                )),
+                $(".btn-submit-all-answers").click((function (e) {
+                    e.preventDefault(),
+                        $(this),
+                        $(".test-questions").find("li").each((function () {
+                            var e = $(this)
+                                , t = !1;
+                            if (e.children().hasClass("que-save") ? t = !0 : e.children().hasClass("que-save-mark") && (t = !0),
+                                t) {
+                                var a = e.find("a").attr("data-href");
+                                $("#" + a).find(".hdfCurrectAns").val(),
+                                    $("#" + a).find("input[name='radios" + a + "']").each((function () {
+                                        var e = $(this);
+                                        e.is(":checked") && e.val()
+                                    }
+                                    ))
+                            }
+                        }
+                        )),
+                        $(".exam-paper").hide(),
+                        $(".stream_1").hide(),
+                        $("#divdrplngcng").hide(),
+                        $(".exam-part").hide(),
+                        $(".exam-summery").show(),
+                        $(".exam-part-2").show(),
+                        CheckQueAttemptStatus()
+                }
+                )),
+                $("#btnYesSubmitConfirm").on("click", (function (e) {
+                    e.preventDefault(),
+                        $(".exam-thankyou").show(),
+                        $(".exam-paper").hide(),
+                        $(".exam-part").hide(),
+                        $(".exam-part-2").hide(),
+
+                        $("#divdrplngcng").hide(),
+                        $(".exam-summery").hide()
+                }
+                )),
+                $("#btnNoSubmitConfirm").on("click", (function (e) {
+                    e.preventDefault(),
+                        $(".exam-paper").show(),
+                        $(".stream_1").show(),
+                        $(".exam-confirm").hide(),
+                        $("#divdrplngcng").show(),
+                        $(".exam-summery").hide(),
+                        $(".exam-part").show(),
+                        $(".exam-part-2").hide()
+                }
+                )),
+                $(".drplanguage").on("change", (function (e) {
+                    e.preventDefault();
+                    var newlang = $(this).val();
+                    $(".question-height > .MQ").each((function (index, item) {
+                        var currentImg = $(this)
+                            , currentQuestionNo = currentImg.data("questionno")
+                            , currentDisImg = $(".question-height > ." + currentQuestionNo + "DQ");
+                        $.each(JSON.parse(PaperQuestions), (function (i, item) {
+                            item.QuestionNo == currentQuestionNo && item.LangID == parseInt(newlang) && (currentDisImg.attr("src", $("#datalink").val() + item.DescriptionImagePath),
+                                currentImg.attr("src", $("#datalink").val() + item.QuestionImagePath))
+                        }
+                        ))
+                    }
+                    )),
+                        $("#hdfCurrentLng").val(newlang)
+                }
+                )),
+                $(".stream_1").on("click", (function (e) {
+                    e.preventDefault();
+                    var current_herf = $(this).attr("data-href"), a;
+                    $(".test-questions").find("li").find("a[data-href=" + current_herf + "]").trigger("click")
+                }
+                )),
+                $("#btnViewResult").on("click", (function (e) {
+                    e.preventDefault(),
+                        CheckResult(),
+
+                        $(".exam-thankyou").hide(),
+                        $(".exam-part-3").show(),
+                        $(".exam-result").show(),
+                        $(".exam-thankyou").hide(),
+
+                        $("#divdrplngcng").hide(),
+                        SubmitResult2(),
+                        SubmitResult()
+                }
+                )),
+                $("#btnRBack").on("click", (function (e) {
+                    e.preventDefault(),
+                        window.location.href = $("#hdfBaseURL").val() + "Quiz/Home/Index"
+                }
+                )),
+                $(".full_screen").click((function () {
+                    $("#quest").removeClass("col-md-8"),
+                        $("#quest").addClass("col-md-12"),
+                        $("#pallette").addClass("hidden"),
+                        $(".full_screen").addClass("hidden"),
+                        $(".collapse_screen").removeClass("hidden")
+                }
+                )),
+                $(".collapse_screen").click((function () {
+                    $("#quest").removeClass("col-md-12"),
+                        $("#quest").addClass("col-md-8"),
+                        $("#pallette").removeClass("hidden"),
+                        $(".full_screen").removeClass("hidden"),
+                        $(".collapse_screen").addClass("hidden")
+                }
+                ))
+        }
+        ));
+
+    </script>
+
+
+    <script>
+
+        function SetValueSelect(a) {
+            var sl = $("input[name='radios" + a + "']:checked").val();
+            var slId = "#selAnsId" + a;
+            var nvId = "#notVisId" + a;
+            var amr = "#ansMarkrevId" + a;
+            var mr = "#markRevId" + a;
+            $(slId).text(sl);
+            $(nvId).text(1);
+            $(mr).text(0);
+            $(amr).text(0);
+        }
+
+        function MarkedforReview(a) {
+            var slId = "#selAnsId" + a;
+            var nvId = "#notVisId" + a;
+            var amr = "#ansMarkrevId" + a;
+            var mr = "#markRevId" + a;
+            $(mr).text(1);
+            $(nvId).text(1);
+            $(slId).text(0);
+            $(amr).text(0);
+        }
+
+        function AnsweredMarkedforReview(a) {
+            var sl = $("input[name='radios" + a + "']:checked").val();
+            var slId = "#selAnsId" + a;
+            var nvId = "#notVisId" + a;
+            var amr = "#ansMarkrevId" + a;
+            var mr = "#markRevId" + a;
+            $(slId).text(sl);
+            $(nvId).text(1);
+            $(amr).text(1);
+            $(mr).text(0);
+        }
+
+        function SubmitResult() {
+
+            var datarr = {};
+            var data1 = new Array();
+            $("#tblexamresult TBODY TR").each(function () {
+                var row = $(this);
+                var data2 = {};
+                data2.QuestionId = row.find("TD").eq(0).html();
+                data2.SelectedAnswer = row.find("TD").eq(1).html();
+                data2.CorrectAnswer = row.find("TD").eq(2).html();
+                data2.NotVisited = row.find("TD").eq(3).html();
+                data2.MarkForReview = row.find("TD").eq(4).html();
+                data2.AnsMarkForReview = row.find("TD").eq(5).html();
+                data2.StudentId = row.find("TD").eq(6).html();
+                data2.ExamId = row.find("TD").eq(7).html();
+                data2.QsNo = row.find("TD").eq(8).html();
+                data1.push(data2);
+            });
+
+
+            datarr.examResults = data1;
+
+            $.ajax({
+                type: "POST",
+                url: "../../api/Exam/Result",
+                data: JSON.stringify(datarr),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                }
+            });
+
+        }
+
+        function SubmitResult2() {
+            $(".exam-thankyou").hide();
+            var datarr2 = {};
+            var rdata1 = new Array();
+            $("#tblexamresult2 TBODY TR").each(function () {
+                var row = $(this);
+                var rdata2 = {};
+                rdata2.TQ = row.find("TD").eq(0).html();
+                rdata2.TA = row.find("TD").eq(1).html();
+                rdata2.CA = row.find("TD").eq(2).html();
+                rdata2.IC = row.find("TD").eq(3).html();
+                rdata2.ES = row.find("TD").eq(4).html();
+                rdata2.ExamId = row.find("TD").eq(5).html();
+                rdata2.StudentId = row.find("TD").eq(6).html();
+                rdata1.push(rdata2);
+            });
+
+
+            datarr2.Attends = rdata1;
+
+            $.ajax({
+                type: "POST",
+                url: "../../api/Exam/ResultAttend",
+                data: JSON.stringify(datarr2),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                }
+            });
+        }
+        
+    </script>
+
+
+
+
+}

@@ -1,0 +1,1884 @@
+﻿@model OnlineExam.ViewModel.StudentRegistrationViewModel
+@{
+    ViewBag.Title = "Student Register";
+}
+
+@{
+    List<SelectListItem> acYear = new List<SelectListItem>();
+    for (int i = 2021; i <= 2031; i++)
+    {
+        acYear.Add(new SelectListItem() { Text = i.ToString(), Value = i.ToString() });
+    }
+}
+
+<section>
+    <div class="container d-flex align-items-center text-center text-lg-left py-5 py-lg-4 border-bottom">
+        <div class="col px-0">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h3 class="h2 mb-2">Student Registration</h3>
+                    <h6 class="font-weight-light text-muted">entrancecoach.com registration form</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="slice">
+    <div class="container">
+        <div class="row row-grid justify-content-between">
+            <div class="col-lg-3">
+                <div data-toggle="sticky" data-sticky-offset="50" class="" style="">
+                    <div class="card">
+                        <div class="list-group list-group-flush">
+                            <a href="#item-1" data-scroll-to="" data-scroll-to-offset="50" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                <div>
+                                    <i data-feather="award" class=""></i>
+                                    <span>&nbsp; About the program</span>
+                                </div>
+                            </a>
+                            <a href="#item-2" data-scroll-to="" data-scroll-to-offset="50" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                <div>
+                                    <i data-feather="user"></i>
+                                    <span>&nbsp; About the student</span>
+                                </div>
+                            </a>
+                            <a href="#item-3" data-scroll-to="" data-scroll-to-offset="50" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                <div>
+                                    <i data-feather="users"></i>
+                                    <span>&nbsp; About the Parent’s</span>
+                                </div>
+                            </a>
+                            <a href="#item-4" data-scroll-to="" data-scroll-to-offset="50" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                <div>
+                                    <i data-feather="home"></i>
+                                    <span>&nbsp; Home country details</span>
+                                </div>
+                            </a>
+                            <a href="#item-5" data-scroll-to="" data-scroll-to-offset="50" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                <div>
+                                    <i data-feather="clipboard"></i>
+                                    <span>&nbsp; Academic performance</span>
+                                </div>
+                            </a>
+                            <a href="#item-6" data-scroll-to="" data-scroll-to-offset="50" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                <div>
+                                    <i data-feather="file-text"></i>
+                                    <span>&nbsp; Examination attempted</span>
+                                </div>
+                            </a>
+                            <a href="#item-7" data-scroll-to="" data-scroll-to-offset="50" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                <div>
+                                    <i data-feather="edit"></i>
+                                    <span>&nbsp; Declaration</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+
+                @if (ViewBag.StatusMessage != null)
+                {
+
+                    <div class="card shadow-none">
+                        <div class="p-3 d-flex">
+                            <div>
+                                <div class="icon icon-shape rounded-circle bg-success text-white mr-4">
+                                    <i data-feather="check"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="h6"> Hello @ViewBag.ApplicationName !</span>
+                                <p class="text-sm text-muted mb-0">
+                                    @ViewBag.StatusMessage
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <div class="alert alert-outline-danger" role="alert">
+                        <strong>@ViewBag.ErrorMessage</strong>
+                    </div>
+                }
+
+
+                <form id="studentRegistration" method="post" enctype="multipart/form-data">
+                    @Html.AntiForgeryToken()
+
+                    @Html.HiddenFor(model => model.RegId)
+
+                    <div class="mb-5">
+                        <h5 id="item-1">About the entrance coaching program</h5>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Choose the Class </label>
+                                    @Html.DropDownList("ClassId", ViewBag.ClassID as SelectList, "Select Class", new { @class = "custom-select" })
+                                    @Html.ValidationMessageFor(model => model.ClassId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Choose the Programme</label>
+                                    @Html.DropDownList("PgmId", ViewBag.ProgramID as SelectList, "Select Programme", new { @class = "custom-select" })
+                                    @Html.ValidationMessageFor(model => model.PgmId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Choose the Sub Programme </label>
+                                    @Html.DropDownList("SubPgmId", (SelectList)ViewBag.SubProgramID as SelectList, "Select Sub Programme", new { @class = "custom-select" })
+                                    @Html.ValidationMessageFor(model => model.SubPgmId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Choose the Course</label>
+                                    @Html.DropDownList("CourseId", ViewBag.CourseID as SelectList, "Select Course", new { @class = "custom-select" })
+                                    @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Application date</label>
+                                    <input type="text" class="form-control" id="ApplnDate" name="ApplnDate" onkeydown="return false;">
+                                    @Html.ValidationMessageFor(model => model.ApplnDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Academic year</label>
+                                    @Html.DropDownList("AcademicYear", acYear, "Select Academic year", htmlAttributes: new { @class = "custom-select" })
+                                    @Html.ValidationMessageFor(model => model.AcademicYear, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Focus to attend entrance exam</label>
+                                    @Html.DropDownList("ExamAttendingYear", acYear, "Select exam attend year", htmlAttributes: new { @class = "custom-select" })
+                                    @Html.ValidationMessageFor(model => model.ExamAttendingYear, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Preferred date to attend admission test</label>
+                                    <input type="date" class="form-control" placeholder="Select a date" onkeydown="return false;" id="AdmissionTestDate" name="AdmissionTestDate" autocomplete="off">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Preferred day’s to attend classes</label>
+                                    <select class="custom-select" id="PreferredDay" name="PreferredDay">
+                                        <option value="">Select a Day</option>
+                                        <option value="Monday">Monday</option>
+                                        <option value="Tuesday">Tuesday</option>
+                                        <option value="Wednesday">Wednesday</option>
+                                        <option value="Thursday">Thursday</option>
+                                        <option value="Friday">Friday</option>
+                                        <option value="Saturday">Saturday</option>
+                                        <option value="Sunday">Sunday</option>
+                                    </select>
+                                    @Html.ValidationMessageFor(model => model.PreferredDay, "", new { @class = "error" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Preferred time slot to attend classes</label>
+                                    <select class="custom-select" id="PreferredTime" name="PreferredTime">
+                                        <option value="">Select a Timing</option>
+                                        <option value="5-6 am">5-6 am</option>
+                                        <option value="6-7 am">6-7 am</option>
+                                        <option value="7-8 am">7-8 am</option>
+                                        <option value="8-9 am">8-9 am</option>
+                                        <option value="9-10 am">9-10 am</option>
+                                        <option value="10-11 am">10-11 am</option>
+                                        <option value="11-12 pm">11-12 pm</option>
+                                        <option value="1-2 pm">1-2 pm</option>
+                                        <option value="2-3 pm">2-3 pm</option>
+                                        <option value="3-4 pm">3-4 pm</option>
+                                        <option value="4-5 pm">4-5 pm</option>
+                                        <option value="5-6 pm">5-6 pm</option>
+                                        <option value="6-7 pm">6-7 pm</option>
+                                        <option value="7-8 pm">7-8 pm</option>
+                                        <option value="8-9 pm">8-9 pm</option>
+                                        <option value="9-10 pm">9-10 pm</option>
+                                    </select>
+                                    @Html.ValidationMessageFor(model => model.PreferredTime, "", new { @class = "error" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="mb-5">
+                        <h5 id="item-2">About the student</h5>
+
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Name of the student</label>
+                                    @Html.EditorFor(model => model.StudentName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Student Name" } })
+                                    @Html.ValidationMessageFor(model => model.StudentName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Whatsapp Number</label>
+                                    @Html.EditorFor(model => model.WhatsappNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Whatsapp Number" } })
+                                    @Html.ValidationMessageFor(model => model.WhatsappNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Date of birth</label>
+                                    <input type="date" class="form-control" placeholder="Select your birth date" onkeydown="return false;" id="DOB" name="DOB" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Gender</label>
+                                    <select class="custom-select" id="Gender" name="Gender">
+                                        <option disabled="disabled" selected="selected">Select Gender</option>
+                                        <option value="1">Female</option>
+                                        <option value="2">Male</option>
+                                        <option value="2">Rather not say</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Religion </label>
+                                    @Html.EditorFor(model => model.Religion, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Religion" } })
+                                    @Html.ValidationMessageFor(model => model.Religion, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Caste</label>
+                                    @Html.EditorFor(model => model.Caste, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Caste" } })
+                                    @Html.ValidationMessageFor(model => model.Caste, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Community </label>
+                                    @Html.EditorFor(model => model.Community, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Community" } })
+                                    @Html.ValidationMessageFor(model => model.Community, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Blood Group</label>
+                                    <select class="custom-select" id="BloodGroup" name="BloodGroup">
+                                        <option disabled="disabled" selected="selected">Select Blood Group</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="B-">B-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="O-">O-</option>
+                                        <option value="O+">O+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">Nationality </label>
+                                    @Html.EditorFor(model => model.Nationalty, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Nationality" } })
+                                    @Html.ValidationMessageFor(model => model.Nationalty, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="form-control-label">Present address</label>
+                                    @Html.EditorFor(model => model.PresentAddress, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Present address" } })
+                                    @Html.ValidationMessageFor(model => model.PresentAddress, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Area </label>
+                                    @Html.EditorFor(model => model.Area, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Area" } })
+                                    @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Location / Post Office</label>
+                                    @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Location / Post Office" } })
+                                    @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">District</label>
+                                    @Html.EditorFor(model => model.District, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter District" } })
+                                    @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">State</label>
+                                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", @placeholder = "EnterState" } })
+                                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">PO Box / Pin code</label>
+                                    @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter PO Box / Pin code" } })
+                                    @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">Quick contact number</label>
+                                    @Html.EditorFor(model => model.QuickContNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Quick contact number" } })
+                                    @Html.ValidationMessageFor(model => model.QuickContNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">Quick contact Whatsapp</label>
+                                    @Html.EditorFor(model => model.QuickWhatsApp, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Quick contact Whatsapp" } })
+                                    @Html.ValidationMessageFor(model => model.QuickWhatsApp, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="mb-5">
+                        <h5 id="item-3">About the Parent’s</h5>
+
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Father Name</label>
+                                    @Html.EditorFor(model => model.FrName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Father Name" } })
+                                    @Html.ValidationMessageFor(model => model.FrName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Father Occupation</label>
+                                    @Html.EditorFor(model => model.FrOcc, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Occupation" } })
+                                    @Html.ValidationMessageFor(model => model.FrOcc, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Mobile Number</label>
+                                    @Html.EditorFor(model => model.FrMobNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Mobile Number" } })
+                                    @Html.ValidationMessageFor(model => model.FrMobNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Whatsapp Number</label>
+                                    @Html.EditorFor(model => model.WhatsappFr, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Whatsapp Number" } })
+                                    @Html.ValidationMessageFor(model => model.WhatsappFr, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Email ID</label>
+                                    @Html.EditorFor(model => model.MailidFr, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Email ID" } })
+                                    @Html.ValidationMessageFor(model => model.MailidFr, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">District</label>
+                                    @Html.EditorFor(model => model.FrDistrict, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter District" } })
+                                    @Html.ValidationMessageFor(model => model.FrDistrict, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">State</label>
+                                    @Html.EditorFor(model => model.FrState, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter State" } })
+                                    @Html.ValidationMessageFor(model => model.FrState, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Mother Name</label>
+                                    @Html.EditorFor(model => model.MrName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Mother Name" } })
+                                    @Html.ValidationMessageFor(model => model.MrName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Mother Occupation</label>
+                                    @Html.EditorFor(model => model.MrOcc, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Occupation" } })
+                                    @Html.ValidationMessageFor(model => model.MrOcc, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Mobile Number</label>
+                                    @Html.EditorFor(model => model.MrMobNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Mobile Number" } })
+                                    @Html.ValidationMessageFor(model => model.MrMobNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Whatsapp Number </label>
+                                    @Html.EditorFor(model => model.WhatsappMr, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Whatsapp Number" } })
+                                    @Html.ValidationMessageFor(model => model.WhatsappMr, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Email ID</label>
+                                    @Html.EditorFor(model => model.MailidMr, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Email ID" } })
+                                    @Html.ValidationMessageFor(model => model.MailidMr, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">District</label>
+                                    @Html.EditorFor(model => model.MrDistrict, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter District" } })
+                                    @Html.ValidationMessageFor(model => model.MrDistrict, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">State</label>
+                                    @Html.EditorFor(model => model.MrState, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter State" } })
+                                    @Html.ValidationMessageFor(model => model.MrState, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">Upload Student Photo</label>
+                                    <input type="file" accept="image/*" name="file_Photo" id="file_Photo" onchange="loadFile1(event)" class="custom-input-file" />
+                                    <label for="file-1" id="forPhoto">
+                                        <i data-feather="upload"></i>
+                                        <span id="1up">Choose a file…</span>
+                                    </label>
+                                    <label id="file_Photo-error" class="error" for="file_Photo" style="display:none;"></label>
+                                    <div class="up-img img1">
+                                        <img alt="Image placeholder" id="file_Photo_src" class="avatar  avatar-lg">
+                                        <div class="remove-class">
+                                            <label id="remove1" class="error img-remove">Remove</label>
+                                        </div>
+                                    </div>
+                                    <div class="er1 size-er">
+                                        <label id="eerror1" class="error img-remove"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">Father Signature</label>
+                                    <input type="file" accept="image/*" name="file_FrSign" id="file_FrSign" onchange="loadFile2(event)" class="custom-input-file" />
+                                    <label for="file-1" id="forFrSign">
+                                        <i data-feather="upload"></i>
+                                        <span id="2up">Choose a file…</span>
+                                    </label>
+                                    <label id="file_FrSign-error" class="error" for="file_FrSign" style="display:none;"></label>
+                                    <div class="up-img img2">
+                                        <img alt="Image placeholder" id="file_FrSign_src" class="avatar  avatar-lg">
+                                        <div class="remove-class">
+                                            <label id="remove2" class="error img-remove">Remove</label>
+                                        </div>
+                                    </div>
+                                    <div class="er2 size-er">
+                                        <label id="eerror2" class="error img-remove"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">Mother Signature</label>
+                                    <input type="file" accept="image/*" name="file_MrSign" id="file_MrSign" onchange="loadFile3(event)" class="custom-input-file" />
+                                    <label for="file-1" id="forMrSign">
+                                        <i data-feather="upload"></i>
+                                        <span id="3up">Choose a file…</span>
+                                    </label>
+                                    <label id="file_MrSign-error" class="error" for="file_MrSign" style="display:none;"></label>
+                                    <div class="up-img img3">
+                                        <img alt="Image placeholder" id="file_MrSign_src" class="avatar  avatar-lg">
+                                        <div class="remove-class">
+                                            <label id="remove3" class="error img-remove">Remove</label>
+                                        </div>
+                                    </div>
+                                    <div class="er3 size-er">
+                                        <label id="eerror3" class="error img-remove"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="mb-5">
+                        <h5 id="item-4">Home country details</h5>
+
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Address 1</label>
+                                    @Html.EditorFor(model => model.homeAddress, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Address 1" } })
+                                    @Html.ValidationMessageFor(model => model.homeAddress, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Address 2</label>
+                                    @Html.EditorFor(model => model.Address2, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Address 2" } })
+                                    @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Area</label>
+                                    @Html.EditorFor(model => model.AreaHome, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Area" } })
+                                    @Html.ValidationMessageFor(model => model.AreaHome, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label"> Location / Post Office</label>
+                                    @Html.EditorFor(model => model.LocationHome, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Location / Post Office" } })
+                                    @Html.ValidationMessageFor(model => model.LocationHome, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">District</label>
+                                    @Html.EditorFor(model => model.DistHome, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter District" } })
+                                    @Html.ValidationMessageFor(model => model.DistHome, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">State</label>
+                                    @Html.EditorFor(model => model.StateHome, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter State" } })
+                                    @Html.ValidationMessageFor(model => model.StateHome, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">PO Box / Pin code</label>
+                                    @Html.EditorFor(model => model.PincodeHome, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter PO Box / Pin code" } })
+                                    @Html.ValidationMessageFor(model => model.PincodeHome, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">email id</label>
+                                    @Html.EditorFor(model => model.emailHome, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter email id" } })
+                                    @Html.ValidationMessageFor(model => model.emailHome, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Quick contact number</label>
+                                    @Html.EditorFor(model => model.homeContact, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Quick contact number" } })
+                                    @Html.ValidationMessageFor(model => model.homeContact, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Quick contact Whatsapp number</label>
+                                    @Html.EditorFor(model => model.QuickHomeWhatsapp, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Quick contact Whatsapp" } })
+                                    @Html.ValidationMessageFor(model => model.QuickHomeWhatsapp, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="mb-5">
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col">
+                                <h5 id="item-5">Academic performance of the student</h5>
+                            </div>
+                            <div class="col-auto text-right ml-auto">
+                                <a href="javascript:void(0)" class="btn btn-sm btn-animated btn-neutral btn-icon btn-animated-x" data-toggle="modal" data-target=".docs-example-modal-lg1">
+                                    <span class="btn-inner--visible">Add Details</span>
+                                    <span class="btn-inner--hidden">
+                                        <i data-feather="plus"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <link rel="stylesheet" type="text/css" href="~/Theme/assets/libs/datatable/css/tables/datatable/datatables.min.css">
+
+                        <div class="table-responsive">
+                            <table id="academic-tb" class="table align-items-center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Sl.No</th>
+                                        <th scope="col">Class</th>
+                                        <th scope="col">Year of Pass</th>
+                                        <th scope="col">School Address</th>
+                                        <th scope="col">Reg.No</th>
+                                        <th scope="col">Board</th>
+                                        <th scope="col">Physics(mark)</th>
+                                        <th scope="col">Chemistry(mark)</th>
+                                        <th scope="col">Biology(mark)</th>
+                                        <th scope="col">Maths(mark)</th>
+                                        <th scope="col">% of Marks</th>
+                                        <th scope="col" class="text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="mb-5">
+                        <div class="row align-items-center mb-4">
+                            <div class="col">
+                                <h5 id="item-6">Details of Entrance Examination attempted by the Student</h5>
+                            </div>
+                            <div class="col-auto text-right ml-auto">
+                                <a href="javascript:void(0)" class="btn btn-sm btn-animated btn-neutral btn-icon btn-animated-x" data-toggle="modal" data-target="#exampleModal">
+                                    <span class="btn-inner--visible">Add Details</span>
+                                    <span class="btn-inner--hidden">
+                                        <i data-feather="plus"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table id="Entrance-tb" class="table align-items-center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Sl.No</th>
+                                        <th scope="col">Name of Examination</th>
+                                        <th scope="col">Roll.No</th>
+                                        <th scope="col">Year</th>
+                                        <th scope="col">Mark Obtained</th>
+                                        <th scope="col">Rank Obtained</th>
+                                        <th scope="col">No of Attempts</th>
+                                        <th scope="col" class="text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="mb-5">
+                        <h5 id="item-7">Declaration</h5>
+                        <p>
+                            I / We hereby declare that the information given in the application form is true and accurate. My ward and I shall follow
+                            all the rules , regulations and procedures laid down by the institution from time to time.
+                        </p>
+                        <p>
+                            I/We also declare that while being an enrolled student of entrancecoach.com / entrance coach educate llp, the student
+                            will be responsible for providing relevant details of all the competitive exams which he/she will be appearing in the future
+                            by virtue of coaching and academic support from the institute. Further I/We hereby give our free consent for using the result, photograph & testimonials of the student by the institution for its growth and developmental procedure without any
+                            objection for it.
+                        </p>
+                        <p>
+                            I/We are also aware of the following rules and regulations. There will be no reimbursement of fee for the short term courses
+                            like FAST Revision, or any other short term and Crash Batches. For other courses refund will be calculated from the date of
+                            receiving relieving form at the corporate office, which will be considered after 30 days. Refund will not be issued after 90
+                            days from the date of admission/date of joining which one is latter. Those who are within in the limit of 90 days the
+                            balance fee will be reimbursed after deducting admission fee and INR 500/hr for the classes completed, which will be
+                            issued as cheque in the name of parent. The disputes if any arising about the reimbursement will be considered in the
+                            courts of Cochin/ (Ernakulam) jurisdiction only.
+                        </p>
+
+                        <div class="my-4">
+
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" name="customCheck1">
+                                <label class="custom-control-label" for="customCheck1">I agree to the terms and conditions</label>
+                            </div>
+                            <label id="customCheck1-error" class="error" for="customCheck1" style="display:none;"></label>
+                        </div>
+
+                        <hr>
+                        <div class="text-right"><button type="submit" class="btn btn-sm btn-primary">Register</button></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Large modal -->
+
+
+<div id="accModel" class="modal fade docs-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title h6" id="myLargeModalLabel">Academic performance</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="academic" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" id="RegId" name="RegId" value="@Model.RegId" />
+                <div class="modal-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label">Class</label>
+                                <select class="custom-select" id="Class" name="Class">
+                                    <option value="">Select</option>
+                                    <option value="Class 5">Class 4</option>
+                                    <option value="Class 5">Class 5</option>
+                                    <option value="Class 6">Class 6</option>
+                                    <option value="Class 7">Class 7</option>
+                                    <option value="Class 8">Class 8</option>
+                                    <option value="Class 9">Class 9</option>
+                                    <option value="Class 10">Class 10</option>
+                                    <option value="Class 11">Class 11</option>
+                                    <option value="Class 12">Class 12</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-control-label">Year</label>
+                                @Html.DropDownList("PassYear", acYear, "Select", htmlAttributes: new { @class = "custom-select" })
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label class="form-control-label">Address of School</label>
+                                <input type="text" class="form-control" id="SchoolAddress" name="SchoolAddress" placeholder="Enter Address of School">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label">Reg.No</label>
+                                <input type="text" class="form-control" id="RegNo" name="RegNo" placeholder="Enter Reg.No">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label">Board</label>
+                                <input type="text" class="form-control" id="Board" name="Board" placeholder="Enter Board">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label">Physics</label>
+                                <input type="text" class="form-control" id="PhyMark" name="PhyMark" placeholder="Mark">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label">Chemistry</label>
+                                <input type="text" class="form-control" id="ChemMark" name="ChemMark" placeholder="Mark">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label">Biology</label>
+                                <input type="text" class="form-control" id="BiologyMark" name="BiologyMark" placeholder="Mark">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label">Maths</label>
+                                <input type="text" class="form-control" id="MathsMark" name="MathsMark" placeholder="Mark">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label">% of Marks</label>
+                                <input type="text" class="form-control" id="PercOfMark" name="PercOfMark" placeholder="Percentage">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-right">
+                        <a href="#" class="btn btn-sm btn-secondary" data-dismiss="modal">close</a>
+                        <button type="submit" class="btn btn-sm btn-primary mr-2 acc-btn">
+                            <span style="display:none;" class="spinner-border spinner-border-sm acc-spin" role="status" aria-hidden="true"></span>
+                            <span class="acc-name">Add</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Entrance Examination attempted</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="entrance" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" id="RegId" name="RegId" value="@Model.RegId" />
+                <div class="modal-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-control-label">Name Of the Exam</label>
+                                <input type="text" class="form-control" id="PrevEntranceExamName" name="PrevEntranceExamName" placeholder="Enter Exam name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label class="form-control-label">Roll.No</label>
+                                <input type="text" class="form-control" id="RollNo" name="RollNo" placeholder="Enter Roll.No">
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="form-control-label">Year</label>
+                                @Html.DropDownList("AttemptedYear", acYear, "Select Year", htmlAttributes: new { @class = "custom-select" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-control-label">Mark Obtained</label>
+                                <input type="text" class="form-control" id="Mark" name="Mark" placeholder="Enter Mark">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-control-label">Rank Obtained</label>
+                                <input type="text" class="form-control" id="Rank" name="Rank" placeholder="Enter Rank">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-control-label">No.of Attempts</label>
+                                <input type="text" class="form-control" id="NoOfAttempts" name="NoOfAttempts" placeholder="Enter Attempts">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-right">
+                        <a href="#" class="btn btn-sm btn-secondary" data-dismiss="modal">close</a>
+                        <button type="submit" class="btn btn-sm btn-primary mr-2 pe-btn">
+                            <span style="display:none;" class="spinner-border spinner-border-sm pe-spin" role="status" aria-hidden="true"></span>
+                            <span class="pe-name">Add</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/vfs_fonts.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.buttons.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/buttons.bootstrap.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+
+    @*<script>
+        $('#AdmissionTestDate').focus(function () {
+            Datepicker = function () {
+                var t = $('#AdmissionTestDate')
+
+                t.length && t.each(function () {
+                    !function (t) {
+                        t.flatpickr({
+                            enableTime: !1,
+                            allowInput: !0
+                        })
+                    }($(this))
+                })
+            }()
+        });
+
+        $('#DOB').focus(function () {
+            Datepicker = function () {
+                var t = $('#DOB')
+
+                t.length && t.each(function () {
+                    !function (t) {
+                        t.flatpickr({
+                            enableTime: !1,
+                            allowInput: !0
+                        })
+                    }($(this))
+                })
+            }()
+        });
+
+
+    </script>*@
+
+    <script>       
+
+        var dataTable1;
+        var dataTable2;
+
+        jQuery(document).ready(function () {
+
+            $("#ClassId").change(function () {
+                var id = $(this).find(":selected").val()
+                var selectid = { "id": id }
+                $.ajax({
+                    url: "GetCourseWiseClass",
+                    data: JSON.stringify(selectid),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $("#CourseId").empty();
+                        $("#CourseId").append('<option value="">Select Course</option>');
+                        $.each(data, function (i) {
+                            var optionhtml = '<option value="' +
+                                data[i].Value + '">' + data[i].Text + '</option>';
+                            $("#CourseId").append(optionhtml);
+                        });
+                    }
+                });
+            });
+
+            //GetSubPgmWisePgm
+
+            $("#PgmId").change(function () {
+                var id = $(this).find(":selected").val()
+
+                console.log(id);
+                var selectid = { "id": id }
+                $.ajax({
+                    url: "GetSubPgmWisePgm",
+                    data: JSON.stringify(selectid),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $("#SubPgmId").empty();
+                        $("#SubPgmId").append('<option value="">Select Sub Programme</option>');
+                        $.each(data, function (i) {
+                            var optionhtml = '<option value="' +
+                                data[i].Value + '">' + data[i].Text + '</option>';
+                            $("#SubPgmId").append(optionhtml);
+                        });
+                    }
+                });
+            });
+        });
+
+
+
+    </script>
+
+    <script>
+        $(function () {
+            var date = $.datepicker.formatDate('dd/mm/yy', new Date());
+            $('#ApplnDate').val(date);
+        });
+    </script>
+
+    <script type="text/javascript">
+        function show(input) {
+            if (input.files && input.files[0]) {
+                var filerdr = new FileReader();
+                filerdr.onload = function (e) {
+                    $('#user_img').attr('src', e.target.result);
+                }
+                filerdr.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+    <script>
+        $("#forPhoto").on("click", function () {
+            jQuery("#file_Photo").trigger("click");
+        })
+
+        $("#forMrSign").on("click", function () {
+            jQuery("#file_MrSign").trigger("click");
+        })
+
+        $("#forFrSign").on("click", function () {
+            jQuery("#file_FrSign").trigger("click");
+        })
+    </script>
+
+    <script type="text/javascript">
+        var loadFile1 = function (event) {
+
+            var extension = $('#file_Photo').val().split('.').pop().toLowerCase();
+            var validFileExtensions = ['jpeg', 'jpg', 'png'];
+            if ($.inArray(extension, validFileExtensions) == -1) {
+                $('.er1').show();
+                $('#eerror1').text("Failed!! Please upload jpg, jpeg, png file only.").show();
+                $('#file_Photo').replaceWith($('#file_Photo').val('').clone(true));
+                $('.img1').hide();
+                $('#1up').empty();
+                $('#1up').text("Choose a file…");
+            }
+            else {
+                if ($('#file_Photo').get(0).files[0].size > (500000)) {
+                    $('.er1').show();
+                    $('#eerror1').text("Max allowed file size is 500 kb").show();
+                    $('#file_Photo').replaceWith($('#file_Photo').val('').clone(true));
+                    $('.img1').hide();
+                    $('#1up').empty();
+                    $('#1up').text("Choose a file…");
+                }
+                else {
+                    $('.er1').hide();
+                    $('#file_Photo-error').hide();
+                    $('#remove1').text("Remove").show();
+                    $('.img1').show();
+                    var image = document.getElementById('file_Photo_src');
+                    image.src = URL.createObjectURL(event.target.files[0]);
+                }
+            }
+        };
+
+        var loadFile2 = function (event) {
+
+            var extension = $('#file_FrSign').val().split('.').pop().toLowerCase();
+            var validFileExtensions = ['jpeg', 'jpg', 'png'];
+            if ($.inArray(extension, validFileExtensions) == -1) {
+                $('.er2').show();
+                $('#eerror2').text("Failed!! Please upload jpg, jpeg, png file only.").show();
+                $('#file_FrSign').replaceWith($('#file_FrSign').val('').clone(true));
+                $('.img2').hide();
+                $('#2up').empty();
+                $('#2up').text("Choose a file…");
+            }
+            else {
+                if ($('#file_FrSign').get(0).files[0].size > (500000)) {
+                    $('.er2').show();
+                    $('#eerror2').text("Max allowed file size is 500 kb").show();
+                    $('#file_FrSign').replaceWith($('#file_FrSign').val('').clone(true));
+                    $('.img2').hide();
+                    $('#2up').empty();
+                    $('#2up').text("Choose a file…");
+                }
+                else {
+                    $('#file_FrSign-error').hide();
+                    $('#remove2').text("Remove").show();
+                    $('.er2').hide();
+                    $('.img2').show();
+                    var image = document.getElementById('file_FrSign_src');
+                    image.src = URL.createObjectURL(event.target.files[0]);
+                }
+            }
+        };
+
+        var loadFile3 = function (event) {
+
+            var extension = $('#file_MrSign').val().split('.').pop().toLowerCase();
+            var validFileExtensions = ['jpeg', 'jpg', 'png'];
+            if ($.inArray(extension, validFileExtensions) == -1) {
+                $('.er3').show();
+                $('#eerror3').text("Failed!! Please upload jpg, jpeg, png file only.").show();
+                $('#file_MrSign').replaceWith($('#file_MrSign').val('').clone(true));
+                document.getElementById("file_MrSign").value = "";
+                $('.img3').hide();
+                $('#3up').empty();
+                $('#3up').text("Choose a file…");
+            }
+            else {
+                if ($('#file_MrSign').get(0).files[0].size > (500000)) {
+                    $('.er3').show();
+                    $('#eerror3').text("Max allowed file size is 500 kb").show();
+                    $('#file_MrSign').replaceWith($('#file_MrSign').val('').clone(true));
+                    document.getElementById("file_MrSign").value = "";
+                    $('.img3').hide();
+                    $('#3up').empty();
+                    $('#3up').text("Choose a file…");
+                }
+                else {
+                    $('#file_MrSign-error').hide();
+                    $('#remove3').text("Remove").show();
+                    $('.er3').hide();
+                    $('.img3').show();
+                    var image = document.getElementById('file_MrSign_src');
+                    image.src = URL.createObjectURL(event.target.files[0]);
+                }
+            }
+        };
+    </script>
+
+    <script>
+        $("#remove1").on("click", function () {
+            document.getElementById("file_Photo").value = "";
+            $('.img1').hide();
+            $('#1up').empty();
+            $('#1up').text("Choose a file…");
+        })
+
+        $("#remove2").on("click", function () {
+            document.getElementById("file_FrSign").value = "";
+            $('.img2').hide();
+            $('#2up').empty();
+            $('#2up').text("Choose a file…");
+        })
+
+        $("#remove3").on("click", function () {
+            document.getElementById("file_MrSign").value = "";
+            $('.img3').hide();
+            $('#3up').empty();
+            $('#3up').text("Choose a file…");
+        })
+    </script>
+
+    <script>
+        $('#studentRegistration').validate({
+            rules: {
+                ExamAttendingYear: {
+                    required: true
+                },
+                PreferredDay: {
+                    required: true
+                },
+                ApplnDate: {
+                    required: true
+                },
+                AcademicYear: {
+                    required: true
+                },
+                AdmissionTestDate: {
+                    required: true
+                },
+                StudentName: {
+                    required: true
+                },
+                PreferredTime: {
+                    required: true
+                },
+                DOB: {
+                    required: true
+                },
+                Gender: {
+                    required: true
+                },
+                Religion: {
+                    required: true
+                },
+                Caste: {
+                    required: true
+                },
+                WhatsappNo: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 14,
+                    digits: true
+                },
+                Community: {
+                    required: true
+                },
+                BloodGroup: {
+                    required: true
+                },
+                Nationalty: {
+                    required: true
+                },
+                PresentAddress: {
+                    required: true
+                },
+                Area: {
+                    required: true
+                },
+                Location: {
+                    required: true
+                },
+                State: {
+                    required: true
+                },
+                District: {
+                    required: true
+                },
+                Pincode: {
+                    required: true
+                },
+                QuickContNo: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 14,
+                    digits: true
+                },
+                QuickWhatsApp: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 14,
+                    digits: true
+                },
+                PgmId: {
+                    required: true,
+                    digits: true
+                },
+                ClassId: {
+                    required: true,
+                    digits: true
+                },
+                CourseId: {
+                    required: true,
+                    digits: true
+                },
+                SubPgmId: {
+                    required: true,
+                    digits: true
+                },
+                FrName: {
+                    required: true
+                },
+                FrOcc: {
+                    required: true
+                },
+                FrMobNo: {
+                    required: true,
+                    digits: true
+                },
+                FrDistrict: {
+                    required: true
+                },
+                FrState: {
+                    required: true
+                },
+                MrName: {
+                    required: true
+                },
+                MrOcc: {
+                    required: true
+                },
+                MrMobNo: {
+                    required: true,
+                    digits: true
+                },
+                MrDistrict: {
+                    required: true
+                },
+                MrState: {
+                    required: true
+                },
+                WhatsappMr: {
+                    required: true,
+                    digits: true
+                },
+                WhatsappFr: {
+                    required: true,
+                    digits: true
+                },
+                MailidFr: {
+                    required: true,
+                    email: true
+                },
+                MailidMr: {
+                    required: true,
+                    email: true
+                },
+                file_Photo: {
+                    required: true
+                },
+                file_FrSign: {
+                    required: true
+                },
+                file_MrSign: {
+                    required: true
+                },
+                homeAddress: {
+                    required: true
+                },
+                AreaHome: {
+                    required: true
+                },
+                PincodeHome: {
+                    required: true,
+                    digits: true
+                },
+                QuickHomeContact: {
+                    required: true,
+                    digits: true
+                },
+                LocationHome: {
+                    required: true
+                },
+                StateHome: {
+                    required: true
+                },
+                emailHome: {
+                    required: true,
+                    email: true
+                },
+                QuickHomeWhatsapp: {
+                    required: true,
+                    digits: true
+                },
+                homeContact: {
+                    required: true,
+                    digits: true,
+                    minlength: 10,
+                    maxlength: 14
+                },
+                DistHome: {
+                    required: true
+                },
+                customCheck1: {
+                    required: true
+                }
+
+            },
+            messages: {
+                ExamAttendingYear: {
+                    required: 'Please Select Year'
+                },
+                PreferredDay: {
+                    required: 'Please Select Day'
+                },
+                ApplnDate: {
+                    required: 'Please Select Date'
+                },
+                AcademicYear: {
+                    required: 'Please Select Year'
+                },
+                AdmissionTestDate: {
+                    required: 'Please Select Date'
+                },
+                StudentName: {
+                    required: 'Please enter Student Name'
+                },
+                PreferredTime: {
+                    required: 'Select Timing'
+                },
+                WhatsappNo: {
+                    required: 'Please enter Valid Number'
+                },
+                DOB: {
+                    required: 'Please Select DOB'
+                },
+                Gender: {
+                    Gender: 'Please Select Gender'
+                },
+                Religion: {
+                    required: 'Please enter Religion'
+                },
+                Caste: {
+                    required: 'Please enter Caste'
+                },
+                Community: {
+                    required: 'Please enter Community'
+                },
+                BloodGroup: {
+                    required: 'Please Select BloodGroup'
+                },
+                Nationalty: {
+                    required: 'Please enter Nationalty'
+                },
+                PresentAddress: {
+                    required: 'Please enter Present Address'
+                },
+                Area: {
+                    required: 'Please enter Area'
+                },
+                Location: {
+                    required: 'Please enter Location'
+                },
+                State: {
+                    required: 'Please enter State'
+                },
+                District: {
+                    required: 'Please enter District',
+                },
+                Pincode: {
+                    required: 'Please enter Pincode'
+                },
+                QuickContNo: {
+                    required: 'Please enter Valid Number'
+                },
+                QuickWhatsApp: {
+                    required: 'Please enter Valid Number'
+                },
+                PgmId: {
+                    required: 'Please Select Program'
+                },
+                ClassId: {
+                    required: 'Please Select Class'
+                },
+                CourseId: {
+                    required: 'Please Select Course'
+                },
+                SubPgmId: {
+                    required: 'Please Select Sub Program'
+                },
+                FrName: {
+                    required: 'Please enter Father Name'
+                },
+                FrOcc: {
+                    required: 'Please enter Father Occupation'
+                },
+                FrMobNo: {
+                    required: 'Please enter Valid Number'
+                },
+                FrDistrict: {
+                    required: 'Please enter District'
+                },
+                FrState: {
+                    required: 'Please enter State'
+                },
+                MrName: {
+                    required: 'Please enter Mother Name'
+                },
+                MrOcc: {
+                    required: 'Please enter Mother Occupation'
+                },
+                MrMobNo: {
+                    required: 'Please enter Valid Number'
+                },
+                MrDistrict: {
+                    required: 'Please enter District'
+                },
+                MrState: {
+                    required: 'Please enter State'
+                },
+                WhatsappMr: {
+                    required: 'Please  enter Valid Number'
+                },
+                WhatsappFr: {
+                    required: 'Please  enter Valid Number'
+                },
+                MailidFr: {
+                    required: 'Please enter Valid Email'
+                },
+                MailidMr: {
+                    required: 'Please enter Valid Email'
+                },
+                file_Photo: {
+                    required: 'Please  Select Photo'
+                },
+                file_FrSign: {
+                    required: 'Please Select Sign'
+                },
+                file_MrSign: {
+                    required: 'Please Select Sign'
+                },
+                customCheck1: {
+                    required: 'Please Agree terms and conditions'
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+
+                var data = element.id;
+
+                $("#" + data).addClass("is-invalid");
+                $("." + data).css({ 'border-color': '#f25767' });
+                $(".error" + data + "-error").show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                var data = element.id;
+                $("#" + data).removeClass("is-invalid");
+                $("." + data).css({ 'border-color': '' });
+                $("." + data + "-error").hide();
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    </script>
+
+    <script>
+        $("#academic").validate({
+            rules: {
+                Class: "required",
+                PassYear: "required",
+                SchoolAddress: "required",
+                Board: "required",
+                RegNo: {
+                    required: true,
+                    maxlength: 15,
+                },
+                PhyMark: {
+                    required: true,
+                    maxlength: 4,
+                    digits: true
+                },
+                ChemMark: {
+                    required: true,
+                    maxlength: 4,
+                    digits: true
+                },
+                BiologyMark: {
+                    required: true,
+                    maxlength: 4,
+                    digits: true
+                },
+                MathsMark: {
+                    required: true,
+                    maxlength: 4,
+                    digits: true
+                },
+                PercOfMark: {
+                    required: true,
+                    maxlength: 4,
+                    digits: true
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+                var data = element.id;
+
+                $("#" + data).addClass("is-invalid");
+                $("." + data).css({ 'border-color': '#f25767' });
+                $(".error" + data + "-error").show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                var data = element.id;
+                $("#" + data).removeClass("is-invalid");
+                $("." + data).css({ 'border-color': '' });
+                $("." + data + "-error").hide();
+            },
+            submitHandler: function () {
+                var serializeData = $('#academic').serialize();
+
+                $.ajax({
+                    url: '../api/Register/AcademicPerformance',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: serializeData,
+                    beforeSend: function (xhr) {
+                        $(".acc-spin").show();
+                        $(".acc-name").hide();
+                        $(".acc-btn").prop("disabled", true);
+                    },
+                    success: function (response) {
+
+
+                        if (response.id != "") {
+
+                            academic.reset();
+                            $(".acc-spin").hide();
+                            $(".acc-name").show();
+                            $(".acc-btn").prop("disabled", false);
+
+
+                            $.notify({ icon: 'fas fa-envelope-open', title: 'Successfully Added', message: 'Academic performance Details Added', url: "" },
+                                {
+                                    element: "body", type: response.type, allow_dismiss: !0, placement: { from: "top", align: "right" }, offset: { x: 15, y: 15 }, spacing: 10, z_index: 1080, delay: 2500,
+                                    timer: 1000, url_target: "_blank", mouse_over: !1, animate: { enter: "animated bounceIn", exit: "animated fadeOut" },
+                                    template: '<div class="alert alert-{0} alert-icon alert-group alert-notify" data-notify="container" role="alert"><div class="alert-group-prepend align-self-start"></div><div class="alert-content"><span class="alert-group-icon" style="padding-right:5px;"><i data-notify="icon"></i></span> <strong data-notify="title">{1}</strong><div data-notify="message">{2}</div></div><button type="button" class="close" data-notify="dismiss" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'
+                                });
+                            dataTable1.ajax.reload();
+                            $('#accModel').modal('toggle');
+                        }
+                        else {
+
+
+                            $(".acc-spin").hide();
+                            $(".acc-name").show();
+                            $(".acc-btn").prop("disabled", false);
+                        }
+                    },
+                    error: function (error) {
+                        $(".acc-spin").hide();
+                        $(".acc-name").show();
+                        $(".acc-btn").prop("disabled", false);
+
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
+        $("#entrance").validate({
+            rules: {
+                PrevEntranceExamName: "required",
+                RollNo: "required",
+                AttemptedYear: "required",
+                Mark: {
+                    required: true,
+                    maxlength: 4,
+                    digits: true
+                },
+                Rank: {
+                    required: true,
+                    maxlength: 4,
+                    digits: true
+                },
+                NoOfAttempts: {
+                    required: true,
+                    maxlength: 4,
+                    digits: true
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+                var data = element.id;
+
+                $("#" + data).addClass("is-invalid");
+                $("." + data).css({ 'border-color': '#f25767' });
+                $(".error" + data + "-error").show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                var data = element.id;
+                $("#" + data).removeClass("is-invalid");
+                $("." + data).css({ 'border-color': '' });
+                $("." + data + "-error").hide();
+            },
+            submitHandler: function () {
+                var serializeData = $('#entrance').serialize();
+
+                $.ajax({
+                    url: '../api/Register/PreviousEntrance',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: serializeData,
+                    beforeSend: function (xhr) {
+                        $(".pe-spin").show();
+                        $(".pe-name").hide();
+                        $(".pe-btn").prop("disabled", true);
+                    },
+                    success: function (response) {
+
+
+                        if (response.id != "") {
+
+                            academic.reset();
+                            $(".pe-spin").hide();
+                            $(".pe-name").show();
+                            $(".pe-btn").prop("disabled", false);
+
+
+                            $.notify({ icon: 'fas fa-envelope-open', title: 'Successfully Added', message: 'Entrance Examination Details Added', url: "" },
+                                {
+                                    element: "body", type: response.type, allow_dismiss: !0, placement: { from: "top", align: "right" }, offset: { x: 15, y: 15 }, spacing: 10, z_index: 1080, delay: 2500,
+                                    timer: 1000, url_target: "_blank", mouse_over: !1, animate: { enter: "animated bounceIn", exit: "animated fadeOut" },
+                                    template: '<div class="alert alert-{0} alert-icon alert-group alert-notify" data-notify="container" role="alert"><div class="alert-group-prepend align-self-start"></div><div class="alert-content"><span class="alert-group-icon" style="padding-right:5px;"><i data-notify="icon"></i></span> <strong data-notify="title">{1}</strong><div data-notify="message">{2}</div></div><button type="button" class="close" data-notify="dismiss" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'
+                                });
+
+                            dataTable2.ajax.reload();
+
+                            $('#exampleModal').modal('toggle');
+                        }
+                        else {
+
+                            $(".pe-spin").hide();
+                            $(".pe-name").show();
+                            $(".pe-btn").prop("disabled", false);
+                        }
+                    },
+                    error: function (error) {
+                        $(".pe-spin").hide();
+                        $(".pe-name").show();
+                        $(".pe-btn").prop("disabled", false);
+
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+            GetEntrance();
+            GetAcademic();
+        });
+
+        function GetAcademic() {
+
+            var RegId = $("#RegId").val();
+            var i = 1;
+            dataTable1 = $("#academic-tb").DataTable({
+                "searching": false,
+                "paging": false,
+                "ordering": false,
+                "info": false,
+                "bDestroy": true,
+                "ajax": {
+                    "url": "../api/Register/GetAcademic?regId=" + RegId,
+                    "type": "GET",
+                    "datatype": "json",
+                    "dataSrc": "",
+                },
+                "columns": [
+                    {
+                        "render": function (data, type, full, meta) {
+                            return i++;
+                        }
+                    },
+                    { "data": "Class" },
+                    { "data": "PassYear" },
+                    { "data": "SchoolAddress" },
+                    { "data": "RegNo" },
+                    { "data": "Board" },
+                    { "data": "PhyMark" },
+                    { "data": "ChemMark" },
+                    { "data": "BiologyMark" },
+                    { "data": "MathsMark" },
+                    { "data": "PercOfMark" },
+                    {
+                        "data": "Id",
+                        "render": function (data) {
+                            return `<div class="actions ml-3 text-right">
+                                                <a href="javascript:;" onclick=DeleteAcademic('${data}') class="action-item text-danger mr-2" data-toggle="tooltip" title="" data-original-title="Move to trash">
+                                                    <i class="fas fa-trash text-danger" ></i>
+                                                </a>
+                                           </div>`;
+                        }
+                    }
+                ],
+                "language": {
+                    "emptyTable": "no data found"
+                }
+            });
+        }
+
+        function GetEntrance() {
+
+            var RegId = $("#RegId").val();
+            var i = 1;
+            dataTable2 = $("#Entrance-tb").DataTable({
+                "searching": false,
+                "paging": false,
+                "ordering": false,
+                "info": false,
+                "bDestroy": true,
+                "ajax": {
+                    "url": "../api/Register/GetEntrance?regId=" + RegId,
+                    "type": "GET",
+                    "datatype": "json",
+                    "dataSrc": "",
+                },
+                "columns": [
+                    {
+                        "render": function (data, type, full, meta) {
+                            return i++;
+                        }
+                    },
+                    { "data": "PrevEntranceExamName" },
+                    { "data": "RollNo" },
+                    { "data": "AttemptedYear" },
+                    { "data": "Mark" },
+                    { "data": "Rank" },
+                    { "data": "NoOfAttempts" },
+                    {
+                        "data": "Id",
+                        "render": function (data) {
+                            return `<div class="class="actions ml-3  text-right">
+                                                <a href="javascript:;" onclick=DeleteEntrance('${data}') class="action-item text-danger mr-2" data-toggle="tooltip" title="" data-original-title="Move to trash">
+                                                    <i class="fas fa-trash text-danger" ></i>
+                                                </a>
+                                           </div>`;
+                        }
+                    }
+                ],
+                "language": {
+                    "emptyTable": "no data found"
+                }
+            });
+
+        }
+
+
+        function DeleteAcademic(id) {
+
+            $.ajax({
+                type: "Delete",
+                url: '../api/Register/DeletePerformance/' + id,
+                data: JSON.stringify({ id: id }), //use id here
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    dataTable1.ajax.reload();
+                },
+                error: function () {
+                    alert("Error while deleting data");
+                }
+            });
+
+        }
+
+        function DeleteEntrance(id) {
+
+            $.ajax({
+                type: "Delete",
+                url: '../api/Register/DeletePreviousEntrance/' + id,
+                data: JSON.stringify({ id: id }), //use id here
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    dataTable2.ajax.reload();
+                },
+                error: function () {
+                    alert("Error while deleting data");
+                }
+            });
+
+        }
+
+    </script>
+} 

@@ -1,0 +1,217 @@
+﻿@model OnlineExam.ViewModel.StdClassViewModel
+
+@{
+    ViewBag.Title = "Class";
+}
+
+<section class="pt-5 bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <span class="surtitle">Admin account</span>
+                        <h1 class="h2 mb-0">Course Management</h1>
+                    </div>
+                </div>
+                <div class="row align-items-center mt-4">
+                    <div class="col">
+                        <ul class="nav nav-tabs overflow-x">
+                            <li class="nav-item">
+                                <a href="~/Admin/Programmes" class="nav-link">Programmes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/SubProgramme" class="nav-link">Sub Programmes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/StdClass" class="nav-link active">Class</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/Course" class="nav-link">Course</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/Subjects" class="nav-link">Subject</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/Chapters" class="nav-link">Chapter</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="slice slice-sm bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="mb-5">
+
+                            @if (ViewBag.StatusMessage != null)
+                            {
+                                <div class="alert alert-outline-success" role="alert">
+                                    <strong>@ViewBag.StatusMessage</strong>
+                                </div>
+                            }
+
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <div class="alert alert-outline-danger" role="alert">
+                                    <strong>@ViewBag.ErrorMessage</strong>
+                                </div>
+                            }
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="h6 mb-0">Class Management</h5>
+                                    <p class="text-sm mb-0">You can add,edit and delete user Class here</p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+
+                                        <form id="Programmes" method="post">
+                                            @Html.AntiForgeryToken()
+                                            @Html.HiddenFor(model => model.Id)
+                                            <div class="row mx-n2">
+                                                <div class="col col-lg px-2">
+                                                    <div class="form-group">
+                                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Programme", @id = "Name", @name = "Name" } })
+                                                    </div>
+                                                    <label id="Name-error" class="error" for="Name" style="display:none;"></label>
+                                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-auto px-2">
+
+                                                    @if (Model.Id != null)
+                                                    {
+                                                        <button type="submit" class="btn btn-secondary px-3" data-toggle="tooltip" data-placement="top" title="Update Class">
+                                                            <i data-feather="upload"></i>
+                                                        </button>
+
+                                                        <a href="StdClass" class="btn btn-danger px-3" data-toggle="tooltip" data-placement="top" title="Cancel">
+                                                            <i data-feather="x"></i>
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button type="submit" class="btn btn-secondary px-3" data-toggle="tooltip" data-placement="top" title="Add Class">
+                                                            <i data-feather="plus"></i>
+                                                        </button>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </li>
+                                    @foreach (var item in Model.Classes)
+                                    {
+                                        <li class="list-group-item">
+                                            <div class="row align-items-center">
+                                                <div class="col-auto">
+                                                    <img alt="Image placeholder" src="~/Theme/assets/img/svg/icons/class.png" class="img-fluid" style="width:40px">
+                                                </div>
+                                                <div class="col ml-n2">
+                                                    <h6 class="text-sm mb-0">@item.Name</h6>
+                                                    <p class="card-text small text-muted">Created By @item.CreatedBy</p>
+                                                </div>
+                                                <div class="col-md d-none d-md-block">
+                                                    <span class="text-muted">Created On</span> @item.CreatedDate
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class="actions text-right ml-3">
+                                                        <a href="~/Admin/StdClass/@item.Id" class="action-item mr-2" data-toggle="tooltip" title="" data-original-title="Edit">
+                                                            <i data-feather="edit-2"></i>
+                                                        </a>
+                                                        <a href="javascript:void(0)" onclick="ClassDelete('@item.Id', '@item.Name');" class="action-item mr-2" data-toggle="tooltip" title="" data-original-title="Delete">
+                                                            <i data-feather="trash-2" class="text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal modal-danger fade" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="modal_5" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h6" id="modal_title_6">User Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="py-3 text-center">
+                    <i class="fas fa-exclamation-circle fa-4x"></i>
+                    <h5 class="heading h4 mt-4">Are you sure ?</h5>
+                    <p>
+                        Do you want delete <strong><span id="name"></span></strong> !
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("StdClassDelete", "Admin", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="classId" name="classId" />
+                    <button type="submit" class="btn btn-sm btn-white">Delete</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $('#Programmes').validate({
+            rules: {
+                Name: {
+                    required: true
+                }
+            },
+            messages: {
+                Name: {
+                    required: 'Please enter Class Name'
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+
+                var data = element.id;
+                $("#" + data).addClass("is-invalid");
+                $("." + data).css({ 'border-color': '#f25767' });
+                $(".error" + data + "-error").show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                var data = element.id;
+                $("#" + data).removeClass("is-invalid");
+                $("." + data).css({ 'border-color': '' });
+                $("." + data + "-error").hide();
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+
+
+        function ClassDelete(id, name) {
+            $('#classId').val(id);
+            $('#name').append(name);
+            $('#deleteModel').modal('toggle');
+        }
+    </script>
+}

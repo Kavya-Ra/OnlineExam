@@ -1,0 +1,213 @@
+﻿@model IEnumerable<OnlineExam.DbContext.GetAllDtpQusAnsByUserId_Result>
+
+@{
+    ViewBag.Title = "QaAsList";
+}
+
+<section class="pt-5 bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <span class="surtitle">DTP account</span>
+                        <h1 class="h3 mb-0">Questions Answers Management</h1>
+                    </div>
+                </div>
+                <div class="row align-items-center mt-4">
+                    <div class="col">
+                        <ul class="nav nav-tabs overflow-x">
+                            <li class="nav-item">
+                                <a href="~/DTP/QaAsList" class="nav-link active">QaAs List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/DTP/QsAs" class="nav-link">Create QaAs</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="slice slice-sm bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="mb-5">
+                            @if (ViewBag.StatusMessage != null)
+                            {
+                                <div class="alert alert-outline-success" role="alert">
+                                    <strong>@ViewBag.StatusMessage</strong>
+                                </div>
+                            }
+
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <div class="alert alert-outline-danger" role="alert">
+                                    <strong>@ViewBag.ErrorMessage</strong>
+                                </div>
+                            }
+                            <div class="colum-hed align-items-center mb-4 ">
+                                <div class="col">
+                                    <div class="d-flex">
+                                        <div class="pr-3">
+                                            <span class="h5 mb-0">
+                                                <i data-feather="users"></i>
+                                            </span>
+                                        </div>
+                                        <div class="">
+                                            <h3 class="h5 mb-0">Questions Answers</h3>
+                                            <p class="text-muted mb-0">Manage all Questions Answers.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-auto">
+                                    <a href="~/DTP/QsAs" class="btn btn-sm btn-warning btn-icon">
+                                        <span class="btn-inner--text">Add QsAs</span> 
+                                        <span class="btn-inner--icon">
+                                            <i data-feather="plus"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <link rel="stylesheet" type="text/css" href="~/Theme/assets/libs/datatable/css/tables/datatable/datatables.min.css">
+
+                            <div class="table-responsive">
+                                <table class="table table-striped" style="width:100%" id="studentReg">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" data-orderable="false">Sl.No</th>
+                                            <th scope="col" class="text-left">Questions</th>
+                                            <th scope="col" class="text-left">CorrectAns</th>
+                                            <th scope="col" class="text-left">Mark</th>
+                                            <th scope="col" class="text-left">Year</th>
+                                            <th scope="col" class="text-left">Subject</th>
+                                            <th scope="col" class="text-left">Chapter</th>
+                                            <th scope="col" class="text-right">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbAccounts">
+                                        @{ int i = 1; }
+                                        @foreach (var item in Model)
+                                        {
+                                            int slno = i++;
+                                            string result = "";
+                                        <tr>
+                                            <th>@slno</th>                                            
+                                            <th scope="row">
+                                                @{
+                                                    if (item.Questions != null)
+                                                    {
+                                                        string title = item.Questions;
+                                                        var qs = title.Length <= 45 ? title : title.Substring(0, 45);
+
+                                                        <div class="media align-items-center">
+                                                            <div class="media-body">
+                                                                @*<a href="#" class="name h6 mb-0 text-sm">@item.StudentName</a>*@
+                                                                <small class="d-block font-weight-bold">@qs</small>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <img alt="Image placeholder" src="@item.Photo" class="avatar  avatar-lg">
+                                                    }
+                                                }
+                                            </th>
+                                            <td>@item.CorrectAns</td>
+                                            <td>@item.Mark</td>
+                                            <td>@item.PrevQnYear</td>
+                                            <td>@item.SubjectName</td>
+                                            <td>@item.ChapterName</td>
+                                            <td class="text-right">
+                                                <div class="actions ml-3">
+                                                    <a href="~/DTP/QsAs/@item.Id" class="action-item mr-2" data-toggle="tooltip" title="" data-original-title="Edit">
+                                                        <i data-feather="edit-2"></i>
+                                                    </a>
+                                                    <a href="javascript:void(0)" class="action-item text-danger mr-2" data-toggle="tooltip" title="" data-original-title="Move to trash" onclick="userdelete('@item.Id', '@result');">
+                                                        <i data-feather="trash-2" class="text-danger"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-danger fade" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="modal_5" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h6" id="modal_title_6">User Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="py-3 text-center">
+                    <i class="fas fa-exclamation-circle fa-4x"></i>
+                    <h5 class="heading h4 mt-4">Are you sure ?</h5>
+                    <p>
+                        Do you want delete this Questions Answers !
+                    </p>
+
+                    <span id="name"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("DeleteQsAS", "DTP", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="deleteQsAsId" name="deleteQsAsId" />
+                    <button type="submit" class="btn btn-sm btn-white">Delete</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/vfs_fonts.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.buttons.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/buttons.bootstrap.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#studentReg').DataTable({
+                "bLengthChange": true,
+                "bFilter": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+        });
+
+
+        function userdelete(id, name) {
+            $('#deleteQsAsId').val(id);
+            $('#name').text('');
+            $('#name').append(name);
+            $('#deleteModel').modal('toggle');
+        }
+    </script>
+}
+

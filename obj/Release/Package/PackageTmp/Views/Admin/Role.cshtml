@@ -1,0 +1,166 @@
+﻿@model OnlineExam.ViewModel.RoleViewModel
+@using OnlineExam.Authentication
+
+@{
+    ViewBag.Title = "Role";
+}
+
+
+<section class="pt-5 bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <span class="surtitle">Admin account</span>
+                        <h1 class="h2 mb-0">User Management</h1>
+                    </div>
+                </div>
+                <div class="row align-items-center mt-4">
+                    <div class="col">
+                        <ul class="nav nav-tabs overflow-x">
+                            <li class="nav-item">
+                                <a href="~/Admin/UserAccounts" class="nav-link">Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/UserAccount" class="nav-link">Create Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/Role" class="nav-link active">Roles</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="slice slice-sm bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="mb-5">
+
+                            @if (ViewBag.StatusMessage != null)
+                            {
+                                <div class="alert alert-outline-success" role="alert">
+                                    <strong>@ViewBag.StatusMessage</strong>
+                                </div>
+                            }
+
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <div class="alert alert-outline-danger" role="alert">
+                                    <strong>@ViewBag.ErrorMessage</strong>
+                                </div>
+                            }
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="h6 mb-0">Role Management</h5>
+                                    <p class="text-sm mb-0">You can add,edit and delete user roles here</p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+
+                                        <form id="role" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" id="RoleId" name="RoleId" />
+
+                                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                            {
+                                                var identity = ((CustomPrincipal)HttpContext.Current.User);
+                                                <input type="hidden" id="CuserId" name="CuserId" value="@identity.UserId" />
+                                            }
+
+                                            <div class="row mx-n2">
+                                                <div class="col col-lg px-2">
+                                                    <div class="form-group">
+                                                        @*<input type="text" class="form-control" placeholder="Enter Role Name" id="RoleName" name="RoleName">*@
+                                                        @Html.EditorFor(model => model.RoleName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Role Name", @id = "RoleName", @name = "RoleName" } })
+                                                    </div>
+                                                    <label id="RoleName-error" class="error" for="RoleName" style="display:none;"></label>
+                                                    @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-auto px-2">
+                                                    <button type="submit" class="btn btn-secondary px-3" data-toggle="tooltip" data-placement="top" title="Add Role">
+                                                        <i data-feather="plus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </li>
+                                    @foreach (var item in Model.Roles)
+                                    {
+                                        <li class="list-group-item">
+                                            <div class="row align-items-center">
+                                                <div class="col-auto">
+                                                    <img alt="Image placeholder" src="~/Theme/assets/img/svg/icons/leadership.png" class="img-fluid" style="width:40px">
+                                                </div>
+                                                <div class="col ml-n2">
+                                                    <h6 class="text-sm mb-0">@item.RoleName</h6>
+                                                    <p class="card-text small text-muted"></p>
+                                                </div>
+                                                <div class="col-md d-none d-md-block">
+                                                    <span class="text-muted">Created On</span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class="actions text-right ml-3">
+                                                        <a href="~/Admin/Role/@item.RoleId" class="action-item mr-2" data-toggle="tooltip" title="" data-original-title="Edit">
+                                                            <i data-feather="edit-2"></i>
+                                                        </a>
+                                                        <a href="~/Admin/Delete/@item.RoleId" class="action-item mr-2" data-toggle="tooltip" title="" data-original-title="Delete">
+                                                            <i data-feather="trash-2" class="text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $('#role').validate({
+            rules: {
+                RoleName: {
+                    required: true
+                }
+            },
+            messages: {
+                RoleName: {
+                    required: 'Please enter Role Name'
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+
+                var data = element.id;
+                $("#" + data).addClass("is-invalid");
+                $("." + data).css({ 'border-color': '#f25767' });
+                $(".error" + data + "-error").show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                var data = element.id;
+                $("#" + data).removeClass("is-invalid");
+                $("." + data).css({ 'border-color': '' });
+                $("." + data + "-error").hide();
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    </script>
+}

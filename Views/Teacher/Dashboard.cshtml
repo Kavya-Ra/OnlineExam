@@ -1,0 +1,145 @@
+﻿@model OnlineExam.ViewModel.TeacherDashboardViewModel
+@{
+    ViewBag.Title = "Dashboard";
+
+    int examCount = @Model.GetExam.Count;
+}
+
+<section class="slice py-5 bg-section-fade">
+    <div class="container">
+
+        <div class="row align-items-center mb-4">
+            <div class="col">
+                <h1 class="h4 mb-0">Dashboard</h1>
+            </div>
+        </div>
+
+        <div class="row mx-n2">
+            <div class="col-lg-3 col-sm-6 px-2">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <div class="icon icon-shape icon-md bg-primary shadow-primary text-white">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                        </div>
+                        <h5 class="h3 font-weight-bolder mb-1">@examCount</h5>
+                        <span class="d-block text-sm text-muted font-weight-bold">Upcoming Exams</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 px-2">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <div class="icon icon-shape icon-md bg-danger shadow-danger text-white">
+                                <i class="fas fa-cash-register"></i>
+                            </div>
+                        </div>
+                        <h5 class="h3 font-weight-bolder mb-1">@Model.ContactedExamCount</h5>
+                        <span class="d-block text-sm text-muted font-weight-bold">Contacted Exams</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 px-2">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <div class="icon icon-shape icon-md bg-warning shadow-warning text-white">
+                                <i class="fas fa-shopping-basket"></i>
+                            </div>
+                        </div>
+                        <h5 class="h3 font-weight-bolder mb-1">@Model.CourseCount</h5>
+                        <span class="d-block text-sm text-muted font-weight-bold">Total Courses</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 px-2">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <div class="icon icon-shape icon-md bg-success shadow-success text-white">
+                                <i class="fas fa-receipt"></i>
+                            </div>
+                        </div>
+                        <h5 class="h3 font-weight-bolder mb-1">@Model.StudentCount</h5>
+                        <span class="d-block text-sm text-muted font-weight-bold">Total Students</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-grid align-items-center">
+                                    <div class="col-lg-8">
+                                        <div class="media align-items-center">
+                                            <span class="avatar bg-danger text-white rounded-circle mr-3">
+                                                <i data-feather="bell"></i>
+                                            </span>
+                                            <div class="media-body">
+                                                <h5 class="mb-0">Verify Account</h5>
+                                                <p class="text-muted lh-150 text-sm mb-0">Your account has been not verified yet. Kindly please verify</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto flex-fill mt-4 mt-sm-0 text-sm-right d-none d-lg-block">
+                                        <a href="#" class="btn btn-sm btn-neutral rounded-pill">Verify</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+
+            @if (examCount > 0)
+            {
+
+            <h3 class="h4 mb-4">Upcoming Exams</h3>
+            }
+
+
+            @foreach (var item in Model.GetExam)
+            {
+                var todate = item.ToDate.ToString();
+                string[] enddate = todate.Split(' ');
+
+                <div class="card mb-3 hover-shadow-lg">
+                    <div class="card-body d-flex align-items-center flex-wrap flex-lg-nowrap py-0">
+                        <div class="col-auto col-lg-1 d-flex align-items-center px-0 pt-3 pt-lg-0 zindex-100">
+                            <div class="custom-rating d-none d-sm-inline-block">
+                                <i data-feather="edit" class="text-primary"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-5 pl-0 pl-md-2 pt-3 pt-lg-0">
+                            <span class="h6 text-sm">@item.SubjectName</span>
+                        </div>
+                        <div class="col col-lg-2 text-right px-0 order-lg-4 pt-3 pt-lg-0">
+                            <span class="text-muted text-sm">Expiry On @enddate[0]</span>
+                        </div>
+                        <div class="col-12 col-lg-7 d-flex align-items-center position-static pb-3 py-lg-3 px-0">
+                            <div class="col col-lg-11 position-static px-0">
+                                <div class="d-flex flex-wrap flex-lg-nowrap align-items-center">
+                                    <div class="col-12 col-lg-auto px-0 position-static">
+                                        <a href="ExamDetails?examId=@item.Id&id=@Model.TeacherId" class="stretched-link h6 d-block mb-0 lh-140 text-sm font-weight-light">@item.Name</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>
+</section>
+

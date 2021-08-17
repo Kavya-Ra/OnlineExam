@@ -1,0 +1,279 @@
+﻿@model OnlineExam.ViewModel.GroupViewModel
+@using OnlineExam.Authentication
+
+@{
+    ViewBag.Title = "User Account";
+}
+
+
+<section class="pt-5 bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <span class="surtitle">Admin account</span>
+                        <h1 class="h2 mb-0">Group Management</h1>
+                    </div>
+                </div>
+                <div class="row align-items-center mt-4">
+                    <div class="col">
+                        <ul class="nav nav-tabs overflow-x">
+                            <li class="nav-item">
+                                <a href="~/Admin/Groups" class="nav-link">Groups</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/Group" class="nav-link active">Create Group</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div class="slice slice-sm bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="mb-5">
+
+                            @if (ViewBag.StatusMessage != null)
+                            {
+                                <div class="alert alert-outline-success" role="alert">
+                                    <strong>@ViewBag.StatusMessage</strong>
+                                </div>
+                            }
+
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <div class="alert alert-outline-danger" role="alert">
+                                    <strong>@ViewBag.ErrorMessage</strong>
+                                </div>
+                            }
+
+                            <div>
+                                <h5 class="mb-3">Create Group</h5>
+                                <form id="group" method="post">
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.Id)
+
+                                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                    {
+                                        var identity = ((CustomPrincipal)HttpContext.Current.User);
+                                        <input type="hidden" id="CuserId" name="CuserId" value="@identity.UserId" />
+                                    }
+
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Group Name</label>
+                                                @Html.EditorFor(model => model.GroupName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Group Name" } })
+                                                @Html.ValidationMessageFor(model => model.GroupName, "", new { @class = "error" })
+                                                <label id="GroupName-error" class="error" for="GroupName" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Class</label>
+                                                @Html.DropDownList("ClassId", null, "Select Class", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.ClassId, "", new { @class = "error" })
+                                                <label id="ClassId-error" class="error" for="ClassId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Programme</label>
+                                                @Html.DropDownList("PgmId", null, "Select Programme", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.PgmId, "", new { @class = "error" })
+                                                <label id="PgmId-error" class="error" for="PgmId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Sub Programme</label>
+                                                @Html.DropDownList("SubPgmId", null, "Select Sub Programme", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.SubPgmId, "", new { @class = "error" })
+                                                <label id="SubPgmId-error" class="error" for="SubPgmId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Course</label>
+                                                @Html.DropDownList("CourseId", null, "Select Course", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "error" })
+                                                <label id="CourseId-error" class="error" for="CourseId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Subject</label>
+                                                @Html.DropDownList("SubjectId", null, "Select Subject", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.SubjectId, "", new { @class = "error" })
+                                                <label id="SubjectId-error" class="error" for="SubjectId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Teacher</label>
+                                                @Html.DropDownList("TeacherId", null, "Select Teacher", htmlAttributes: new { @class = "custom-select chosen-select", @multiple = true })
+                                                @Html.ValidationMessageFor(model => model.TeacherId, "", new { @class = "error" })
+                                                <label id="TeacherId-error" class="error" for="TeacherId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Student</label>
+                                                @Html.DropDownList("StudentId", null, "Select Student", htmlAttributes: new { @class = "custom-select chosen-select", @multiple = true })
+                                                @Html.ValidationMessageFor(model => model.StudentId, "", new { @class = "error" })
+                                                <label id="StudentId-error" class="error" for="StudentId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 text-right">
+                                        <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var subProgram = '@Url.Action("GetSubProgram")';
+            var chapters = '@Url.Action("GetCourse")';
+            var SubPgmId = $('#SubPgmId');
+            var CourseId = $('#CourseId');
+            $('#PgmId').change(function () {
+                SubPgmId.empty();
+                $.getJSON(subProgram, { ID: $(this).val() }, function (data) {
+                    if (!data) {
+                        return;
+                    }
+                    SubPgmId.append($('<option></option>').val('').text('Please select'));
+                    $.each(data, function (index, item) {
+                        SubPgmId.append($('<option></option>').val(item.Value).text(item.Text));
+                    });
+                });
+            })
+
+            $('#ClassId').change(function () {
+                CourseId.empty();
+                $.getJSON(chapters, { ID: $(this).val() }, function (data) {
+                    if (!data) {
+                        return;
+                    }
+                    CourseId.append($('<option></option>').val('').text('Please select'));
+                    $.each(data, function (index, item) {
+                        CourseId.append($('<option></option>').val(item.Value).text(item.Text));
+                    });
+                });
+            })
+        });
+    </script>
+
+    <script>
+                $(document).ready(function () {
+                    $("#TeacherId").chosen();
+                    $("#StudentId").chosen();
+                });
+    </script>
+
+
+    <script>
+        $('#group').validate({
+            rules: {
+                GroupName: {
+                    required: true
+                },
+                ClassId: {
+                    required: true
+                },
+                PgmId: {
+                    required: true
+                },
+                SubPgmId: {
+                    required: true
+                },
+                CourseId: {
+                    required: true
+                },
+                SubjectId: {
+                    required: true
+                },
+                TeacherId: {
+                    required: true
+                },
+                StudentId: {
+                    required: true
+                }
+            },
+            messages: {
+                GroupName: {
+                    required: 'Please enter GroupName'
+                },
+                ClassId: {
+                    required: 'Please Select Class'
+                },
+                PgmId: {
+                    required: 'Please Select Programme'
+                },
+                SubPgmId: {
+                    required: 'Please Select Sub Programme'
+                },
+                CourseId: {
+                    required: 'Please Select Course'
+                },
+                SubjectId: {
+                    required: 'Please Select Subject'
+                },
+                TeacherId: {
+                    required: 'Please Select Teacher'
+                },
+                StudentId: {
+                    required: 'Please Select Student'
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+
+                var data = element.id;
+                $("#" + data).addClass("is-invalid");
+                $("." + data).css({ 'border-color': '#f25767' });
+                $(".error" + data + "-error").show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                var data = element.id;
+                $("#" + data).removeClass("is-invalid");
+                $("." + data).css({ 'border-color': '' });
+                $("." + data + "-error").hide();
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    </script>
+}

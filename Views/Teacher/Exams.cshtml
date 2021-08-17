@@ -1,0 +1,298 @@
+﻿@model IEnumerable<OnlineExam.DbContext.GetAllExamByTeacherId_Result>
+
+@{
+    ViewBag.Title = "Exams";
+}
+
+
+
+<section class="pt-5 bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <span class="surtitle">Teacher account</span>
+                        <h1 class="h3 mb-0">Exams Management</h1>
+                    </div>
+                </div>
+                <div class="row align-items-center mt-4">
+                    <div class="col">
+                        <ul class="nav nav-tabs overflow-x">
+                            <li class="nav-item">
+                                <a href="~/Teacher/Exams" class="nav-link active">Exam List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Teacher/Exam" class="nav-link">Create Exam</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="slice slice-sm bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="mb-5">
+                            @if (ViewBag.StatusMessage != null)
+                            {
+                                <div class="alert alert-outline-success" role="alert">
+                                    <strong>@ViewBag.StatusMessage</strong>
+                                </div>
+                            }
+
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <div class="alert alert-outline-danger" role="alert">
+                                    <strong>@ViewBag.ErrorMessage</strong>
+                                </div>
+                            }
+                            <div class="colum-hed align-items-center mb-4 ">
+                                <div class="col">
+                                    <div class="d-flex">
+                                        <div class="pr-3">
+                                            <span class="h5 mb-0">
+                                                <i data-feather="clipboard"></i>
+                                            </span>
+                                        </div>
+                                        <div class="">
+                                            <h3 class="h5 mb-0">Exams</h3>
+                                            <p class="text-muted mb-0">Manage all Exam.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-auto">
+                                    <a href="~/Teacher/Exam" class="btn btn-sm btn-warning btn-icon">
+                                        <span class="btn-inner--text">Create Exam</span>
+                                        <span class="btn-inner--icon">
+                                            <i data-feather="plus"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <link rel="stylesheet" type="text/css" href="~/Theme/assets/libs/datatable/css/tables/datatable/datatables.min.css">
+
+                            <div class="table-responsive">
+                                <table class="table table-striped" style="width:100%" id="exam">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" data-orderable="false">Sl.No</th>
+                                            <th scope="col" class="text-left">Name</th>
+                                            <th scope="col" class="text-left">Class</th>
+                                            <th scope="col" class="text-left">Course</th>
+                                            <th scope="col" class="text-left">Subject</th>
+                                            <th scope="col" data-orderable="false" class="text-center">Status</th>
+                                            <th scope="col" data-orderable="false" class="text-right">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbAccounts">
+                                        @{ int i = 1; }
+                                        @foreach (var item in Model)
+                                        {
+                                            int slno = i++;
+                                            <tr>
+                                                <th>@slno</th>
+                                                <th scope="row">
+                                                    @item.Name
+                                                </th>
+                                                <td>@item.PName</td>
+                                                <td>@item.ClassName</td>
+                                                <td>@item.SubjectName</td>
+                                                <td class="text-center">
+                                                    @if (item.IsActive == 1)
+                                                    {
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-sm btn-outline-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Active</button>
+                                                            <div class="dropdown-menu" style="">
+                                                                <a class="dropdown-item" href="javascript:void(0)" onclick="InactiveExam('@item.Id', '@item.Name');">Inactive</a>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-sm btn-outline-danger dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Inactive</button>
+                                                            <div class="dropdown-menu" style="">
+                                                                <a class="dropdown-item" href="javascript:void(0)" onclick="ActiveExam('@item.Id', '@item.Name');">Active</a>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </td>
+                                                <td class="text-right">
+                                                    <div class="actions ml-3">
+                                                        <a href="~/Teacher/Exam/@item.Id" class="action-item mr-2" data-toggle="tooltip" title="" data-original-title="Edit">
+                                                            <i data-feather="edit-2"></i>
+                                                        </a>
+                                                        <a href="javascript:void(0)" class="action-item text-danger mr-2" data-toggle="tooltip" title="" data-original-title="Move to trash" onclick="Examdelete('@item.Id', '@item.Name');">
+                                                            <i data-feather="trash-2" class="text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-danger fade" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="modal_5" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h6" id="modal_title_6">Exam Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="py-3 text-center">
+                    <i class="fas fa-exclamation-circle fa-4x"></i>
+                    <h5 class="heading h4 mt-4">Are you sure ?</h5>
+                    <p>
+                        Do you want delete this Exam !
+                    </p>
+
+                    <span id="name"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("DeleteExam", "Teacher", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="deleteQsAsId" name="deleteQsAsId" />
+                    <button type="submit" class="btn btn-sm btn-white">Delete</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-active" data-backdrop="false" aria-labelledby="modal-cookies" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-aside right-4 bottom-4">
+        <div class="modal-content bg-dark-dark">
+            <div class="modal-body">
+                <!-- Text -->
+                <p class="text-sm text-white mb-3">
+                    <strong>Are you sure ?</strong> Do you want to active - <strong><span id="activeName"></span></strong>
+                </p>
+                <!-- Buttons -->
+                @using (Html.BeginForm("ActiveExam", "Teacher", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">close</a>
+                    <input type="hidden" id="activeId" name="activeId" />
+                    <button type="submit" class="btn btn-sm btn-primary mr-2">Active</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-Inactive" data-backdrop="false" aria-labelledby="modal-cookies" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-aside right-4 bottom-4">
+        <div class="modal-content bg-dark-dark">
+            <div class="modal-body">
+                <!-- Text -->
+                <p class="text-sm text-white mb-3">
+                    <strong>Are you sure ?</strong> Do you want to Inactive - <strong><span id="inactiveName"></span></strong>
+                </p>
+                <!-- Buttons -->
+                @using (Html.BeginForm("InactiveExam", "Teacher", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">close</a>
+                    <input type="hidden" id="inactiveId" name="inactiveId" />
+                    <button type="submit" class="btn btn-sm btn-primary mr-2">Inactive</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/vfs_fonts.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.buttons.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/buttons.bootstrap.min.js"></script>
+    <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#exam').DataTable({
+                "bLengthChange": true,
+                "bFilter": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+        });
+
+
+        function Examdelete(id, name) {
+            $('#deleteQsAsId').val(id);
+            $('#name').text('');
+            $('#name').append(name);
+            $('#deleteModel').modal('toggle');
+        }
+
+        function ActiveExam(id, name) {
+            $('#activeId').val(id);
+            $('#activeName').append(name);
+            $('#modal-active').modal('toggle');
+        }
+
+        function InactiveExam(id, name) {
+            $('#inactiveId').val(id);
+            $('#inactiveName').append(name);
+            $('#modal-Inactive').modal('toggle');
+        }
+
+        function DeleteExam(id) {
+            $.ajax({
+                type: "Delete",
+                url: '../../api/Exam/DeleteExam/' + id,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+
+                    Swal.fire(
+                        'Deleted!',
+                        'Your Exam has been deleted.',
+                        'success'
+                    )
+
+                    dataTable3.ajax.reload();
+                },
+                error: function () {
+                    alert("Error while deleting data");
+                }
+            });
+        }
+    </script>
+}
+
+
+

@@ -1,0 +1,665 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Exam_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AttendExam">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExamId" Type="int" Nullable="false" />
+    <Property Name="StudentId" Type="int" Nullable="false" />
+    <Property Name="IsAttented" Type="int" Nullable="false" />
+    <Property Name="OptMark" Type="varchar" MaxLength="10" />
+    <Property Name="IsDeletedEr" Type="int" Nullable="false" />
+    <Property Name="CreatedDateAe" Type="datetime" Nullable="false" />
+    <Property Name="TQ" Type="int" Nullable="false" />
+    <Property Name="TA" Type="int" Nullable="false" />
+    <Property Name="CA" Type="int" Nullable="false" />
+    <Property Name="IA" Type="int" Nullable="false" />
+    <Property Name="ES" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Chapter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+    <Property Name="DeletedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedTime" Type="datetime" Nullable="false" />
+    <Property Name="SubId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+    <Property Name="DeletedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Courses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+    <Property Name="DeletedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedTime" Type="datetime" Nullable="false" />
+    <Property Name="ClassId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DataEntry_QuestionBank">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Questions" Type="varchar(max)" />
+    <Property Name="Option1" Type="varchar(max)" Nullable="false" />
+    <Property Name="Option2" Type="varchar(max)" Nullable="false" />
+    <Property Name="Option3" Type="varchar(max)" Nullable="false" />
+    <Property Name="Option4" Type="varchar(max)" Nullable="false" />
+    <Property Name="CorrectAns" Type="varchar(max)" Nullable="false" />
+    <Property Name="Mark" Type="varchar(max)" Nullable="false" />
+    <Property Name="PrevQnYear" Type="varchar(max)" Nullable="false" />
+    <Property Name="SubjectId" Type="int" Nullable="false" />
+    <Property Name="ChapterId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+    <Property Name="DeletedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="int" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="DeletedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="PgmId" Type="int" Nullable="false" />
+    <Property Name="CourseId" Type="int" Nullable="false" />
+    <Property Name="ClassId" Type="int" Nullable="false" />
+    <Property Name="Photo" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="DataEntry_Registration">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DtpRegId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="Mobile" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="WhatsApp" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="Place" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+    <Property Name="DeletedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="DeletedDateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" Nullable="false" />
+    <Property Name="ExGroupId" Type="int" Nullable="false" />
+    <Property Name="PgmId" Type="int" Nullable="false" />
+    <Property Name="ClassId" Type="int" Nullable="false" />
+    <Property Name="CourseId" Type="int" Nullable="false" />
+    <Property Name="SubjectId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="IsActive" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+    <Property Name="DeletedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="FromDate" Type="datetime" Nullable="false" />
+    <Property Name="ToDate" Type="datetime" Nullable="false" />
+    <Property Name="DeletedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="ExamTime" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TotalMark" Type="int" Nullable="false" />
+    <Property Name="QsAsFrom" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Exam_QnTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExamId" Type="int" Nullable="false" />
+    <Property Name="QnId" Type="varchar(max)" Nullable="false" />
+    <Property Name="IsDataEntryQn" Type="int" />
+  </EntityType>
+  <EntityType Name="ExamResult">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExamId" Type="int" Nullable="false" />
+    <Property Name="StudentId" Type="int" Nullable="false" />
+    <Property Name="QuestionId" Type="int" Nullable="false" />
+    <Property Name="SelectedAnswer" Type="int" Nullable="false" />
+    <Property Name="CorrectAnswer" Type="int" Nullable="false" />
+    <Property Name="NotVisited" Type="int" Nullable="false" />
+    <Property Name="MarkForReview" Type="int" Nullable="false" />
+    <Property Name="AnsMarkForReview" Type="int" Nullable="false" />
+    <Property Name="QsNo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="PgmId" Type="int" Nullable="false" />
+    <Property Name="CourseId" Type="int" Nullable="false" />
+    <Property Name="SubPgmId" Type="int" Nullable="false" />
+    <Property Name="SubjectId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="DeletedBy" Type="int" Nullable="false" />
+    <Property Name="DeletedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+    <Property Name="ClassId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Group_StudentTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+    <Property Name="StudentId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Group_Teacher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TeacherId" Type="int" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Programmes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+    <Property Name="DeletedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Student_AcademicPerformance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegId" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Class" Type="varchar" MaxLength="50" />
+    <Property Name="PassYear" Type="varchar" MaxLength="50" />
+    <Property Name="SchoolAddress" Type="varchar(max)" />
+    <Property Name="RegNo" Type="varchar" MaxLength="50" />
+    <Property Name="Board" Type="varchar" MaxLength="200" />
+    <Property Name="PhyMark" Type="varchar" MaxLength="50" />
+    <Property Name="ChemMark" Type="varchar" MaxLength="50" />
+    <Property Name="BiologyMark" Type="varchar" MaxLength="50" />
+    <Property Name="MathsMark" Type="varchar" MaxLength="50" />
+    <Property Name="PercOfMark" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+    <Property Name="IsRegistered" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student_HomeCountryDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegId" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="AddressHome1" Type="varchar" MaxLength="100" />
+    <Property Name="AddressHome2" Type="varchar" MaxLength="100" />
+    <Property Name="AreaHome" Type="varchar" MaxLength="100" />
+    <Property Name="PincodeHome" Type="varchar" MaxLength="50" />
+    <Property Name="QuickHomeContact" Type="varchar" MaxLength="50" />
+    <Property Name="LocationHome" Type="varchar" MaxLength="100" />
+    <Property Name="StateHome" Type="varchar" MaxLength="50" />
+    <Property Name="EmaiIdHome" Type="varchar" MaxLength="50" />
+    <Property Name="QuickHomeWhatsapp" Type="varchar" MaxLength="50" />
+    <Property Name="DistrictHome" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student_Parent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegId" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FrName" Type="varchar" MaxLength="200" />
+    <Property Name="FrOcc" Type="varchar" MaxLength="100" />
+    <Property Name="FrMobNo" Type="varchar" MaxLength="100" />
+    <Property Name="FrMailid" Type="varchar" MaxLength="200" />
+    <Property Name="FrDistrict" Type="varchar" MaxLength="50" />
+    <Property Name="FrSign" Type="varchar(max)" />
+    <Property Name="FrState" Type="varchar" MaxLength="50" />
+    <Property Name="FrWhatsapp" Type="varchar" MaxLength="50" />
+    <Property Name="MrName" Type="varchar" MaxLength="200" />
+    <Property Name="MrOcc" Type="varchar" MaxLength="100" />
+    <Property Name="MrMobNo" Type="varchar" MaxLength="100" />
+    <Property Name="MrMailid" Type="varchar" MaxLength="200" />
+    <Property Name="MrDistrict" Type="varchar" MaxLength="50" />
+    <Property Name="MrSign" Type="varchar(max)" />
+    <Property Name="MrState" Type="varchar" MaxLength="50" />
+    <Property Name="MrWhatsapp" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student_PreviousEntrance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegId" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="PrevEntranceExamName" Type="varchar" MaxLength="100" />
+    <Property Name="RollNo" Type="varchar" MaxLength="50" />
+    <Property Name="AttemptedYear" Type="varchar" MaxLength="50" />
+    <Property Name="Mark" Type="varchar" MaxLength="50" />
+    <Property Name="Rank" Type="varchar" MaxLength="50" />
+    <Property Name="NoOfAttempts" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+    <Property Name="IsRegistered" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student_Registration">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegId" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ExamAttendingYear" Type="varchar" MaxLength="50" />
+    <Property Name="PreferredDay" Type="varchar" MaxLength="100" />
+    <Property Name="ApplnDate" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="AcademicYear" Type="varchar" MaxLength="100" />
+    <Property Name="AdmissionTestDate" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="PreferredTime" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="WhatsappNo" Type="varchar" MaxLength="100" />
+    <Property Name="DOB" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Gender" Type="varchar" MaxLength="100" />
+    <Property Name="Religion" Type="varchar" MaxLength="100" />
+    <Property Name="Caste" Type="varchar" MaxLength="100" />
+    <Property Name="Community" Type="varchar" MaxLength="100" />
+    <Property Name="BloodGroup" Type="varchar" MaxLength="50" />
+    <Property Name="Nationalty" Type="varchar" MaxLength="50" />
+    <Property Name="PresentAddress" Type="varchar(max)" />
+    <Property Name="Area" Type="varchar" MaxLength="200" />
+    <Property Name="Location" Type="varchar" MaxLength="200" />
+    <Property Name="State" Type="varchar" MaxLength="100" />
+    <Property Name="District" Type="varchar" MaxLength="100" />
+    <Property Name="Pincode" Type="varchar" MaxLength="50" />
+    <Property Name="QuickContNo" Type="varchar" MaxLength="100" />
+    <Property Name="Photo" Type="varchar(max)" />
+    <Property Name="QuickWhatsApp" Type="varchar" MaxLength="100" />
+    <Property Name="PgmId" Type="int" Nullable="false" />
+    <Property Name="ClassId" Type="int" Nullable="false" />
+    <Property Name="CourseId" Type="int" Nullable="false" />
+    <Property Name="SubPgmId" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+    <Property Name="IsVisited" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+    <Property Name="DeletedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SubPrograms">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+    <Property Name="DeletedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedTime" Type="datetime" />
+    <Property Name="PgmId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Teachers_QuestionBank">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Questions" Type="varchar(max)" />
+    <Property Name="Option1" Type="varchar(max)" Nullable="false" />
+    <Property Name="Option2" Type="varchar(max)" Nullable="false" />
+    <Property Name="Option3" Type="varchar(max)" Nullable="false" />
+    <Property Name="Option4" Type="varchar(max)" Nullable="false" />
+    <Property Name="CorrectAns" Type="varchar(max)" Nullable="false" />
+    <Property Name="Mark" Type="varchar(max)" Nullable="false" />
+    <Property Name="PrevQnYear" Type="varchar(max)" Nullable="false" />
+    <Property Name="SubjectId" Type="int" Nullable="false" />
+    <Property Name="ChapterId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+    <Property Name="DeletedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="int" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="DeletedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="PgmId" Type="int" Nullable="false" />
+    <Property Name="CourseId" Type="int" Nullable="false" />
+    <Property Name="ClassId" Type="int" Nullable="false" />
+    <Property Name="TeacherId" Type="int" Nullable="false" />
+    <Property Name="Photo" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Teachers_Registration">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TeachRegId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FirstName" Type="varchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="varchar(max)" Nullable="false" />
+    <Property Name="WhatsApp" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PrimarySubject" Type="varchar(max)" Nullable="false" />
+    <Property Name="SecondarySubject" Type="varchar(max)" Nullable="false" />
+    <Property Name="Location" Type="varchar(max)" Nullable="false" />
+    <Property Name="Street" Type="varchar(max)" Nullable="false" />
+    <Property Name="Address" Type="varchar(max)" Nullable="false" />
+    <Property Name="PO" Type="varchar(max)" Nullable="false" />
+    <Property Name="District" Type="varchar(max)" Nullable="false" />
+    <Property Name="State" Type="varchar(max)" Nullable="false" />
+    <Property Name="IsActive" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+    <Property Name="DeletedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="MiddleName" Type="varchar(max)" />
+    <Property Name="StudentGrade" Type="varchar" MaxLength="100" />
+    <Property Name="Weekdays" Type="varchar" MaxLength="50" />
+    <Property Name="Weekends" Type="varchar" MaxLength="50" />
+    <Property Name="Time" Type="varchar" MaxLength="100" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Country" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="255" />
+    <Property Name="LastName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="int" Nullable="false" />
+    <Property Name="DeletedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="DeletedDate" Type="datetime" Nullable="false" />
+    <Property Name="UniqueID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MobileNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ActivationCode" Type="varchar" MaxLength="100" />
+    <Property Name="EmailVerify" Type="int" Nullable="false" />
+    <Property Name="Picture" Type="varchar(max)" />
+  </EntityType>
+  <Association Name="FK__SubProgra__PgmId__114A936A">
+    <End Role="Programmes" Type="Self.Programmes" Multiplicity="1" />
+    <End Role="SubPrograms" Type="Self.SubPrograms" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Programmes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SubPrograms">
+        <PropertyRef Name="PgmId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Chapter_ChapterSujectid">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Chapter" Type="Self.Chapter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Chapter">
+        <PropertyRef Name="SubId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Courses_Class">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Courses">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserRoles_dbo_Roles_RoleId">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserRoles_dbo_Users_UserId">
+    <End Role="Users" Type="Self.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Exam_QnTable_Exam">
+    <End Role="Exam" Type="Self.Exam" Multiplicity="1" />
+    <End Role="Exam_QnTable" Type="Self.Exam_QnTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exam">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Exam_QnTable">
+        <PropertyRef Name="ExamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Group_Group">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="Group1" Type="Self.Group" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Group1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AllStudentRegistrationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllAttentedExamByStudentId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="StudentId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllDtpQusAns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllDtpQusAnsByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Userid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllExam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllExamById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllExamByTeacherId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllGroupLisByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllGroupList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllQusByExamId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="From" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllQusForEdit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="From" Type="int" Mode="In" />
+    <Parameter Name="CourseId" Type="int" Mode="In" />
+    <Parameter Name="PgId" Type="int" Mode="In" />
+    <Parameter Name="SubId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllStudentRegistrationByRegId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RegId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllTeacherQusAns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllTeacherQusAnsByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Userid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetCourseDetailsByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="From" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetExamByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="GetExamByTeacherId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="Date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="GetExamByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="Date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="GetExamReultByQus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ExamId" Type="int" Mode="In" />
+    <Parameter Name="StudentId" Type="int" Mode="In" />
+    <Parameter Name="From" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetGroupUserByTeacherId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetStudentGroupbyGroupId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Groupid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetTeacherGroupbyGroupId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Groupid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Student_AcademicPerformancebyRegid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RegId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Student_PreviousEntrancebyRegid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RegId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="StudentAllDetailsByRegId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="Exam_DBModelStoreContainer">
+    <EntitySet Name="AttendExam" EntityType="Self.AttendExam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Chapter" EntityType="Self.Chapter" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DataEntry_QuestionBank" EntityType="Self.DataEntry_QuestionBank" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DataEntry_Registration" EntityType="Self.DataEntry_Registration" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Exam" EntityType="Self.Exam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Exam_QnTable" EntityType="Self.Exam_QnTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ExamResult" EntityType="Self.ExamResult" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Group_StudentTable" EntityType="Self.Group_StudentTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Group_Teacher" EntityType="Self.Group_Teacher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Programmes" EntityType="Self.Programmes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student_AcademicPerformance" EntityType="Self.Student_AcademicPerformance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student_HomeCountryDetails" EntityType="Self.Student_HomeCountryDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student_Parent" EntityType="Self.Student_Parent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student_PreviousEntrance" EntityType="Self.Student_PreviousEntrance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student_Registration" EntityType="Self.Student_Registration" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubPrograms" EntityType="Self.SubPrograms" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teachers_QuestionBank" EntityType="Self.Teachers_QuestionBank" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teachers_Registration" EntityType="Self.Teachers_Registration" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__SubProgra__PgmId__114A936A" Association="Self.FK__SubProgra__PgmId__114A936A">
+      <End Role="Programmes" EntitySet="Programmes" />
+      <End Role="SubPrograms" EntitySet="SubPrograms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Chapter_ChapterSujectid" Association="Self.FK_Chapter_ChapterSujectid">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Chapter" EntitySet="Chapter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Courses_Class" Association="Self.FK_Courses_Class">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Courses" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserRoles_dbo_Roles_RoleId" Association="Self.FK_dbo_UserRoles_dbo_Roles_RoleId">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserRoles_dbo_Users_UserId" Association="Self.FK_dbo_UserRoles_dbo_Users_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Exam_QnTable_Exam" Association="Self.FK_Exam_QnTable_Exam">
+      <End Role="Exam" EntitySet="Exam" />
+      <End Role="Exam_QnTable" EntitySet="Exam_QnTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Group_Group" Association="Self.FK_Group_Group">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="Group1" EntitySet="Group" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

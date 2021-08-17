@@ -1,0 +1,378 @@
+﻿@using OnlineExam.Authentication
+
+
+@if (Request.IsAuthenticated)
+{
+    <nav class="navbar navbar-main navbar-expand-lg shadow navbar-light bg-white" id="navbar-main">
+        <div class="container">
+            <button class="navbar-toggler order-lg-2 ml-n3 ml-lg-0" type="button" data-toggle="collapse" data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand order-lg-1" href="~/">
+                @*<img alt="Image placeholder" src="../../assets/img/brand/dark.svg" id="navbar-logo">*@
+                <h3 class="display-5 text-center text-md-left">
+                    <strong class="text-primary">entrance</strong>coach.com
+                </h3>
+            </a>
+            <div class="collapse navbar-collapse navbar-collapse-overlay order-lg-3" id="navbar-main-collapse">
+                <div class="position-relative">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+                <ul class="navbar-nav ml-lg-auto mr-3">
+
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        var identity = ((CustomPrincipal)HttpContext.Current.User);
+                        <li class="nav-item nav-item-spaced d-none d-lg-block"><a class="nav-link" href="~/@string.Format("{0}", identity.Roles)/Dashboard">Dashboard</a></li>
+                    }
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item nav-item-spaced dropdown dropdown-animate" data-toggle="hover">
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage</a>
+                            <div class="dropdown-menu dropdown-menu-md p-0">
+                                <ul class="list-group list-group-flush px-lg-4">
+                                    <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
+                                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="d-flex">
+                                                <figure style="width:20px">
+                                                    <img src="~/Theme/assets/img/svg/icons/Code.svg" style="width: 20px;">
+                                                </figure><div class="ml-3"><h6 class="heading mb-0">User Account</h6><p class="mb-0">Menu option for User Management.</p></div>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="~/Admin/UserAccounts" class="dropdown-item">Users</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Admin/UserAccount" class="dropdown-item">Create Users</a>
+                                            </li>
+                                            @* <li>
+                    <a href="~/Admin/Role" class="dropdown-item">Roles</a>
+                </li>*@
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
+                                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="d-flex">
+                                                <figure style="width:20px">
+                                                    <img src="~/Theme/assets/img/svg/icons/Code.svg" style="width: 20px;">
+                                                </figure><div class="ml-3"><h6 class="heading mb-0">Course</h6><p class="mb-0">Menu option for Course Management.</p></div>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="~/Admin/Programmes" class="dropdown-item">Programmes</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Admin/SubProgramme" class="dropdown-item">Sub Programmes</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Admin/StdClass" class="dropdown-item">Class</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Admin/Course" class="dropdown-item">Course</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Admin/Subjects" class="dropdown-item">Subject</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Admin/Chapters" class="dropdown-item">Chapter</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
+                                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="d-flex">
+                                                <figure style="width:20px">
+                                                    <img src="~/Theme/assets/img/svg/icons/Code.svg" style="width: 20px;">
+                                                </figure><div class="ml-3"><h6 class="heading mb-0">Group</h6><p class="mb-0">Menu option for Group Management.</p></div>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="~/Admin/Groups" class="dropdown-item">Groups</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Admin/Group" class="dropdown-item">Create Group</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
+                                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="d-flex">
+                                                <figure style="width:20px">
+                                                    <img src="~/Theme/assets/img/svg/icons/Code.svg" style="width: 20px;">
+                                                </figure><div class="ml-3"><h6 class="heading mb-0">QsAs</h6><p class="mb-0">Menu option for QsAs Management.</p></div>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="~/Admin/QsAs" class="dropdown-item">DTP</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Admin/QsAsTeacher" class="dropdown-item">Teacher</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item nav-item-spaced dropdown dropdown-animate" data-toggle="hover">
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View</a>
+                            <div class="dropdown-menu dropdown-menu-md p-0">
+                                <ul class="list-group list-group-flush px-lg-4">
+                                    <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
+                                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="d-flex">
+                                                <figure style="width:20px">
+                                                    <img src="~/Theme/assets/img/svg/icons/Code.svg" style="width: 20px;">
+                                                </figure><div class="ml-3"><h6 class="heading mb-0">Registration</h6><p class="mb-0">Management All Registration</p></div>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="~/Admin/StudentRegistrations" class="dropdown-item">Student</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Admin/TeacherRegistrations" class="dropdown-item">Teacher</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+
+                    @if (User.IsInRole("Teacher"))
+                    {
+                        <li class="nav-item nav-item-spaced dropdown dropdown-animate" data-toggle="hover">
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Exam</a>
+                            <div class="dropdown-menu dropdown-menu-md p-0">
+                                <ul class="list-group list-group-flush px-lg-4">
+                                    <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
+                                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="d-flex">
+                                                <figure style="width:20px">
+                                                    <img src="~/Theme/assets/img/svg/icons/Code.svg" style="width: 20px;">
+                                                </figure><div class="ml-3"><h6 class="heading mb-0">Exams</h6><p class="mb-0">Menu option for Exam Management.</p></div>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="~/Teacher/Exams" class="dropdown-item">Exams</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Teacher/Exam" class="dropdown-item">Create Exam</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
+                                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="d-flex">
+                                                <figure style="width:20px">
+                                                    <img src="~/Theme/assets/img/svg/icons/Code.svg" style="width: 20px;">
+                                                </figure><div class="ml-3"><h6 class="heading mb-0">Questions Answers</h6><p class="mb-0">Menu option for QaAs Management.</p></div>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="~/Teacher/QaAsList" class="dropdown-item">QaAs List</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Teacher/QsAs" class="dropdown-item">Create QaAs</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+
+                    @if (User.IsInRole("DTP"))
+                    {
+                        <li class="nav-item nav-item-spaced dropdown dropdown-animate" data-toggle="hover">
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">QaAs</a>
+                            <div class="dropdown-menu dropdown-menu-md p-0">
+                                <ul class="list-group list-group-flush px-lg-4">
+                                    <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
+                                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="d-flex">
+                                                <figure style="width:20px">
+                                                    <img src="~/Theme/assets/img/svg/icons/Code.svg" style="width: 20px;">
+                                                </figure><div class="ml-3"><h6 class="heading mb-0">Questions Answers</h6><p class="mb-0">Menu option for QaAs Management.</p></div>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="~/DTP/QaAsList" class="dropdown-item">QaAs List</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/DTP/QsAs" class="dropdown-item">Create QaAs</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+
+                    @if (User.IsInRole("Student"))
+                    {
+                        <li class="nav-item nav-item-spaced dropdown dropdown-animate" data-toggle="hover">
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Exam</a>
+                            <div class="dropdown-menu dropdown-menu-md p-0">
+                                <ul class="list-group list-group-flush px-lg-4">
+                                    <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
+                                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="d-flex">
+                                                <figure style="width:20px">
+                                                    <img src="~/Theme/assets/img/svg/icons/Code.svg" style="width: 20px;">
+                                                </figure><div class="ml-3"><h6 class="heading mb-0">Exams</h6><p class="mb-0">Menu option for Exam.</p></div>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="~/Student/Exams" class="dropdown-item">Exams</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Student/Results" class="dropdown-item">Exam Results</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+
+                </ul>
+                <ul class="navbar-nav align-items-lg-center d-none d-lg-flex ml-lg-auto">
+                    <li class="nav-item dropdown dropdown-animate">
+                        <a class="nav-link nav-link-icon px-2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i data-feather="settings"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right dropdown-menu-arrow p-3">
+
+                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+                                var identity = ((CustomPrincipal)HttpContext.Current.User);
+                                var fullName = identity.FirstName + " " + identity.LastName;
+                                var first = identity.FirstName;
+                                var second = identity.LastName;
+                                var fl = first.Substring(0, 1);
+                                var lt = second.Substring(0, 1);
+                                var tw = fl.ToUpper() + lt.ToUpper();
+
+                                <input type="hidden" id="twoLetter" value="@tw" />
+                                <input type="hidden" id="userFullName" value="@fullName" />
+                                <h6 class="dropdown-header px-0 mb-2 text-primary">Hi, @identity.FirstName!</h6>
+                                <a href="~/@string.Format("{0}", identity.Roles)/Profile" class="dropdown-item">
+                                    <i data-feather="user"></i>
+                                    <span>My profile</span>
+                                </a>
+                            }
+
+                            <div class="dropdown-divider"></div>
+                            @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">
+                                    <i data-feather="log-out" class="text-danger"></i>
+                                    <span>Logout</span>
+                                </a>
+                            }
+                        </div>
+                    </li>
+                </ul>
+                <div class="d-lg-none px-4 text-center">
+                    @using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-block btn-sm btn-danger">Logout</a>
+                    }
+                </div>
+            </div>
+            <div class="order-lg-4 ml-lg-3">
+                @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    var identity = ((CustomPrincipal)HttpContext.Current.User);
+                    var first = identity.FirstName;
+                    var second = identity.LastName;
+                    var fl = first.Substring(0, 1);
+                    var lt = second.Substring(0, 1);
+                    var tw = fl.ToUpper() + lt.ToUpper();
+
+                <a class="" href="~/@string.Format("{0}", identity.Roles)/Profile">
+                    <div class="avatar bg-gradient-primary text-white rounded-circle icon-shape hover-rotate-360 mr-3">
+                        @tw
+                    </div>
+                </a>
+                }
+            </div>
+        </div>
+    </nav>
+}
+else
+{
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand" href="~/">
+                <h3 class="display-5 text-center text-md-left">
+                    <strong class="text-primary">entrance</strong>coach.com
+                </h3>
+            </a>
+            <!-- Toggler -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+
+                <ul class="navbar-nav mt-4 mt-lg-0 ml-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="~/">Overview</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="~/Home/About">About us</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="~/Home/Contact">Contact</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav align-items-lg-center d-none d-lg-flex ml-lg-auto">
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Register</button>
+                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-dark bg-dark dropdown-menu-right">
+                                <a class="dropdown-item text-secondary" href="~/Registration/Student">Student</a>
+                                <a class="dropdown-item text-secondary" href="~/Registration/Teacher">Teacher</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="~/Account/Login" class="btn btn-sm btn-primary btn-icon ml-3">
+                            <span class="btn-inner--text">Sign In</span>
+                        </a>
+                    </li>
+                </ul>
+                <!--  Mobile button -->
+                <div class="d-lg-none text-center" style="margin-top: 18px;">
+                    <a href="~/Registration/Student" class="btn btn-block btn-sm btn-soft-success">Student Register</a>
+                </div>
+                <div class="d-lg-none text-center" style="margin-top: 18px;">
+                    <a href="~/Registration/Teacher" class="btn btn-block btn-sm btn-soft-warning">Teacher Register</a>
+                </div>
+                <div class="d-lg-none text-center" style="margin-top: 18px;">
+                    <a href="~/Account/Login" class="btn btn-block btn-sm btn-primary">Login</a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+}

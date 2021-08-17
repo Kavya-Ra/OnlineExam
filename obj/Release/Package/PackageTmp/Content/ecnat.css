@@ -1,0 +1,1025 @@
+﻿
+
+
+.test-title[_ngcontent-c20] {
+    font-size: 28px;
+    font-weight: 800;
+}
+
+
+@media (max-width: 767px) {
+    .test-title[_ngcontent-c20] {
+        margin-top: 0;
+        font-size: 24px;
+        margin-bottom: 16px;
+        text-align: center;
+    }
+}
+
+.test-name[_ngcontent-c20] {
+    font-weight: 300;
+    color: #008aff;
+}
+
+.scholarship-grade-and-time {
+    display: flex;
+}
+
+@media (max-width: 767px) {
+    .scholarship-grade-and-time[_ngcontent-c20] {
+        margin-top: 16px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+}
+
+.grade-list[_ngcontent-c20] {
+    padding-right: 30px;
+}
+
+.flex-center {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.display-flex {
+    display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+}
+
+.grade-list[_ngcontent-c20] .grade-text[_ngcontent-c20] {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: .3px;
+    margin-left: 6px;
+}
+
+@media (max-width: 767px) {
+    .grade-list[_ngcontent-c20] {
+        padding-right: unset;
+        padding-bottom: 6px;
+    }
+}
+
+.timer-title[_ngcontent-c27] {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.79;
+    padding-top: 0;
+    letter-spacing: .7px;
+    color: #008aff;
+}
+
+
+
+@media (max-width: 767px) {
+    .grade-list[_ngcontent-c20] .grade-text[_ngcontent-c20] {
+        font-size: 14px;
+    }
+
+    .timer-title[_ngcontent-c27] {
+        font-size: 18px;
+        align-items: center;
+    }
+
+    .pre-test-details-with-timer[_ngcontent-c27] {
+        text-align: center;
+    }
+}
+
+@media (min-width: 768px) {
+    .timer-title[_ngcontent-c27] {
+        padding-top: 30px;
+    }
+}
+
+.count-down-timer[_ngcontent-c29] {
+    text-align: center;
+    padding-bottom: 37px;
+}
+
+@media (min-width: 768px) {
+    .count-down-timer.not-registered[_ngcontent-c29] {
+        text-align: left;
+    }
+}
+
+.count-down-hour[_ngcontent-c29], .count-down-minutes[_ngcontent-c29], .count-down-seconds[_ngcontent-c29] {
+    display: inline-block;
+    text-align: center;
+}
+
+.count-down-time[_ngcontent-c29] {
+    display: block;
+    border-radius: 3px;
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(50%,#fff),color-stop(51%,#f3f3f3));
+    background: linear-gradient(#e0e0e0 50%,#f3f3f3 51%);
+    font-weight: 300;
+    color: #008aff;
+    border: 3px solid #fff;
+    font-size: 30px;
+    line-height: 45px;
+    padding: 0 24px;
+}
+
+.reg-details-btn-container[_ngcontent-c27] {
+    padding-bottom: 30px;
+}
+
+.register-section[_ngcontent-c27] .register[_ngcontent-c27] {
+    background-image: linear-gradient( 256deg,#008aff,#171347);
+    -webkit-box-shadow: 0 0 50px 2px rgb(0 138 255);
+    box-shadow: 0 0 50px 2px rgb(186 210 230);
+    color: #ffffff;
+    border: 1px solid #008AFE;
+    border-radius: 29px;
+    margin-bottom: 10px;
+    display: inline-block;
+    padding: 12px 41px;
+    width: 226px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.register-section[_ngcontent-c27] .know-more[_ngcontent-c27] {
+    border-radius: 29px;
+    border: 1px solid #008aff;
+    color: #008aff;
+    font-weight: 600;
+    padding: 12px 41px;
+    font-size: 14px;
+    width: 226px;
+    display: inline-block;
+    text-align: center;
+}
+
+.header[_ngcontent-c11] {
+    font-size: 20px;
+    letter-spacing: 1.4px;
+    color: #008aff;
+    text-align: center;
+    padding-bottom: 27px;
+    text-transform: uppercase;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media (min-width: 768px) {
+    .header[_ngcontent-c11] {
+        font-size: 28px;
+        letter-spacing: 2px;
+        padding-bottom: 41px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header[_ngcontent-c11] {
+        font-size: 18px;
+    }
+}
+
+.middle-section-container[_ngcontent-c11] .scholarship-detail[_ngcontent-c11] {
+    margin: 0;
+    text-align: center;
+    padding-bottom: 11px;
+}
+
+@media (min-width: 768px) {
+    .middle-section-container[_ngcontent-c11] .scholarship-detail[_ngcontent-c11] {
+        padding-bottom: 22px;
+        margin: 0 -14px;
+    }
+}
+
+.scholarship-detail[_ngcontent-c11] .details-portion[_ngcontent-c11] {
+    display: inline-block;
+    padding: 0 10px;
+    width: 40%;
+    font-size: 12px;
+    text-align: center;
+    color: #4a4a4a;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    display: -ms-inline-flex;
+    display: -o-inline-flex;
+    display: -moz-inline-flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -moz-flex-direction: column;
+    -o-flex-direction: column;
+    -ms-flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    -moz-align-items: center;
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+    .scholarship-detail[_ngcontent-c11] .details-portion[_ngcontent-c11] {
+        font-size: 14px;
+        padding: 0 32px;
+        width: 260px;
+    }
+}
+
+
+.details-portion[_ngcontent-c11] .image[_ngcontent-c11] {
+    background-image: url(vsat-sprite.9dce2d1ad3c608e13d2e.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 88px;
+    width: 88px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+@media (min-width: 768px) {
+    .details-portion[_ngcontent-c11] .image[_ngcontent-c11] {
+        background-image: url(vsat-sprite.9dce2d1ad3c608e13d2e.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 140px;
+        width: 140px;
+        display: inline-block;
+        margin-bottom: 8px;
+    }
+}
+
+.details-portion[_ngcontent-c11] .image.cup[_ngcontent-c11] {
+    background-position: -175px 0;
+}
+
+@media (min-width: 768px) {
+    .details-portion[_ngcontent-c11] .image.cup[_ngcontent-c11] {
+        background-position: -280px 0;
+    }
+}
+
+.details-portion[_ngcontent-c11] .text-title[_ngcontent-c11] {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+@media (min-width: 768px) {
+    .details-portion[_ngcontent-c11] .text-title[_ngcontent-c11] {
+        font-size: 18px;
+    }
+}
+
+.details-portion[_ngcontent-c11] .image.label[_ngcontent-c11] {
+    background-position: -262px 0;
+}
+
+@media (min-width: 768px) {
+    .details-portion[_ngcontent-c11] .image.label[_ngcontent-c11] {
+        background-position: -415px 0;
+    }
+}
+
+.details-portion[_ngcontent-c11] .image.board[_ngcontent-c11] {
+    background-position: -88px 0;
+}
+
+@media (min-width: 768px) {
+    .details-portion[_ngcontent-c11] .image.board[_ngcontent-c11] {
+        background-position: -140px 0;
+    }
+}
+
+
+.scholarship-card-section[_ngcontent-c11] {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: -moz-flex;
+    margin: 0 auto;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-flow: row wrap;
+    -o-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-direction: column;
+    -o-flex-direction: column;
+    -ms-flex-direction: column;
+    -moz-flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -o-justify-content: center;
+    max-width: 480px;
+    width: 90%;
+}
+
+@media (min-width: 768px) {
+    .scholarship-card-section[_ngcontent-c11] {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+        -o-flex-direction: row;
+        -ms-flex-direction: row;
+        -moz-flex-direction: row;
+        margin: 0 -14px;
+        max-width: 100%;
+        width: auto;
+    }
+}
+
+.scholarship-card-section[_ngcontent-c11] .course-card[_ngcontent-c11] {
+    margin: 0 0 10px;
+    width: auto;
+    border-radius: 10px;
+    padding: 25px 37px 35px 28px;
+}
+
+@media (min-width: 768px) {
+    .scholarship-card-section[_ngcontent-c11] .course-card[_ngcontent-c11] {
+        margin: 0 14px 10px;
+        width: 30%;
+        padding: 25px 37px 35px 38px;
+    }
+}
+
+.scholarship-card-section[_ngcontent-c11] .course-card[_ngcontent-c11]:first-child {
+    background-color: #008aff;
+}
+
+.course-card[_ngcontent-c11] .title[_ngcontent-c11] {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.22;
+    letter-spacing: 1.3px;
+    color: #fff;
+    padding-bottom: 14px;
+    text-transform: uppercase;
+}
+
+.course-card[_ngcontent-c11] .text[_ngcontent-c11] {
+    font-size: 14px;
+    line-height: 1.29;
+    letter-spacing: .5px;
+    color: #fff;
+    padding-bottom: 19px;
+    height: 63px;
+    margin-bottom: 20px;
+}
+
+.course-card[_ngcontent-c11] .link-button[_ngcontent-c11] {
+    font-size: 12px;
+    line-height: 1.83;
+    letter-spacing: .8px;
+    color: #fff;
+    width: 154px;
+    text-align: center;
+    padding: 8px 0 9px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid #fff;
+    border-radius: 22px;
+    display: inline-block;
+    transition: .2s;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+    -ms-transition: all .2s ease;
+    -o-transition: .2s;
+}
+
+.scholarship-card-section[_ngcontent-c11] .course-card[_ngcontent-c11]:nth-child(2) {
+    background-color: #575a89;
+}
+
+.scholarship-card-section[_ngcontent-c11] .course-card[_ngcontent-c11]:nth-child(3) {
+    background-color: #171347;
+}
+
+
+
+.results-of-vsat-container {
+    /* max-width: 1040px;*/
+    margin: auto;
+    padding-bottom: 95px;
+}
+
+@media (max-width: 768px) {
+    .results-of-vsat-container {
+        padding-top: 14px;
+        padding-bottom: 1px;
+    }
+
+    .result .container {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+}
+
+.rov-heading {
+    font-size: 28px;
+    text-align: center;
+    color: #008aff;
+    margin-bottom: 35px;
+}
+
+@media (max-width: 768px) {
+    .rov-heading {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.grades-holder {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 16px;
+    text-align: center;
+    color: #666;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .grades-holder {
+        overflow-x: scroll;
+        display: flex;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+    }
+}
+
+.grade {
+    padding-left: 13px;
+    padding-right: 13px;
+    cursor: pointer;
+}
+
+    .grade.selected {
+        padding-bottom: 21px;
+        border-bottom: 3px solid #008aff;
+        font-size: 16px;
+        font-weight: 700;
+        text-align: center;
+        color: #008aff;
+    }
+
+@media (max-width: 768px)
+{
+    .grade.selected {
+        padding-bottom: 17px;
+    }
+}
+
+
+
+.rov-data-top {
+    padding: 48px 93px 50px;
+    background-image: linear-gradient( 109deg,#f0f8ff,#f2edff);
+    border-top: 2px solid #008aff;
+    border-radius: 10px 10px 0 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px)
+{
+    .rov-data-holder {
+        background-image: linear-gradient( 148deg,#f8f7fa,#fcf6f4);
+        border-radius: 0 0 10px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .rov-data-top {
+        padding: 23px 0 6px;
+        border-radius: 0;
+    }
+}
+
+.rov-data-bottom {
+    border-radius: 0 0 10px 10px;
+    background-image: linear-gradient( 99deg,rgb(228 241 251) 11%,rgb(238 236 255));
+    padding-left: 100px;
+    padding-right: 100px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding-bottom: 50px;
+}
+
+@media (max-width: 768px)
+{
+    .rov-data-bottom {
+        padding: 0 0 35px;
+        display: block;
+        margin-left: 16px;
+        margin-right: 16px;
+        background-image: linear-gradient( 148deg,#ffffff,#ffffff);
+    }
+}
+
+.rov-data-top-left {
+    padding: 35px 84px 27px 76px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-right: 20px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 0 25px 0 rgb(239 206 255 / 17%);
+    box-shadow: 0 0 25px 0 rgb(239 206 255 / 17%);
+    background-color: #fff;
+    min-width: 417px;
+}
+
+@media (max-width: 768px)
+{
+    .rov-data-top-left {
+        min-width: 0;
+        padding: 32px 15px 33px 27px;
+        margin-right: 0;
+        border-radius: 8px 0 0 8px;
+        display: block;
+        text-align: center;
+        width: calc(50% - 16px);
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+}
+
+.student-count-img {
+    margin-right: 21px;
+    width: 57px;
+    height: 48px;
+}
+
+@media (max-width: 768px)
+{
+    .student-count-img {
+        margin-right: 0;
+        width: 41px;
+        height: 35px;
+        margin-bottom: 17px;
+        position: relative;
+        left: -7px;
+    }
+}
+
+.result-count-numbers {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: .75;
+    color: #171347;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px)
+{
+    .result-count-numbers {
+        font-size: 28px;
+        line-height: .86;
+        margin-bottom: 4px;
+    }
+}
+
+.result-count-text {
+    font-size: 20px;
+    line-height: 1.2;
+    color: #333;
+}
+
+@media (max-width: 768px)
+{
+    .result-count-text {
+        font-size: 14px;
+        line-height: normal;
+    }
+}
+
+.rov-data-top-right {
+    padding: 32px 91px 27px 94px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 0 25px 0 rgb(239 206 255 / 17%);
+    box-shadow: 0 0 25px 0 rgb(239 206 255 / 17%);
+    background-color: #fff;
+    min-width: 417px;
+}
+
+@media (max-width: 768px)
+{
+    .rov-data-top-right {
+        min-width: 0;
+        padding: 28px 27px 33px 15px;
+        border-radius: 0 8px 8px 0;
+        display: block;
+        text-align: center;
+        width: calc(50% - 16px);
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+}
+
+.scholarship-count-img {
+    margin-right: 24px;
+    width: 45px;
+    height: 60px;
+}
+
+@media (max-width: 768px)
+{
+    .scholarship-count-img {
+        height: 43px;
+        width: 32px;
+        margin-bottom: 13px;
+        margin-right: 0;
+    }
+}
+
+.student-scholarship-holder {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+}
+
+.student-details-holder {
+    margin-top: 31px;
+    margin-left: 6px;
+}
+
+
+@media (max-width: 768px)
+{
+    .student-scholarship-holder {
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        margin-top: 2px;
+        margin-bottom: 2px;
+        padding-bottom: 22px;
+        background-image: linear-gradient( 99deg,rgb(228 241 251) 11%,rgb(238 236 255));
+    }
+}
+
+@media (max-width: 768px) {
+    .student-scholarship-holder:first-child {
+        border-radius: 8px 8px 0 0;
+    }
+}
+
+@media (max-width: 768px)
+{
+    .student-details-holder {
+        margin-top: 14px;
+        margin-left: 13px;
+    }
+}
+
+.rank-number {
+    text-shadow: 0 2px 14px rgb(239 206 255 / 21%);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: .72;
+    text-align: center;
+    color: #171347;
+    position: absolute;
+    top: 61px;
+    left: 33px;
+}
+
+@media (max-width: 768px)
+{
+    .rank-number {
+        text-shadow: 0 2px 13px rgb(239 206 255 / 21%);
+        font-size: 29.3px;
+        line-height: .72;
+        left: 31px;
+        top: 58px;
+    }
+}
+
+.medal-img {
+    height: 109px;
+    width: 85px;
+}
+@media (max-width: 768px){
+    .rank-img-holder {
+        position: relative;
+    }
+}
+
+@media (max-width: 768px) 
+{
+    .medal-img {
+        height: 100px;
+        width: 78px;
+    }
+}
+
+
+.student-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 2px;
+}
+
+@media (max-width: 768px)
+{
+    .student-name {
+        font-size: 16px;
+        margin-bottom: 1px;
+    }
+}
+
+.student-location, .student-name {
+    max-width: 173px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.student-location {
+    font-size: 14px;
+    color: #222;
+    margin-bottom: 4px;
+}
+
+.student-location, .student-name {
+    max-width: 173px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.student-scholarship {
+    border-radius: 4px;
+    border: 1px solid #171347;
+    padding: 1px 10px;
+    font-size: 14px;
+    line-height: 1.86;
+    text-align: center;
+    color: #706d9e;
+    height: 26px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+
+.vsat-bottom-section[_ngcontent-c15] {
+    background-color: #eee;
+}
+
+.bottom-page-section[_ngcontent-c15] .bottom-page-container[_ngcontent-c15] {
+    max-width: 1110px;
+    margin: 0 auto;
+    width: 90%;
+}
+
+
+.vsat-bottom-section[_ngcontent-c15] .bottom-page-section[_ngcontent-c15] {
+    padding: 43px 0 1px;
+}
+
+@media (min-width: 768px)
+{
+    .vsat-bottom-section[_ngcontent-c15] .bottom-page-section[_ngcontent-c15] {
+        padding: 57px 0 1px;
+    }
+}
+
+.bottom-page-container[_ngcontent-c15] .header[_ngcontent-c15] {
+    text-align: center;
+    font-size: 20px;
+    letter-spacing: 1.4px;
+    color: #008aff;
+    text-transform: uppercase;
+    padding-bottom: 16px;
+}
+
+@media (min-width: 768px)
+{
+    .bottom-page-container[_ngcontent-c15] .header[_ngcontent-c15] {
+        padding-bottom: 41px;
+        font-size: 28px;
+        letter-spacing: 2px;
+    }
+}
+
+.bottom-page-container[_ngcontent-c15] .test-description[_ngcontent-c15] {
+    background-color: #fff;
+    padding: 50px 18px 39px;
+    margin-bottom: 11px;
+    text-align: center;
+    border-radius: 0.75rem;
+}
+
+@media (min-width: 768px)
+{
+    .bottom-page-container[_ngcontent-c15] .test-description[_ngcontent-c15] {
+        padding: 36px 49px 26px 43px;
+        margin-bottom: 29px;
+        text-align: center;
+    }
+}
+
+.test-description[_ngcontent-c15] .test-details[_ngcontent-c15] {
+    display: inline-block;
+    vertical-align: top;
+    padding: 12px 0 12px 12px;
+    font-size: 16px;
+    color: #4a4a4a;
+    position: relative;
+    text-align: center;
+    width: 49%;
+}
+
+
+@media (min-width: 768px)
+{
+    .test-description[_ngcontent-c15] .test-details[_ngcontent-c15] {
+        padding: 12px 33px 18px 12px;
+        font-size: 15px;
+        text-align: left;
+        width: auto;
+    }
+}
+
+.test-details[_ngcontent-c15] .image[_ngcontent-c15] {
+    background-image: url(vsat-sprite.9dce2d1ad3c608e13d2e.png);
+    background-repeat: no-repeat;
+    width: 46px;
+    height: 40px;
+    position: absolute;
+    left: calc(50% - 16px);
+    top: -25px;
+    background-size: 1476%;
+}
+
+.test-description[_ngcontent-c15] .bulletin[_ngcontent-c15] {
+    background-position: -623px -113px;
+}
+
+@media (min-width: 768px)
+{
+    .test-details[_ngcontent-c15] .image[_ngcontent-c15] {
+        top: 0;
+        left: 0;
+    }
+}
+
+.test-details[_ngcontent-c15] .title[_ngcontent-c15] {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .9px;
+    color: #171347;
+    text-transform: uppercase;
+}
+
+@media (min-width: 768px)
+{
+    .test-details[_ngcontent-c15] .title[_ngcontent-c15] {
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+}
+
+.test-description[_ngcontent-c15] .study[_ngcontent-c15] {
+    background-position: -623px -33px;
+}
+
+.test-description[_ngcontent-c15] .date[_ngcontent-c15] {
+    background-position: -623px -75px;
+}
+
+.vsat-faq-section[_ngcontent-c16] {
+    background-color: #eee;
+    padding-bottom: 50px;
+}
+
+    .vsat-faq-section[_ngcontent-c16] .question-card[_ngcontent-c16] {
+        margin: 0 auto 2px;
+        max-width: 1040px;
+        width: 90%;
+        background-color: #fff;
+        padding: 25px 0 13px 37px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(255,255,255,0);
+    }
+
+@media (min-width: 768px){
+    .vsat-faq-section[_ngcontent-c16] .question-card[_ngcontent-c16] {
+        padding: 31px 0 13px 37px;
+    }
+}
+
+.question-card[_ngcontent-c16] .question-section[_ngcontent-c16] {
+    margin-bottom: 2px;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+@media (min-width: 768px)
+{
+    .question-card[_ngcontent-c16] .question-section[_ngcontent-c16] {
+        margin-bottom: 2px;
+        padding-bottom: 14px;
+    }
+}
+
+.question-section[_ngcontent-c16] .question[_ngcontent-c16] {
+    font-size: 13px;
+    color: #4a4a4a;
+    padding-right: 55px;
+}
+
+@media (min-width: 768px)
+{
+    .question-section[_ngcontent-c16] .question[_ngcontent-c16] {
+        font-size: 16px;
+    }
+}
+
+.question-section[_ngcontent-c16] .changing-sign[_ngcontent-c16] {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    right: 10px;
+    top: -10px;
+}
+
+.changing-sign[_ngcontent-c16] .strike[_ngcontent-c16] {
+    width: 10px;
+    height: 2px;
+    background-color: #6f59b1;
+    display: inline-block;
+    position: absolute;
+    top: calc(50% - 2px);
+    right: calc(50% - 5px);
+    -webkit-transition: transform .2s linear;
+    transition: transform .2s linear;
+    transition: transform .2s linear,-webkit-transform .2s linear;
+    -moz-transition: transform .2s linear;
+    -ms-transition: transform .2s linear;
+    -o-transition: transform .2s linear;
+}
+
+    .changing-sign[_ngcontent-c16] .strike[_ngcontent-c16]:first-child {
+        transform: rotate( 90deg );
+        -webkit-transform: rotate( 90deg );
+        -o-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+    }
+
+.sec .container {
+    padding-right: 0px;
+    padding-left: 0px;
+}

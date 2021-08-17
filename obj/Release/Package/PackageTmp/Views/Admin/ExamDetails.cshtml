@@ -1,0 +1,69 @@
+﻿@model OnlineExam.DbContext.GetAllExamById_Result
+
+@{
+    ViewBag.Title = "ExamDetails";
+
+    var todate = Model.ToDate.ToString();
+    string[] enddate = todate.Split(' ');
+    var fromdate = Model.FromDate.ToString();
+    string[] startdate = fromdate.Split(' ');
+}
+
+
+<section class="slice py-6 bg-section-secondary">
+    <div class="container">
+        <div class="col px-0">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <p class="lead lh-180">Exam Details</p>
+                    <h2 class="h4 mb-2">@Model.Name</h2>
+                    <h6 class="font-weight-light opacity-8">@startdate[0] To @enddate[0]</h6>
+                    <div class="my-3">
+                        <span class="badge badge-primary">@Model.ClassName</span>
+                        <span class="badge badge-primary">@Model.PName</span>
+                        <span class="badge badge-primary">@Model.CourseName</span>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-sm-4">
+                            <div class="card shadow-lg rounded-lg border-0 mb-sm-0">
+                                <div class="p-4 text-center">
+                                    <p class="text-muted mb-2">Exam Time</p>
+                                    <h5 class="mb-0">@Model.ExamTime Hr</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card shadow-lg rounded-lg border-0 mb-sm-0">
+                                <div class="p-4 text-center">
+                                    <p class="text-muted mb-2">Total Mark</p>
+                                    <h5 class="mb-0">@Model.TotalMark</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card shadow-lg rounded-lg border-0 mb-sm-0">
+                                <div class="p-4 text-center">
+                                    <p class="text-muted mb-2">Subject</p>
+                                    <h5 class="mb-0">@Model.SubjectName</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5">
+                        <div class="row mb-5 justify-content-center text-center">
+
+                                <a href="~/admin/dashboard" class="btn btn-success btn-sm btn-icon">
+                                    <span class="btn-inner--text">Back to Exam List</span>
+                                    <span class="btn-inner--icon">
+                                        <i data-feather="arrow-left"></i>
+                                    </span>
+                                </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

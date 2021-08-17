@@ -1,0 +1,237 @@
+﻿@model OnlineExam.ViewModel.AccountViewModel
+@using OnlineExam.Authentication
+
+@{
+    ViewBag.Title = "User Account";
+}
+
+<section class="pt-5 bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <span class="surtitle">Admin account</span>
+                        <h1 class="h2 mb-0">User Management</h1>
+                    </div>
+                </div>
+                <div class="row align-items-center mt-4">
+                    <div class="col">
+                        <ul class="nav nav-tabs overflow-x">
+                            <li class="nav-item">
+                                <a href="~/Admin/UserAccounts" class="nav-link">Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/UserAccount" class="nav-link active">Create Users</a>
+                            </li>
+                           @* <li class="nav-item">
+                                <a href="~/Admin/Role" class="nav-link">Roles</a>
+                            </li>*@
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="slice slice-sm bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="mb-5">
+
+                            @if (ViewBag.StatusMessage != null)
+                            {
+                                <div class="alert alert-outline-success" role="alert">
+                                    <strong>@ViewBag.StatusMessage</strong>
+                                </div>
+                            }
+
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <div class="alert alert-outline-danger" role="alert">
+                                    <strong>@ViewBag.ErrorMessage</strong>
+                                </div>
+                            }
+
+                            <div>
+                                <h5 class="mb-3">Create User Account</h5>
+                                <form id="UserAccount" method="post">
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.Id)
+
+                                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                    {
+                                        var identity = ((CustomPrincipal)HttpContext.Current.User);
+                                        <input type="hidden" id="CuserId" name="CuserId" value="@identity.UserId" />
+                                    }
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">First name</label>
+                                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter your first name" } })
+                                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "error" })
+                                                <label id="FirstName-error" class="error" for="FirstName" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Last name</label>
+                                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Also your last name" } })
+                                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "error" })
+                                                <label id="LastName-error" class="error" for="LastName" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Email</label>
+                                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "name@exmaple.com", @type = "email" } })
+                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "error" })
+                                                <label id="Email-error" class="error" for="Email" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Mobile</label>
+                                                @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "000 000 0000", @maxlength = "14" } })
+                                                @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "error" })
+                                                <label id="MobileNo-error" class="error" for="MobileNo" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Role</label>
+                                                @Html.DropDownListFor(model => model.RoleId, new SelectList(Model.Roles, "RoleId", "RoleName"), " Select Role ", new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "error" })
+                                                <label id="RoleId-error" class="error" for="RoleId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Username</label>
+                                                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username" } })
+                                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "error" })
+                                                <label id="UserName-error" class="error" for="UserName" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Password</label>
+                                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
+                                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "error" })
+                                                <label id="Password-error" class="error" for="Password" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Confirm password</label>
+                                                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Confirm password" } })
+                                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "error" })
+                                                <label id="ConfirmPassword-error" class="error" for="ConfirmPassword" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 text-right">
+                                        <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/Theme/assets/jquery.validate.min.js"></script>
+    <script>
+        $('#UserAccount').validate({
+            rules: {
+                FirstName: {
+                    required: true
+                },
+                LastName: {
+                    required: true
+                },
+                Email: {
+                    required: true,
+                    email: true
+                },
+                MobileNo: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 14
+                },
+                RoleId: {
+                    required: true
+                },
+                UserName: {
+                    required: true
+                },
+                Password: {
+                    required: true,
+                    minlength: 6
+                },
+                ConfirmPassword: {
+                    required: true,
+                    equalTo: "#Password"
+                }
+            },
+            messages: {
+                FirstName: {
+                    required: 'Please enter First Name'
+                },
+                LastName: {
+                    required: 'Please enter Last Name'
+                },
+                Email: {
+                    required: 'Please enter valid Email'
+                },
+                MobileNo: {
+                    required: 'Please enter valid Mobile Number'
+                },
+                RoleId: {
+                    required: 'Please enter Role Name'
+                },
+                UserName: {
+                    required: 'Please enter UserName'
+                },
+                Password: {
+                    required: 'Password must be at least 6 characters long'
+                },
+                ConfirmPassword: {
+                    required: 'The password and confirmation password do not match'
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+
+                var data = element.id;
+                $("#" + data).addClass("is-invalid");
+                $("." + data).css({ 'border-color': '#f25767' });
+                $(".error" + data + "-error").show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                var data = element.id;
+                $("#" + data).removeClass("is-invalid");
+                $("." + data).css({ 'border-color': '' });
+                $("." + data + "-error").hide();
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    </script>
+}

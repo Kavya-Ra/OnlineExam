@@ -1,0 +1,138 @@
+﻿@model IEnumerable<OnlineExam.ViewModel.GetStudentExam>
+
+@{
+    ViewBag.Title = "Exams";
+}
+
+
+<section class="pt-5 bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <span class="surtitle">Student account</span>
+                        <h1 class="h3 mb-0">Exams</h1>
+                    </div>
+                </div>
+                <div class="row align-items-center mt-4">
+                    <div class="col">
+                        <ul class="nav nav-tabs overflow-x">
+                            <li class="nav-item">
+                                <a href="~/Student/Exams" class="nav-link active">Exam List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Student/Results" class="nav-link">Exam Results</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="slice slice-sm bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="mb-5">
+                            @if (ViewBag.StatusMessage != null)
+                            {
+                                <div class="alert alert-outline-success" role="alert">
+                                    <strong>@ViewBag.StatusMessage</strong>
+                                </div>
+                            }
+
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <div class="alert alert-outline-danger" role="alert">
+                                    <strong>@ViewBag.ErrorMessage</strong>
+                                </div>
+                            }
+                            <div class="colum-hed align-items-center mb-4 ">
+                                <div class="col">
+                                    <div class="d-flex">
+                                        <div class="pr-3">
+                                            <span class="h5 mb-0">
+                                                <i data-feather="clipboard"></i>
+                                            </span>
+                                        </div>
+                                        <div class="">
+                                            <h3 class="h5 mb-0">All Exams</h3>
+                                            <p class="text-muted mb-0">Ongoing Exam</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-auto">
+                                   
+                                </div>
+                            </div>
+
+                            <link rel="stylesheet" type="text/css" href="~/Theme/assets/libs/datatable/css/tables/datatable/datatables.min.css">
+
+                            <div class="table-responsive">
+                                <table class="table table-striped" style="width:100%" id="exam">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" data-orderable="false">Sl.No</th>
+                                            <th scope="col" class="text-left">Name</th>
+                                            <th scope="col" class="text-left">Course</th>
+                                            <th scope="col" class="text-left">Class</th>
+                                            <th scope="col" class="text-left">Subject</th>
+                                            <th scope="col" class="text-left">Time</th>
+                                            <th scope="col" class="text-left">Mark</th>
+                                            <th scope="col" class="text-right">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbAccounts">
+                                        @{ int i = 1; }
+                                        @foreach (var item in Model)
+                                        {
+                                            var todate = item.ToDate.ToString();
+                                            string[] enddate = todate.Split(' ');
+                                            var fromdate = item.FromDate.ToString();
+                                            string[] startdate = fromdate.Split(' ');
+
+                                            int slno = i++;
+                                            <tr>
+                                                <th>@slno</th>
+                                                <th scope="row">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <a href="javascript:void(0)" class="name h6 mb-0 text-sm">@item.Name</a>
+                                                            <small class="d-block font-weight-bold">@startdate[0] To @enddate[0]</small>
+                                                        </div>
+                                                    </div>                                                    
+                                                </th>
+                                                <td>@item.PName</td>
+                                                <td>@item.ClassName</td>
+                                                <td>@item.SubjectName</td>
+                                                <td>@item.ExamTime hr</td>
+                                                <td>@item.TotalMark</td>
+                                                <td class="text-right">
+                                                    @if (item.Attended == 0)
+                                                    {
+                                                        <a href="ExamDetails?examId=@item.Id&id=@item.StudentId" class="btn btn-soft-success btn-sm">Attend</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="Result?examId=@item.Id&id=@item.StudentId" class="btn btn-soft-info btn-sm">Result</a>
+                                                    }
+                                                </td>
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

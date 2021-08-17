@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d08f6946a8964d5a897abb220c98ce49" Name="Diagram1">
+        <EntityTypeShape EntityType="Exam_DBModel.AttendExam" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Chapter" Width="1.5" PointX="8" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Class" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Cours" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.DataEntry_QuestionBank" Width="1.5" PointX="5.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.DataEntry_Registration" Width="1.5" PointX="10.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Exam" Width="1.5" PointX="10.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Exam_QnTable" Width="1.5" PointX="13" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.ExamResult" Width="1.5" PointX="7.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Group" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Group_StudentTable" Width="1.5" PointX="12.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Group_Teacher" Width="1.5" PointX="12.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Programme" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Role" Width="1.5" PointX="2.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Student_AcademicPerformance" Width="1.5" PointX="9.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Student_HomeCountryDetails" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Student_Parent" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Student_PreviousEntrance" Width="1.5" PointX="2.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Student_Registration" Width="1.5" PointX="14.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Subject" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.SubProgram" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Teachers_QuestionBank" Width="1.5" PointX="14.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Teachers_Registration" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.User" Width="1.5" PointX="5" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="Exam_DBModel.FK_Chapter_ChapterSujectid" ManuallyRouted="false" />
+        <AssociationConnector Association="Exam_DBModel.FK_Courses_Class" ManuallyRouted="false" />
+        <AssociationConnector Association="Exam_DBModel.FK_Exam_QnTable_Exam" ManuallyRouted="false" />
+        <AssociationConnector Association="Exam_DBModel.FK_Group_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="Exam_DBModel.FK__SubProgra__PgmId__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="Exam_DBModel.UserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,164 @@
+﻿@model OnlineExam.Models.LoginViewModel
+
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Entrancecaoch.com is an online entrance coaching platform for Medical NEET (UG), Engineering IIT JEE Main, JEE Advanced, Class 6 to 12, NTSE, KVPY Olympiad & Other Competitive Exams.">
+    <meta name="author" content="entrancecoach.com">
+    <title>Login - entrancecoach.com</title>
+    <!-- Preloader -->
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    @* <script>
+            window.addEventListener("load", function () {
+                setTimeout(function () {
+                    document.querySelector('body').classList.add('loaded');
+                }, 300);
+            });
+        </script>*@
+    <!-- Favicon -->
+    <link rel="icon" href="~/Theme/favicon.png" type="image/png"><!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Theme/assets/libs/fortawesome/fontawesome-free/css/all.min.css">
+    <!-- Quick CSS -->
+    <link rel="stylesheet" href="~/Theme/assets/quick-website.css" id="stylesheet">
+</head>
+
+<body>
+    <!-- Preloader -->
+    @* <div class="preloader">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>*@
+
+    <section>
+        <div class="container d-flex flex-column">
+            <div class="row align-items-center justify-content-center min-vh-100">
+                <div class="col-md-6 col-lg-5 col-xl-5 py-6 py-md-0">
+                    <div class="card shadow zindex-100 mb-0">
+                        <div class="card-body px-md-5 py-3">
+                            <div class="mb-3 text-center">
+                                <h6 class="h3 mb-1">entrancecoach.com</h6><p class="text-muted mb-0">Sign in to your account to continue.</p>
+                            </div>
+                            <span class="clearfix"></span>
+                            <form id="login" method="post">
+
+                                @if (ViewBag.Error != null)
+                                {
+                                    <div class="alert alert-outline-danger" role="alert">
+                                        <strong>@ViewBag.Error</strong> !
+                                    </div>
+                                }
+
+                                <div class="form-group">
+                                    <label class="form-control-label">Name</label>
+                                    <div class="input-group input-group-merge">
+                                        <input type="text" class="form-control form-control-prepend" id="username" name="username" placeholder="username">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text username"><i data-feather="user"></i></span>
+                                        </div>
+                                    </div>
+                                    <label id="username-error" class="error" for="username" style="display:none;"></label>
+                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "error" })
+                                </div>
+                                <div class="form-group mb-0">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <label class="form-control-label">Password</label>
+                                        </div>
+                                        <div class="mb-2">
+                                            <a href="#" class="small text-muted text-underline--dashed border-primary" data-toggle="password-text" data-target="#input-password">Forgot password</a>
+                                        </div>
+                                    </div>
+                                    <div class="input-group input-group-merge">
+                                        <input type="password" class="form-control form-control-prepend" id="password" name="password" placeholder="Password">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text password"><i data-feather="key"></i></span>
+                                        </div>
+                                    </div>
+                                    <label id="password-error" class="error" for="password" style="display:none;"></label>
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "error" })
+                                </div>
+
+                                <div class="mt-4">
+                                    <button type="submit" class="btn btn-block btn-primary">Sign in</button>
+                                </div>
+                            </form>
+
+                            <div class="py-3 text-center">
+                                <span class="text-xs text-uppercase">or</span>
+                            </div>
+                            <!-- Links -->
+                            <div class="mt-0 text-center">
+                                <small>Not registered?</small>
+                                <a href="~/Home/Contact" class="small font-weight-bold">Create account</a>
+                            </div>
+                            <div class="mt-1 text-center">
+                                <a href="~/" class="small font-weight-bold">Back To Home</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Core JS  -->
+    <script src="~/Theme/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="~/Theme/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Theme/assets/libs/feather-icons/dist/feather.min.js"></script>
+    <!-- Quick JS -->
+    <script src="~/Theme/assets/quick-website.js"></script>
+    <script src="~/Theme/assets/jquery.validate.min.js"></script>
+    <script>
+        $('#login').validate({
+            rules: {
+                username: {
+                    required: true
+                },
+                password: {
+                    required: true
+                }
+            },
+            messages: {
+                username: {
+                    required: 'Please enter username'
+                },
+                password: {
+                    required: 'Please enter password'
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+
+                var data = element.id;
+                $("#" + data).addClass("is-invalid");
+                $("." + data).css({ 'border-color': '#f25767' });
+                $(".error" + data + "-error").show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                var data = element.id;
+                $("#" + data).removeClass("is-invalid");
+                $("." + data).css({ 'border-color': '' });
+                $("." + data + "-error").hide();
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    </script>
+    <!-- Feather Icons -->
+    <script>
+        feather.replace({
+            'width': '1em',
+            'height': '1em'
+        })
+    </script>
+</body>
+
+</html>

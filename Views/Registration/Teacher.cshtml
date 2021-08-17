@@ -1,0 +1,470 @@
+﻿@model OnlineExam.ViewModel.TeacherRegViewModel
+@{
+    ViewBag.Title = "Teacher Register";
+}
+
+<section>
+    <div class="container d-flex align-items-center text-center text-lg-left py-5 py-lg-4 border-bottom">
+        <div class="col px-0">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h3 class="h2 mb-2">Teacher Registration</h3>
+                    <h6 class="font-weight-light text-muted">entrancecoach.com registration form</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="slice">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+
+                @if (ViewBag.StatusMessage != null)
+                {
+
+                    <div class="card shadow-none">
+                        <div class="p-3 d-flex">
+                            <div>
+                                <div class="icon icon-shape rounded-circle bg-success text-white mr-4">
+                                    <i data-feather="check"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="h6"> Hello @ViewBag.ApplicationName !</span>
+                                <p class="text-sm text-muted mb-0">
+                                    @ViewBag.StatusMessage
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <div class="alert alert-outline-danger" role="alert">
+                        <strong>@ViewBag.ErrorMessage</strong>
+                    </div>
+                }
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form id="teacherRegistration" method="post">
+
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.TeachRegId)
+
+                                    <div>
+                                        <h5 class="mb-3">General information</h5>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">First name</label>
+                                                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter your first name" } })
+                                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "error" })
+                                                    <label id="FirstName-error" class="error" for="UserName" style="display:none;"></label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Middle name</label>
+                                                    @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter your Middle name" } })
+                                                    @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "error" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Last name</label>
+                                                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter your last name" } })
+                                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "error" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Email</label>
+                                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "name@exmaple.com" } })
+                                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "error" })
+                                                    <small class="form-text text-muted mt-2">This is the main email address that we'll send notifications.</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Whatsapp Number</label>
+                                                    @Html.EditorFor(model => model.WhatsApp, new { htmlAttributes = new { @class = "form-control", @placeholder = "+91 123 456 7890" } })
+                                                    @Html.ValidationMessageFor(model => model.WhatsApp, "", new { @class = "error" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <h5 class="mb-3">Contact information</h5>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Location</label>
+                                                    @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", @placeholder = "Location" } })
+                                                    @Html.ValidationMessageFor(model => model.Location, "", new { @class = "error" })
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Street</label>
+                                                    @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "form-control", @placeholder = "Street" } })
+                                                    @Html.ValidationMessageFor(model => model.Street, "", new { @class = "error" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Address</label>
+                                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter your home address" } })
+                                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "error" })
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Post Office</label>
+                                                    @Html.EditorFor(model => model.PO, new { htmlAttributes = new { @class = "form-control", @placeholder = "Post Office" } })
+                                                    @Html.ValidationMessageFor(model => model.PO, "", new { @class = "error" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">District</label>
+                                                    @Html.EditorFor(model => model.District, new { htmlAttributes = new { @class = "form-control", @placeholder = "District" } })
+                                                    @Html.ValidationMessageFor(model => model.District, "", new { @class = "error" })
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">State</label>
+                                                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", @placeholder = "State" } })
+                                                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "error" })
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Country</label>
+                                                    <select class="custom-select" id="Country" name="Country">
+                                                        <option value="">Select Country</option>
+                                                        <option value="India">India</option>
+                                                        <option value="UAE ">UAE</option>
+                                                        <option value="Kuwait">Kuwait</option>
+                                                        <option value="Oman">Oman</option>
+                                                        <option value="Saudi Arabia">Saudi Arabia</option>
+                                                        <option value="Bahrain">Bahrain</option>
+                                                        <option value="Qatar">Qatar</option>
+                                                        <option value="Singapore">Singapore</option>
+                                                    </select>
+                                                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "error" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <h5 class="mb-3">Teaching information</h5>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Primary Subject</label>
+                                                    <select class="custom-select" id="PrimarySubject" name="PrimarySubject">
+                                                        <option value="">Select Subject</option>
+                                                        <option value="Mathematics">Mathematics</option>
+                                                        <option value="Physics">Physics</option>
+                                                        <option value="Chemistry">Chemistry</option>
+                                                        <option value="Biology">Biology</option>
+                                                    </select>
+                                                    @Html.ValidationMessageFor(model => model.PrimarySubject, "", new { @class = "error" })
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">SecondarySubject</label>
+                                                    <select class="custom-select" id="SecondarySubject" name="SecondarySubject">
+                                                        <option value="">Select Subject</option>
+                                                        <option value="Mathematics">Mathematics</option>
+                                                        <option value="Physics">Physics</option>
+                                                        <option value="Chemistry">Chemistry</option>
+                                                        <option value="Biology">Biology</option>
+                                                    </select>
+                                                    @Html.ValidationMessageFor(model => model.SecondarySubject, "", new { @class = "error" })
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Please mark which grad students you would love teach</label>
+                                                    <select class="form-control selectClass" id="StudentGrade" name="StudentGrade">
+                                                        <option value="Class 5">Class 5</option>
+                                                        <option value="Class 6">Class 6</option>
+                                                        <option value="Class 7">Class 7</option>
+                                                        <option value="Class 8">Class 8</option>
+                                                        <option value="Class 9">Class 9</option>
+                                                        <option value="Class 10">Class 10</option>
+                                                        <option value="Class 11">Class 11</option>
+                                                        <option value="Class 12">Class 12</option>
+                                                    </select>
+                                                    @Html.ValidationMessageFor(model => model.StudentGrade, "", new { @class = "error" })
+                                                    <small class="form-text text-muted mt-2">You can select multiple class from the list.</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <a class="d-inline-block text-sm text-muted mb-3 text-underline--dashed">Hours you will be available per day for teaching with entrancecaoch.com</a>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6">
+                                                        <label class="form-control-label">Monday to Friday</label>
+                                                        <select class="custom-select" id="Weekdays" name="Weekdays">
+                                                            <option value="">Select Weekdays Timing</option>
+                                                            <option value="1">1 Hours Per Day</option>
+                                                            <option value="2">2 Hours Per Day</option>
+                                                            <option value="3">3 Hours Per Day</option>
+                                                            <option value="4">4 Hours Per Day</option>
+                                                            <option value="5">5 Hours Per Day</option>
+                                                            <option value="6">6 Hours Per Day</option>
+                                                            <option value="7">7 Hours Per Day</option>
+                                                            <option value="8">8 Hours Per Day</option>
+                                                        </select>
+                                                        @Html.ValidationMessageFor(model => model.Weekdays, "", new { @class = "error" })
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label class="form-control-label">Saturday & Sunday</label>
+                                                        <select class="custom-select" id="Weekends" name="Weekends">
+                                                            <option value="">Select Weekends Timing</option>
+                                                            <option value="1">1 Hours Per Day</option>
+                                                            <option value="2">2 Hours Per Day</option>
+                                                            <option value="3">3 Hours Per Day</option>
+                                                            <option value="4">4 Hours Per Day</option>
+                                                            <option value="5">5 Hours Per Day</option>
+                                                            <option value="6">6 Hours Per Day</option>
+                                                            <option value="7">7 Hours Per Day</option>
+                                                            <option value="8">8 Hours Per Day</option>
+                                                        </select>
+                                                        @Html.ValidationMessageFor(model => model.Weekends, "", new { @class = "error" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Available Timings</label>
+                                                    <select class="form-control selectTime" id="Time" name="Time">
+                                                        <option value="5-6 am">5-6 am</option>
+                                                        <option value="6-7 am">6-7 am</option>
+                                                        <option value="7-8 am">7-8 am</option>
+                                                        <option value="8-9 am">8-9 am</option>
+                                                        <option value="9-10 am">9-10 am</option>
+                                                        <option value="10-11 am">10-11 am</option>
+                                                        <option value="11-12 pm">11-12 pm</option>
+                                                        <option value="1-2 pm">1-2 pm</option>
+                                                        <option value="2-3 pm">2-3 pm</option>
+                                                        <option value="3-4 pm">3-4 pm</option>
+                                                        <option value="4-5 pm">4-5 pm</option>
+                                                        <option value="5-6 pm">5-6 pm</option>
+                                                        <option value="6-7 pm">6-7 pm</option>
+                                                        <option value="7-8 pm">7-8 pm</option>
+                                                        <option value="8-9 pm">8-9 pm</option>
+                                                        <option value="9-10 pm">9-10 pm</option>
+                                                    </select>
+                                                    @Html.ValidationMessageFor(model => model.Time, "", new { @class = "error" })
+                                                    <small class="form-text text-muted mt-2">You can select multiple Timings from the list.</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="text-right"><button type="submit" class="btn btn-sm btn-primary">Register</button></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+
+    <script src="~/Theme/assets/jquery.validate.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+
+
+            $('.selectPrimary').select2({
+                placeholder: "Select a Subject"
+            });
+
+            $('.selectSecond').select2({
+                placeholder: "Select Subject"
+            });
+
+            $('.selectClass').select2({
+                placeholder: "Please Select a Class",
+                multiple: true
+            });
+
+            $('.selectTime').select2({
+                placeholder: "Please Select a Class",
+                multiple: true
+            });
+
+            $('.selectMtoF').select2({
+                placeholder: "Please Select a Timings"
+            });
+
+            $('.selectStoS').select2({
+                placeholder: "Please Select a Timings"
+            });
+
+
+        });
+
+
+        $('#teacherRegistration').validate({
+            rules: {
+                FirstName: {
+                    required: true
+                },
+                MiddleName: {
+                    required: true
+                },
+                LastName: {
+                    required: true
+                },
+                Email: {
+                    required: true,
+                    email: true
+                },
+                WhatsApp: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 14,
+                    digits: true
+                },
+                PrimarySubject: {
+                    required: true
+                },
+                SecondarySubject: {
+                    required: true
+                },
+                Location: {
+                    required: true
+                },
+                Street: {
+                    required: true
+                },
+                Address: {
+                    required: true
+                },
+                PO: {
+                    required: true
+                },
+                District: {
+                    required: true
+                },
+                State: {
+                    required: true
+                },
+                StudentGrade: {
+                    required: true
+                },
+                Weekdays: {
+                    required: true
+                },
+                Weekends: {
+                    required: true
+                },
+                Time: {
+                    required: true
+                },
+                Country: {
+                    required: true
+                }
+            },
+            messages: {
+                FirstName: {
+                    required: 'Please enter FirstName'
+                },
+                MiddleName: {
+                    required: 'Please enter MiddleName'
+                },
+                LastName: {
+                    required: 'Please enter LastName'
+                },
+                Email: {
+                    required: 'Please enter Valied Email'
+                },
+                WhatsApp: {
+                    required: 'Please enter Valied Number'
+                },
+                PrimarySubject: {
+                    required: 'Select Your Primary Subject'
+                },
+                SecondarySubject: {
+                    required: 'Select Your Secondary Subject'
+                },
+                Location: {
+                    required: 'Please enter Location'
+                },
+                Street: {
+                    required: 'Please enter Street'
+                },
+                Address: {
+                    required: 'Please enter Address'
+                },
+                PO: {
+                    required: 'Please enter Postoffice'
+                },
+                District: {
+                    required: 'Please enter District'
+                },
+                State: {
+                    required: 'Please enter State'
+                },
+                StudentGrade: {
+                    required: 'Please Select Classes'
+                },
+                Weekdays: {
+                    required: 'Please Select Weekdays Timing'
+                },
+                Weekends: {
+                    required: 'Please Select Weekends Timing'
+                },
+                Time: {
+                    required: 'Please Select Timing'
+                },
+                Country: {
+                    required: 'Please Select Country'
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+
+                var data = element.id;
+                $("#" + data).addClass("is-invalid");
+                $("." + data).css({ 'border-color': '#f25767' });
+                $(".error" + data + "-error").show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                var data = element.id;
+                $("#" + data).removeClass("is-invalid");
+                $("." + data).css({ 'border-color': '' });
+                $("." + data + "-error").hide();
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+
+    </script>
+
+}

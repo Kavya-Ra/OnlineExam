@@ -1,0 +1,313 @@
+﻿@model OnlineExam.ViewModel.StudentRegPdfViewModel
+
+@{
+    ViewBag.Title = "StudentRegView";
+}
+
+
+<section class="pt-5 bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <span class="surtitle">Admin account</span>
+                        <h1 class="h3 mb-0">Student Application</h1>
+                    </div>
+                </div>
+
+                <div class="row align-items-center mt-4" id="printableArea">
+                    <div class="card card-body p-md-5">
+                        <div class="row align-items-center mb-5">
+                            <div class="col-sm-3 mb-3 mb-sm-0">
+                                <span class="badge badge-pill badge-success ml-3">@Model.GetAllStudentRegistrationByRegId.RegId</span>
+                            </div>
+
+                            <div class="col-sm-9 mb-3 mb-sm-0 photo-dis">
+
+                                <div class="row align-items-center inner">
+                                    <div class="col-auto">
+                                        <!-- Avatar -->
+                                        <img alt="Image placeholder" src="@Model.GetAllStudentRegistrationByRegId.Photo" class="avatar  avatar-lg">
+                                    </div>
+                                    <div class="col ml-n2">
+                                        <a href="#!" class="d-block h6 mb-0">@Model.GetAllStudentRegistrationByRegId.StudentName</a><div>
+                                            <small>Student Photo</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row align-items-center inner">
+                                    <div class="col-auto">
+                                        <!-- Avatar -->
+                                        <img alt="Image placeholder" src="@Model.GetAllStudentRegistrationByRegId.FrSign" class="avatar  avatar-lg">
+                                    </div>
+                                    <div class="col ml-n2">
+                                        <a href="#!" class="d-block h6 mb-0">@Model.GetAllStudentRegistrationByRegId.FrName</a><div>
+                                            <small>Father Sign</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row align-items-center  inner">
+                                    <div class="col-auto">
+                                        <!-- Avatar -->
+                                        <img alt="Image placeholder" src="@Model.GetAllStudentRegistrationByRegId.MrSign" class="avatar  avatar-lg">
+                                    </div>
+                                    <div class="col ml-n2">
+                                        <a href="#!" class="d-block h6 mb-0">@Model.GetAllStudentRegistrationByRegId.MrName</a><div>
+                                            <small>Mother Sign</small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                     
+
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <h5 style="font-size:18px;">About the Student</h5>
+                                <dl class="row mt-4 align-items-center">
+                                    <dt class="col-sm-7 h6 text-sm">Full Name</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.StudentName</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Registration No</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.RegId</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Application Date</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.ApplnDate</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Selected Class</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.ClassName</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Selected Programme</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.SpName</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Selected SubProgram</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.SubpName</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Selected Course</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.CorseName</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Academic Year</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.AcademicYear</dd>
+                                    <dt class="col-sm-7 h6 text-sm">WhatsApp No</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.WhatsappNo</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Date of Birth</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.DOB</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Gender</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.Gender</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Religion</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.Religion</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Caste</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.Caste</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Community</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.Community</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Nationality</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.Nationalty</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Blood Group</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.BloodGroup</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Present address</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.PresentAddress</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Area</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.Area</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Location/PostOffice</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.Location</dd>
+                                    <dt class="col-sm-7 h6 text-sm">District</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.District</dd>
+                                    <dt class="col-sm-7 h6 text-sm">State</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.State</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Pincode</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.Pincode</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Quick Contact number</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.QuickContNo</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Quick Whatsapp No</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.QuickWhatsApp</dd>
+                                </dl>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <h5 style="font-size:18px;">About the Parents</h5>
+                                <dl class="row mt-4 align-items-center">
+                                    <dt class="col-sm-7 h6 text-sm">Father Name</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.FrName</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Father Occupation</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.FrOcc</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Mobile Number</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.FrMobNo</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Whatsapp Number</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.FrWhatsapp</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Email ID</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.FrMailid</dd>
+                                    <dt class="col-sm-7 h6 text-sm">District</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.FrDistrict</dd>
+                                    <dt class="col-sm-7 h6 text-sm">State</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.FrState</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Mother Name</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.MrName</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Mother Occupation</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.MrOcc</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Mobile Number</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.MrMobNo</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Whatsapp Number</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.MrWhatsapp</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Email ID</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.MrMailid</dd>
+                                    <dt class="col-sm-7 h6 text-sm">District</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.MrDistrict</dd>
+                                    <dt class="col-sm-7 h6 text-sm">State</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.MrState</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Address 1</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.AddressHome1</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Address 2</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.AddressHome2</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Area</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.AreaHome</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Location / Post Office</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.LocationHome</dd>
+                                    <dt class="col-sm-7 h6 text-sm">District</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.DistrictHome</dd>
+                                    <dt class="col-sm-7 h6 text-sm">State</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.StateHome</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Pincode</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.PincodeHome</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Email</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.EmaiIdHome</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Quick Contact number</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.QuickHomeContact</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Quick Whatsapp No</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.QuickHomeWhatsapp</dd>
+                                </dl>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h5 style="font-size:18px;"> Academic Details</h5>
+                                <!-- Table -->
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="px-0 bg-transparent border-top-0">Class</th>
+                                                <th class="px-0 bg-transparent border-top-0">Pass Year</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">School Address</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Register No</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Board</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Physics Mark</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Chemistry Mark</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Biology Mark</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Mathematics Mark</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Percentage of Mark</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Student_AcademicPerformancebyRegid)
+                                            {
+                                                <tr>
+                                                    <td class="px-0">
+                                                        <span class="h6 text-sm">@item.Class</span>
+                                                    </td>
+                                                    <td class="px-0">
+                                                        <span class="h6 text-sm">@item.PassYear</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.SchoolAddress</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.RegNo</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.Board</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.PhyMark</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.ChemMark</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.BiologyMark</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.MathsMark</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.PercOfMark</span>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <h5 style="font-size:18px;" class=" mt-4">Previous Entrance Details</h5>
+                                <!-- Table Previous Entrance Details -->
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="px-0 bg-transparent border-top-0">Previous Entrance Exam</th>
+                                                <th class="px-0 bg-transparent border-top-0">Roll No</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Attempted Year</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Mark</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Rank</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">No of Attempts</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Student_PreviousEntrancebyRegid)
+                                            {
+                                                <tr>
+                                                    <td class="px-0">
+                                                        <span class="h6 text-sm">@item.PrevEntranceExamName</span>
+                                                    </td>
+                                                    <td class="px-0">
+                                                        <span class="h6 text-sm">@item.RollNo</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.AttemptedYear</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.Mark</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.Rank</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.NoOfAttempts</span>
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4 justify-content-center text-center">
+                    <div class="col-lg-7 col-md-9 mb-5">
+                        <button type="button" class="btn btn-sm btn-primary" onclick="window.print();">Print Application</button>
+                        <a href="StudentRegistrations" class="btn btn-sm btn-secondary text-dark font-weight-bold">Back To List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+@section Scripts {
+    <script>
+            function printDiv(divName) {
+                var printContents = document.getElementById(divName).innerHTML;
+                var originalContents = document.body.innerHTML;
+
+                document.body.innerHTML = printContents;
+
+                window.print();
+
+                document.body.innerHTML = originalContents;
+        }
+
+
+    </script>
+}
+

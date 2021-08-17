@@ -1,0 +1,518 @@
+﻿@model OnlineExam.ViewModel.QsAsViewModel
+@using OnlineExam.Authentication
+
+@{
+    ViewBag.Title = "QsAs";
+}
+
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem { Text = "Option 1", Value = "1" });
+    listItems.Add(new SelectListItem { Text = "Option 2", Value = "2" });
+    listItems.Add(new SelectListItem { Text = "Option 3", Value = "3" });
+    listItems.Add(new SelectListItem { Text = "Option 4", Value = "4" });
+}
+
+@{
+    List<SelectListItem> ls = new List<SelectListItem>();
+    for (int i = 2021; i >= 2000; i--)
+    {
+        ls.Add(new SelectListItem() { Text = i.ToString(), Value = i.ToString() });
+    }
+}
+
+
+
+<section class="pt-5 bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <span class="surtitle">Teacher account</span>
+                        <h1 class="h3 mb-0">Questions Answers Management</h1>
+                    </div>
+                </div>
+                <div class="row align-items-center mt-4">
+                    <div class="col">
+                        <ul class="nav nav-tabs overflow-x">
+                            <li class="nav-item">
+                                <a href="~/Teacher/QaAsList" class="nav-link">QaAs List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Teacher/QsAs" class="nav-link active">Create QaAs</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="slice slice-sm bg-section-secondary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="mb-5">
+                            @if (ViewBag.StatusMessage != null)
+                            {
+                                <div class="alert alert-outline-success" role="alert">
+                                    <strong>@ViewBag.StatusMessage</strong>
+                                </div>
+                            }
+
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <div class="alert alert-outline-danger" role="alert">
+                                    <strong>@ViewBag.ErrorMessage</strong>
+                                </div>
+                            }
+                            <div>
+                                <h5 class="mb-3">Create Questions Answers</h5>
+                                <form id="qsAs" method="post" enctype="multipart/form-data">
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.Id)
+
+                                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                    {
+                                        var identity = ((CustomPrincipal)HttpContext.Current.User);
+                                        <input type="hidden" id="CuserId" name="CuserId" value="@identity.UserId" />
+                                    }
+
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Year</label>
+                                                @Html.DropDownList("PrevQnYear", ls, "Select Year", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.PrevQnYear, "", new { @class = "error" })
+                                                <label id="PrevQnYear-error" class="error" for="PrevQnYear" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Class</label>
+                                                @Html.DropDownList("ClassId", null, "Select Class", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.ClassId, "", new { @class = "error" })
+                                                <label id="ClassId-error" class="error" for="ClassId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Course</label>
+                                                @Html.DropDownList("CourseId", null, "Select Course", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "error" })
+                                                <label id="CourseId-error" class="error" for="CourseId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Programme</label>
+                                                @Html.DropDownList("PgmId", null, "Select Programme", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.PgmId, "", new { @class = "error" })
+                                                <label id="PgmId-error" class="error" for="PgmId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Subject</label>
+                                                @Html.DropDownList("SubjectId", null, "Select Subject", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.SubjectId, "", new { @class = "error" })
+                                                <label id="SubjectId-error" class="error" for="SubjectId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Chapter</label>
+                                                @Html.DropDownList("ChapterId", null, "Select Chapter", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.ChapterId, "", new { @class = "error" })
+                                                <label id="SubjectId-error" class="error" for="SubjectId" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Questions</label>
+                                                <div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                                                        <label class="custom-control-label" for="customRadioInline1">Enter Question</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                                                        <label class="custom-control-label" for="customRadioInline2">Select Image Questions</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center enter">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <textarea class="form-control" id="Questions" name="Questions" data-toggle="autosize" placeholder="Enter Questions here" rows="5">@Model.Questions</textarea>
+                                                @Html.ValidationMessageFor(model => model.Questions, "", new { @class = "error" })
+                                                <label id="Questions-error" class="error" for="Questions" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center upload" style="display:none;">
+                                        <div class="col-md-12">
+
+                                            <input type="hidden" id="Photo" name="Photo" value="@Model.Photo" />
+
+                                            <div class="form-group">
+                                                <input type="file" name="fileQus" id="fileQus" class="custom-input-file" onchange="loadFile(event)" />
+                                                <label for="file-1" class="qsAs-upload">
+                                                    <i data-feather="upload"></i>
+                                                    <span id="1up">Choose a file…</span>
+                                                </label>
+                                            </div>
+                                            <div class="up-img img1">
+                                                <img id="fileQus_src" class="qsAs-img">
+                                                <div class="remove-file">
+                                                    <label id="remove1" class="qs-error img-remove">Remove</label>
+                                                </div>
+                                            </div>
+                                            <div class="up-img img2">
+                                                <img id="fileQus_src" class="qsAs-img" src="@Model.Photo">
+                                                <div class="remove-file">
+                                                    <label id="remove2" class="qs-error img-remove">Remove</label>
+                                                </div>
+                                            </div>
+                                            <div class="er1 size-er">
+                                                <label id="eerror1" class="error img-remove"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center valid-qsu" style="display:none;">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" style="color: #f25767;">Please enter Questions or Select a Image Questions</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Option 1</label>
+                                                @Html.EditorFor(model => model.Option1, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Option 1" } })
+                                                @Html.ValidationMessageFor(model => model.Option1, "", new { @class = "error" })
+                                                <label id="Option1-Location" class="error" for="Option1" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Option 2</label>
+                                                @Html.EditorFor(model => model.Option2, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Option 2" } })
+                                                @Html.ValidationMessageFor(model => model.Option2, "", new { @class = "error" })
+                                                <label id="Option2-error" class="error" for="Option2" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Option 3</label>
+                                                @Html.EditorFor(model => model.Option3, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Option 3" } })
+                                                @Html.ValidationMessageFor(model => model.Option3, "", new { @class = "error" })
+                                                <label id="Option3-error" class="error" for="Option3" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Option 4</label>
+                                                @Html.EditorFor(model => model.Option4, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Option 4" } })
+                                                @Html.ValidationMessageFor(model => model.Option4, "", new { @class = "error" })
+                                                <label id="Option4-error" class="error" for="Option4" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Correct Answer</label>
+                                                @Html.DropDownList("CorrectAns", listItems, "Select Correct Answer", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.CorrectAns, "", new { @class = "error" })
+                                                <label id="CorrectAns-error" class="error" for="CorrectAns" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Mark</label>
+                                                @Html.EditorFor(model => model.Mark, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Mark" } })
+                                                @Html.ValidationMessageFor(model => model.Mark, "", new { @class = "error" })
+                                                <label id="Mark-error" class="error" for="Mark" style="display:none;"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 text-right">
+                                        <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var subProgram = '@Url.Action("Course")';
+            var chapters = '@Url.Action("Chapters")';
+            var CourseId = $('#CourseId');
+            var ChapterId = $('#ChapterId');
+            $('#ClassId').change(function () {
+                CourseId.empty();
+                $.getJSON(subProgram, { ID: $(this).val() }, function (data) {
+                    if (!data) {
+                        return;
+                    }
+                    CourseId.append($('<option></option>').val('').text('Select Course'));
+                    $.each(data, function (index, item) {
+                        CourseId.append($('<option></option>').val(item.Value).text(item.Text));
+                    });
+                });
+            })
+
+            $('#SubjectId').change(function () {
+                ChapterId.empty();
+                $.getJSON(chapters, { ID: $(this).val() }, function (data) {
+                    if (!data) {
+                        return;
+                    }
+                    ChapterId.append($('<option></option>').val('').text('Select Chapter'));
+                    $.each(data, function (index, item) {
+                        ChapterId.append($('<option></option>').val(item.Value).text(item.Text));
+                    });
+                });
+            })
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            var photo = $('#Photo').val();
+
+            if (photo != '') {
+                $('#customRadioInline2').attr('checked', true);
+                $('.enter').hide();
+                $('.upload').show();
+                $('.img2').show();
+            }
+            else {
+                $('#customRadioInline1').attr('checked', true);
+            }
+
+           
+
+            $('#customRadioInline1').click(function () {
+                $('.enter').show();
+                $('.upload').hide();
+
+            });
+
+            $('#customRadioInline2').click(function () {
+                $('.enter').hide();
+                $('.upload').show();
+            });
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.qsAs-upload').click(function () {
+                $('#fileQus').trigger('click');
+                $('.valid-qsu').hide();
+            });
+
+            $("#remove1").on("click", function () {
+                document.getElementById("fileQus").value = "";
+                $('.img1').hide();
+                $('#1up').empty();
+                $('#1up').text("Choose a file…");
+            })
+
+            $("#remove2").on("click", function () {
+                document.getElementById("fileQus").value = "";
+                $('.img1').hide();
+                $('.img2').hide();
+                $('#1up').empty();
+                $('#1up').text("Choose a file…");
+            })
+
+            $("#Questions").change(function () {
+                $('.valid-qsu').hide();
+            });
+        });
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#qsAs').validate({
+                rules: {
+                    PrevQnYear: {
+                        required: true,
+                        digits: true
+                    },
+                    PgmId: {
+                        required: true
+                    },
+                    ClassId: {
+                        required: true
+                    },
+                    CourseId: {
+                        required: true
+                    },
+                    SubjectId: {
+                        required: true
+                    },
+                    ChapterId: {
+                        required: true
+                    },
+                    Option1: {
+                        required: true
+                    },
+                    Option2: {
+                        required: true
+                    },
+                    Option3: {
+                        required: true
+                    },
+                    Option4: {
+                        required: true
+                    },
+                    CorrectAns: {
+                        required: true
+                    },
+                    Mark: {
+                        required: true,
+                        digits: true
+                    }
+                },
+                messages: {
+                    PrevQnYear: {
+                        required: 'Please Select Year'
+                    },
+                    PgmId: {
+                        required: 'Please Select Programme'
+                    },
+                    SubPgmId: {
+                        required: 'Please Select Sub Programme'
+                    },
+                    CourseId: {
+                        required: 'Please Select Course'
+                    },
+                    SubjectId: {
+                        required: 'Please Select Subject'
+                    },
+                    ChapterId: {
+                        required: 'Select Select Chapter'
+                    },
+                    Option1: {
+                        required: 'Please enter Option 1'
+                    },
+                    Option2: {
+                        required: 'Please enter Option 2'
+                    },
+                    Option3: {
+                        required: 'Please enter Option 3'
+                    },
+                    Option4: {
+                        required: 'Please enter Option 4'
+                    },
+                    CorrectAns: {
+                        required: 'Please Select Correct Ans'
+                    },
+                    Mark: {
+                        required: 'Please enter Mark'
+                    }
+                },
+                highlight: function (element, errorClass, validClass) {
+
+                    var data = element.id;
+                    $("#" + data).addClass("is-invalid");
+                    $("." + data).css({ 'border-color': '#f25767' });
+                    $(".error" + data + "-error").show();
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    var data = element.id;
+                    $("#" + data).removeClass("is-invalid");
+                    $("." + data).css({ 'border-color': '' });
+                    $("." + data + "-error").hide();
+                },
+                submitHandler: function (form) {
+
+                    var data1 = $('#Questions').val();
+                    var data2 = $('#fileQus').val();
+                    var data3 = $('#photo').val();
+
+                    if (data1 != '' || data2 != '' || data3 != '') {
+                        form.submit();
+                    }
+                    else {
+                        $('.valid-qsu').show();
+                    }
+
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        var loadFile = function (event) {
+
+            var extension = $('#fileQus').val().split('.').pop().toLowerCase();
+            var validFileExtensions = ['jpeg', 'jpg', 'png'];
+            if ($.inArray(extension, validFileExtensions) == -1) {
+                $('.er1').show();
+                $('#eerror1').text("Failed!! Please upload jpg, jpeg, png file only.").show();
+                $('#fileQus').replaceWith($('#fileQus').val('').clone(true));
+                $('.img1').hide();
+                $('#1up').empty();
+                $('#1up').text("Choose a file…");
+            }
+            else {
+                if ($('#fileQus').get(0).files[0].size > (500000)) {
+                    $('.er1').show();
+                    $('#eerror1').text("Max allowed file size is 500 kb").show();
+                    $('#fileQus').replaceWith($('#fileQus').val('').clone(true));
+                    $('.img1').hide();
+                    $('#1up').empty();
+                    $('#1up').text("Choose a file…");
+                }
+                else {
+                    $('.er1').hide();
+                    $('.img1').show();
+                    var image = document.getElementById('fileQus_src');
+                    image.src = URL.createObjectURL(event.target.files[0]);
+                }
+            }
+        };
+
+    </script>
+}
+
+
+
